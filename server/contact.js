@@ -46,9 +46,6 @@ function postMessage(req, res, next) {
     req.flash('error', true);
     res.redirect('contact');
   }
-
-  // transporter.sendMail(mailOptions);
-
 }
 
 module.exports = {

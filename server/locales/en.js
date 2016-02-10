@@ -95,7 +95,8 @@
 			"submit": "submit"
 		},
 		"alert": {
-			"success": "contact.alert.success"
+			"success": "Your message has been sent!",
+			"error": "An error has occured. Please try with the email adress"
 		}
 	}
 }
