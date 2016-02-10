@@ -4,11 +4,11 @@
 		"description": "layout.description"
 	},
 	"menu": {
-		"home": "menu.home",
-		"projects": "menu.projects",
-		"process": "menu.process",
-		"faq": "menu.faq",
-		"contact": "menu.contact"
+		"home": "หน้าแรก",
+		"projects": "โครงการ",
+		"process": "ดำเนินการ",
+		"faq": "คำถาม",
+		"contact": "ติดต่อเรา"
 	},
 	"contact": {
 		"form": {
@@ -25,78 +25,78 @@
 	},
 	"process": {
 		"planning": {
-			"title": "process.planning.title",
-			"description": "process.planning.description"
+			"title": "เขียนแบบปละประมวลภาพ 3 มิติ",
+			"description": "เริ่มต้ังแต่เขียนแบบโดยสถาปนิก และพิมพ์เขียว ของวิศวกร ไปจนถึงการประมวลภาพ 3 มิติ ให้คุณ ติดตามทุกข้นั ตอนของการดาเนินการ"
 		},
 		"construction": {
-			"title": "process.construction.title",
-			"description": "process.construction.description"
+			"title": "โครงสร้าง",
+			"description": "ทุกๆ อาคารน้นั ตอ้ งเริ่มดว้ ยรากฐานท่ีแขง็ แรง เราใช้ วสั ดุก่อสร้างให้คุณแบบใจป้าท้ังปริมาณและ คุณภาพของวสั ดุใส่ใจในทุกๆรายละเอียดแมเ้รื่อง เล็กๆ น้อยๆ คุณเคยได้ยินอะไรแบบน้ีมาก่อน หรือเปล่า"
 		},
 		"completion": {
-			"title": "process.completion.title",
-			"description": "process.completion.description"
+			"title": "การเก็บงานและเติมเตม็ รายละเอียด",
+			"description": "พวกเราสามารถช่วยคุณตัดสินใจเลือกใช้วัสดุ ตกแต่งได้อย่างแม่นยา เปรียบเทียบท้ังราคา, คุณภาพ และรูปแบบท่ีเหมาะสม ไม่ว่าจะเป็น โคมไฟ,แต่งหอ้ งน้าโดยคาแนะนาจากผู้เชี่ยวชาญ"
 		},
 		"interior": {
-			"title": "process.interior.title",
-			"description": "process.interior.description"
+			"title": "ออกแบบตกแต่งภายใน",
+			"description": "ไม่ว่าจะเป็นสไตล์ไหน มินิมอล, มุมพักผ่อน, เพื่อธุรกิจ, แนวโรแมนติก หรือแนวเน้นประโยชน์ ใช้สอยสูงสุด เราก็สามารถให้คาปรึกษาแก่คุณได้ อย่างเป็นกันเองและจริงใจเหมือนเพื่อน เพื่อร่วม คน้หาความลงตวัที่เป็นคุณมากท่ีสุดก็เพื่อนน่ะมีไว้ เพื่อแบบน้ีไงล่ะ"
 		}
 	},
 	"projects": {
 		"residence-mae-rim": {
-			"title": "projects.residence-mae-rim.title",
-			"description": "projects.residence-mae-rim.description"
+			"title": "บา้นพกัอาศยัในอ.แม่ริม",
+			"description": "บา้น3ช้นั พร้อมสระว่ายน้ำภายในอาคาร\n ก่อผนงั เบิล้ สองช้นั เป็รฉนวนระบบระบายความร้อน ผนังด้านนอกเป็นคอนกรีตเต็ม ส่วนผนังด้านในเป็ นอิฐมวลเบา\nตวัอาคารดา้นทิศใตเ้ป็นแบบลอยตวั แขวนจากฐานมากถึง 3.75 เมตร"
 		},
 		"residence-paa-phai": {
-			"title": "projects.residence-paa-phai.title",
-			"description": "projects.residence-paa-phai.description"
+			"title": "บา้นพกัอาศยัต.ป่าไผ่",
+			"description": "บ้านเดี่ยวชั้นเดียว\nระบบระบายความร้อนเต็มรูปแบบผนังก่อ2ช้ัน อดั ดว้ ยPU โฟมภายใน,พ่นPU โฟมบริเวณฝ้า เพดานหนา2นิ้ว,กระจกประตูหน้าต่างเบิ้ล2ช้นั , หลงั คาคอนกรีตติดต้งั เมมเบรนดก์ นั ซึม"
 		},
 		"residence-san-sai": {
-			"title": "projects.residence-san-sai.title",
-			"description": "projects.residence-san-sai.description"
+			"title": "บา้นพกัอาศยัอ.สันทราย",
+			"description": "บ้านช้ันเดียว1หลังและบ้านสองช้ัน1หลัง พร้อมสระว่ายน้าด้านนอก\nระบบการระบายอากาศวิถีธรรมชาติฝ้าเพดานตี ดว้ยไมค้อนวดู"
 		},
 		"home-office-mae-rim": {
-			"title": "projects.home-office-mae-rim.title",
-			"description": "projects.home-office-mae-rim.description"
+			"title": "โฮมออฟฟิซอ.แม่ริม",
+			"description": "ระเบียงช้นั บนโครงสร้างแบบลอยตัวแขวนไว้เสา รองรับ แบบโมเดิร์นแทๆ้"
 		}
 	},
 	"home": {
 		"baseline": {
-			"1": "home.baseline.1",
-			"2": "home.baseline.2"
+			"1": "คุณอยากสร้างบา้ นในฝันของคุณใช่หรือไม่",
+			"2": "พวกเราก็เช่นกนั"
 		},
 		"expertise": {
-			"1": "home.expertise.1",
-			"2": "home.expertise.2",
-			"3": "home.expertise.3",
-			"4": "home.expertise.4",
-			"title": "home.expertise.title"
+			"1": "ที่อยู่อาศ้ยและอาคารพาณิชย",
+			"2": "ออกแบบตกแต่งภายใน",
+			"3": "แต่งสวนและสระว่ายน้ำ",
+			"4": "ต่อเติมและปรับปรุงอาคาร",
+			"title": "ความเชี่ยวชาญของเรา"
 		}
 	},
 	"faq": {
-		"intro": "faq.intro",
+		"intro": "และนี่คือคำถาม – ตอบ บางส่วน ท่ีอาจช่วยคุณได้ หากคุณพบว่า ยงั มีขอ้ สงสัยอื่นๆ คุณสามารถทิ้ง คำถามไว้ พวกเราจะใหค้ าตอบท่ีชดั เจนที่สุดภายใน 48 ชวั่ โมง ขอบคุณล่วงหนา้ สาหรับคำถามนะคะ",
 		"commercial": {
-			"title": "faq.commercial.title",
-			"description": "faq.commercial.description"
+			"title": "commercial ดี.บี. เอดิล เป็นบริษทั ท่ีจดทะเบียนจดั ต้งั ข้ึนอย่า งถูกกฎหมายหรือไม่ ?",
+			"description": "ใช่ค่ะ พวกเราเป็นบริษทั ที่จดั ต้งั ข้ึนโดยจดทะเบียนกบั กระทรวงพาณิชย์"
 		},
 		"legal": {
-			"title": "faq.legal.title",
-			"description": "faq.legal.description"
+			"title": "legal พวกคุณยินดีที่จะเป็นตวั แทนดาเนินการเพื่อการขออนุญาตก่อสร้าง หรือดาเนินการใดๆ ตามข้นั ตอน เก่ียวกบั สัญญาหรือไม่?",
+			"description": "พวกเรายนิ ดีให้คำปรึกษา และแนะนำนกั กฎหมายที่จะช่วยคุณจดั การเก่ียวกบั สัญญาต่างๆ การซ้ือขาย โอนสิทธ์ิ สัญญาก่อสร้าง การดำเนินการต่างๆ กบั รัฐไดอ้ ย่า งถูกตอ้ งตามกฎหมายไทย"
 		},
 		"assistance": {
-			"title": "faq.assistance.title",
+			"title": "assistance ",
 			"description": "faq.assistance.description"
 		},
 		"cost": {
-			"title": "faq.cost.title",
-			"description": "faq.cost.description"
+			"title": "cost ราคาก่อสร้าง มีกี่เรท คิดเป็ นตารางเมตรละเท่าไรบ้าง ?",
+			"description": "ค่ารับเหมาก่อสร้างข้ึนอยู่กบั ชนิดของวสั ดุที่ลูกคา้ เลือกใช้, รูปแบบของโครงการ และขอ้ ตกลงว่า ตอ้ งการใหเ้ราทำงานเสร็จสิ้นณข้นั ตอนใดรวมถึงค่าใช้จ่ายในส่วนของสถาปนิกและรับรองการแบบ โดยวิศวกรแล้ว โดยทวั่ ไปราคาจะเริ่มต้นที่ 10,000 บาทต่อตารางเมตร (เรทปี 2015) สำหรับงาน Standard Quality"
 		},
 		"quality": {
-			"title": "faq.quality.title",
-			"description": "faq.quality.description"
+			"title": "quality อะไรคือ คาจากดั ความของคาว่า “Standard Quality”",
+			"description": "เรามกั จะเสนอแนะงานแบบ “Superior” และ “Luxury” ให้ลูกคา้ โดยใช้ของที่ดีที่สุด ท้งั ในงาน โครงสร้างและงานตกแต่งในข้นั ข้นั ตอนสุดทา้ ย แต่อย่างไรก็ตามงาน “Standard Quality” ของเราก็คือ งานท่ีใชข้ องคุณภาพสูงอยู่ดี่ เพียงแต่งานตกแต่งต่างๆ อาจเป็นไปเพื่อความเหมาะสมกบั รูปแบบความ ตอ้ งการของลูกคา้ อย่างไรก็ตาม งานโครงสร้างของเรายงั คงเป็ นการใชว้ สั ดุมาตรฐานข้นั สูงให้ลูกคา้"
 		},
 		"deadlines": {
-			"title": "faq.deadlines.title",
-			"description": "faq.deadlines.description"
+			"title": "deadlines มนั่ ใจไดแ้ ค่ไหน ว่างานจะเสร็จตามเป้ าหมายในระยะเวลาที่ตกลงไว้",
+			"description": "นอกจากคุณจะมนั่ ใจมาตรฐานงานก่อสร้างของเราไดแ้ ลว้ พวกเรายงั ภาคภูมิใจเป็นอย่างมากในความ ตรงต่อเวลาของเรา เราสามารถส่งมอบงานให้ท่านตรงตามแผนการทำงานที่รัดกุม และการทำงาน อนัรวดเร็วจากการประสานงานและวางแผนเป็นอย่างดี"
 		}
 	}
 }

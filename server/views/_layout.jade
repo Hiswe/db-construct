@@ -29,12 +29,12 @@ html(lang=getLocale())
   body(class="page-" + pageName)
     header
       nav
-        a(href="/")= __('menu.home')
-        a(href="/projects")= __('menu.projects')
-        a(href="/process")= __('menu.process')
-        a(href="/faq")= __('menu.faq')
-        a(href="/contact")= __('menu.contact')
-        a(href="/?lang=en") EN
-        a(href="/?lang=th") TH
+        a(href="/", class= pageName == 'home' ? 'is-selected' : '')= __('menu.home')
+        a(href="/projects", class= pageName == 'projects' ? 'is-selected' : '')= __('menu.projects')
+        a(href="/process", class= pageName == 'process' ? 'is-selected' : '')= __('menu.process')
+        a(href="/faq", class= pageName == 'faq' ? 'is-selected' : '')= __('menu.faq')
+        a(href="/contact", class= pageName == 'contact' ? 'is-selected' : '')= __('menu.contact')
+        a(href="?lang=en") EN
+        a(href="?lang=th") TH
     main(role="main")
       block content
