@@ -15,8 +15,8 @@ html(lang=getLocale())
     //- meta(property="og:type", content="website")
 
     //- link(rel="canonical", href="http://agence.badsender.com")
-    link(rel="shortcut icon", href="favicon.png", type="image/png")
-    link(rel="icon", href="favicon.png", type="image/png")
+    link(rel="shortcut icon", href="/favicon.png", type="image/png")
+    link(rel="icon", href="/favicon.png", type="image/png")
 
     //- link(href='https://fonts.googleapis.com/css?family=PT+Sans:400,700', rel='stylesheet', type='text/css')
     //- link(rel="stylesheet", href="/badsender.css")
@@ -29,5 +29,9 @@ html(lang=getLocale())
     header
       nav
         a(href="/")= __('menu.home')
+        a(href="/projects")= __('menu.projects')
+        a(href="/process")= __('menu.process')
+        a(href="/faq")= __('menu.faq')
+        a(href="/contact")= __('menu.contact')
     main(role="main")
       block content

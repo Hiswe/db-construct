@@ -88,17 +88,22 @@ app.use(morgan(logResponse));
 
 var render    = require('./server/render');
 
-app.get('/',                render.home);
+app.get('/project/:name', render.project);
+app.get('/projects',      render.projects);
+app.get('/process',       render.proc);
+app.get('/faq',           render.faq);
+app.get('/contact',       render.contact);
+app.get('/',              render.home);
 
 //////
 // ERROR HANDLING
 //////
 
 var handler = errorHandler({
-  // views: {
+  views: {
   //   default:  'error/default',
-  //   404:      'error/404',
-  // },
+    404:      'error/404',
+  },
 });
 app.use(function (err, req, res, next) {
   console.log(err);

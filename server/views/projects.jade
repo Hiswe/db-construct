@@ -1,0 +1,12 @@
+extends _layout.jade
+
+block content
+  h1 projects
+  ul
+    for project in projects
+      li: dl
+        dt: a(href="/project/" + project)= __('projects.' + project + '.title')
+        dt: ul
+          for point in __('projects.' + project + '.description').split('\n')
+            li= point
+

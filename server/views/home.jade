@@ -1,4 +1,14 @@
 extends _layout.jade
 
 block content
-  | Hello World
+  h1
+    | #{__('home.baseline.1')}
+    br
+    | #{__('home.baseline.2')}
+
+  h2= __('home.expertise.title')
+  ul
+    li= __('home.expertise.1')
+    li= __('home.expertise.2')
+    li= __('home.expertise.3')
+    li= __('home.expertise.4')
