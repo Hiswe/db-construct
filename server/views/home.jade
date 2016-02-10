@@ -1,15 +1,21 @@
 extends _layout.jade
 
 block content
-  h1
-    | #{__('home.baseline.1')}
-    br
-    | #{__('home.baseline.2')}
+  #carrousel
+    h1
+      | #{__('home.baseline.1')}
+      br
+      | #{__('home.baseline.2')}
+    ul
+      li: img(src="/image/1400x600")
+      li: img(src="/image/1400x600")
+      li: img(src="/image/1400x600")
+      li: img(src="/image/1400x600")
 
-  h2= __('home.expertise.title')
-  img(src="/image/300x400")
-  ul
-    li= __('home.expertise.1')
-    li= __('home.expertise.2')
-    li= __('home.expertise.3')
-    li= __('home.expertise.4')
+  .expertise
+    h2= __('home.expertise.title')
+    ul
+      li= __('home.expertise.1')
+      li= __('home.expertise.2')
+      li= __('home.expertise.3')
+      li= __('home.expertise.4')

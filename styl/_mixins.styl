@@ -1,0 +1,50 @@
+hidden-accessible() {
+  border: 0 !important;
+  clip: rect(0 0 0 0) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+}
+
+//////
+// MEDIA QUERIES
+//////
+
+// $small-range      = 0, px2em(639);
+// $medium-range     = px2em(640), px2em(1023);
+// $large-range      = px2em(1024);
+
+$small-range      = 0, 639px;
+$medium-range     = 640px, 1023px;
+$large-range      = 1024px;
+
+$max-width        = $large-range;
+
+mq($$size) {
+  if ($$size == "==S") {
+    @media only screen and (max-width: $small-range[1]) {
+      {block}
+    }
+  } else if ($$size == ">=M" ) {
+    @media only screen and (min-width: $medium-range[0]) {
+      {block}
+    }
+  } else if ($$size == "==M") {
+    @media only screen and (min-width: $medium-range[0]) and (max-width: $medium-range[1]) {
+      {block}
+    }
+  } else if ($$size == "<=M") {
+    @media only screen and (max-width: $medium-range[1]) {
+      {block}
+    }
+  } else if ($$size == ">=L") {
+    @media only screen and (min-width: $large-range[0]) {
+      {block}
+    }
+  } else {
+    {block}
+  }
+}

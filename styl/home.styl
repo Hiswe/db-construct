@@ -1,0 +1,57 @@
+.page-home,
+.page-home main {
+  max-width: none;
+  padding: 0;
+}
+
+#carrousel {
+  position: relative;
+  z-index: $zindex--carrousel;
+  height: 70vh;
+
+  +mq('>=L') {
+    height: auto;
+    margin-top: -80px - $gutter;
+  }
+
+  h1 {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    left: 0;
+    transform: translate(0, -50%);
+    margin: 0;
+  }
+
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  ul {
+    display: flex;
+    overflow: auto;
+    // height: 100%;
+  }
+  li {
+    flex: 0 0 100%;
+    // height: 100%;
+  }
+  ul,
+  li,
+  img {
+    height: 100%;
+  }
+  img {
+    // https://medium.com/@primozcigler/neat-trick-for-css-object-fit-fallback-on-edge-and-other-browsers-afbc53bbb2c3#.jv8dlnfx5
+    object-fit: cover;
+  }
+}
+
+
+.expertise {
+  max-width: $large-range;
+  margin: 0 auto;
+}

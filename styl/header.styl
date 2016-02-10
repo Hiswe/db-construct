@@ -1,8 +1,44 @@
-nav {
-  display: flex;
-  justify-content: space-around;
+header {
+  text-align: center;
+  background: $primary;
+  max-width: $large-range;
+  margin: 0 auto;
 
-  a.is-selected {
-    color: red;
+  +mq('>=M') {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  +mq('>=L') {
+    margin-top: $gutter;
+    position: relative;
+    z-index: $zindex--header;
+  }
+}
+
+nav {
+  display: none;
+
+  +mq('>=M') {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  a {
+    padding: 1em;
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+
+.logo {
+  display: inline-block;
+  img {
+    display: block;
   }
 }
