@@ -101,6 +101,7 @@ app.use(morgan(logResponse));
 var render    = require('./server/render');
 var contact   = require('./server/contact');
 var projects  = require('./server/projects');
+var mock      = require('./server/mock');
 
 // take care of language query params
 app.use(function(req, res, next) {
@@ -122,15 +123,16 @@ app.get('*', function (req, res, next) {
   next();
 });
 
-app.get('/project/:name', projects.one);
-app.get('/projects',      projects.all);
+app.get('/project/:name',     projects.one);
+app.get('/projects',          projects.all);
 
-app.get('/contact',       contact.get);
-app.post('/contact',      contact.post);
+app.get('/contact',           contact.get);
+app.post('/contact',          contact.post);
 
-app.get('/process',       render.proc);
-app.get('/faq',           render.faq);
-app.get('/',              render.home);
+app.get('/process',           render.proc);
+app.get('/faq',               render.faq);
+app.get('/image/:dimensions', mock.image);
+app.get('/',                  render.home);
 
 //////
 // ERROR HANDLING

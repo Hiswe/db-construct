@@ -72,6 +72,15 @@ gulp.task('css', function () {
 // ASSETS
 ////////
 
+//----- FONTS
+
+gulp.task('fonts', function () {
+  return gulp
+    .src('fonts.list')
+    .pipe($.googleWebfonts())
+    .pipe($.if(/[.]woff$/, gulp.dest('public/assets')));
+});
+
 ////////
 // DEV
 ////////
