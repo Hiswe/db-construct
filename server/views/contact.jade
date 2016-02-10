@@ -2,3 +2,14 @@ extends _layout.jade
 
 block content
   h1 contact
+
+  form(action="/contact", method="post")
+    label(for="name") name
+    input(name="name", id="name", required)
+    label(for="email") email
+    input(name="email", id="email", type="email", required)
+    label(for="phone") phone (optional)
+    input(name="phone", id="phone")
+    lable(for="message") message
+    textarea(name="message", id="message", required)
+    button(type="submit") submit

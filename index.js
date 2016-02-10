@@ -87,12 +87,17 @@ app.use(morgan(logResponse));
 //////
 
 var render    = require('./server/render');
+var contact   = require('./server/contact');
+var projects  = require('./server/projects');
 
-app.get('/project/:name', render.project);
-app.get('/projects',      render.projects);
+app.get('/project/:name', projects.one);
+app.get('/projects',      projects.all);
+
+app.get('/contact',       contact.get);
+app.post('/contact',      contact.post);
+
 app.get('/process',       render.proc);
 app.get('/faq',           render.faq);
-app.get('/contact',       render.contact);
 app.get('/',              render.home);
 
 //////
