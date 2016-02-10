@@ -90,6 +90,14 @@ var render    = require('./server/render');
 var contact   = require('./server/contact');
 var projects  = require('./server/projects');
 
+// add page class name
+app.get('*', function (req, res, next) {
+  var path = req.path;
+  var name = path === '/' ? 'home' : /\/([^/]*).*/.exec(path)[1];
+  res.locals.pageName = name;
+  next();
+});
+
 app.get('/project/:name', projects.one);
 app.get('/projects',      projects.all);
 
