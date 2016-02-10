@@ -102,6 +102,18 @@ var render    = require('./server/render');
 var contact   = require('./server/contact');
 var projects  = require('./server/projects');
 
+// take care of language query params
+app.use(function(req, res, next) {
+  if (req.query.lang) {
+    res.cookie('dbconstruct', req.query.lang, { maxAge: 900000, httpOnly: true });
+    res.setLocale(req.query.lang);
+    // need this for first query good rendering…
+    res.locals.locale = req.query.lang;
+  };
+  next();
+});
+
+
 // add page class name
 app.get('*', function (req, res, next) {
   var path = req.path;
