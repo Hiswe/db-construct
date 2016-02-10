@@ -4,12 +4,19 @@ block content
   h1 contact
 
   form(action="/contact", method="post")
-    label(for="name") name
+    label(for="name")= __('contact.form.name')
     input(name="name", id="name", required)
-    label(for="email") email
+    label(for="email")= __('contact.form.email')
     input(name="email", id="email", type="email", required)
-    label(for="phone") phone (optional)
+    label(for="phone")= __('contact.form.phone')
     input(name="phone", id="phone")
-    label(for="message") message
+    label(for="message")= __('contact.form.message')
     textarea(name="message", id="message", required)
-    button(type="submit") submit
+    button(type="submit")= __('contact.form.submit')
+
+  if messages.error
+    p.alert.alert-error= __('contact.alert.error')
+  if messages.success
+    p.alert.alert-success= __('contact.alert.success')
+
+

@@ -1,6 +1,8 @@
-'use strict';
-
+// meant to be used with ES2015
 // https://nodejs.org/en/docs/es6/
+// still need the 'use strict' with v8
+
+'use strict';
 
 var path          = require('path');
 var chalk         = require('chalk');
@@ -12,14 +14,14 @@ var favicon       = require('serve-favicon');
 var errorHandler  = require('express-error-handler');
 var cookieParser  = require('cookie-parser');
 var i18n          = require('i18n');
+var flash         = require('express-flash');
+var session       = require('express-session');
 
 var config        = require('./server/config');
 
 //////
 // SERVER CONFIG
 //////
-
-var app = express();
 
 var app = express();
 
@@ -40,7 +42,17 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 app.use(compression());
 app.use(favicon(path.join(__dirname, '/favicon.png')));
-app.use(cookieParser());
+
+var cookieSecret = 'keyboard cat';
+
+app.use(cookieParser(cookieSecret));
+// https://www.npmjs.com/package/express-session#cookie-options
+app.use(session({
+  secret: cookieSecret,
+  resave: false,
+  saveUninitialized: true,
+}));
+app.use(flash());
 app.use(i18n.init);
 
 
