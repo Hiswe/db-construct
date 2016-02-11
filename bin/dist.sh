@@ -16,7 +16,7 @@
 #   exit
 # fi
 
-env=preprod
+env=prod
 
 #
 # Fetch the last tagged version (only if git >= 2.0.0, because of --sort=v:refname option)

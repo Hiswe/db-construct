@@ -63,11 +63,7 @@ app.set('view engine', 'jade');
 
 //----- STATIC
 
-// compiled assets
-app.use(express.static('./dist'));
-
-// commited assets
-app.use(express.static('./public'));
+app.use(express.static(path.join(__dirname, './public')));
 
 // placeholder mocking
 var mock      = require('./server/mock');

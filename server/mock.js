@@ -3,6 +3,12 @@
 var path    = require('path');
 var gm      = require('gm');
 
+var config  = require('./config');
+
+if (config.isProd) {
+  gm = gm.subClass({imageMagick: true})
+}
+
 function image(req, res, next) {
   var dimensions  = req.params.dimensions.split('x');
   var width       = dimensions[0];

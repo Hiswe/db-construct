@@ -11,7 +11,8 @@
     "start": "gulp dev",
     "release": "./bin/dist.sh",
     "build-prod": "gulp build --prod",
-    "bump": "gulp bump"
+    "bump": "gulp bump",
+    "logs": "heroku logs -n 10000"
   },
   "repository": {
     "type": "git",
