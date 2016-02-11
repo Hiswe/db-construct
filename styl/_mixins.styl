@@ -86,8 +86,7 @@ container() {
 
 //----- GRID
 
-$cols             = 12;
-$big-gutter       = ($gutter * 2);
+$default-cols             = 3;
 
 row($$gutter = $gutter) {
   margin-left: $$gutter * -.5;
@@ -97,11 +96,11 @@ row($$gutter = $gutter) {
   justify-content: space-around;
 }
 
-col($i = 1, $$cols = $cols){
+col($i = 1, $$cols = $default-cols){
   return ((100% / $$cols) * $i);
 }
 
-cell($i = 1, $$cols = $cols, $$gutter = $gutter) {
+cell($i = 1, $$cols = $default-cols, $$gutter = $gutter) {
   flex-basis: 'calc(%s - %s)' % (col($i, $$cols) $$gutter);
   max-width: @flex-basis;
 }

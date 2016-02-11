@@ -1,0 +1,32 @@
+.page-process {
+  dl {
+    +mq('>=M') {
+      row();
+      align-items: flex-end;
+    }
+  }
+  dt {
+    font-title();
+    padding: 0 0 $half-gutter;
+    text-align: center;
+
+    +mq('>=M') {
+      padding: 0;
+      text-align: left;
+      font-size: 24px;
+      cell(1);
+    }
+  }
+  dd {
+    &:first-of-type {
+      +mq('>=M') {
+        cell(2);
+      }
+    }
+    &:last-of-type {
+      +mq('>=M') {
+        cell(3);
+      }
+    }
+  }
+}
