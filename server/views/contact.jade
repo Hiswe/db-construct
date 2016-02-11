@@ -3,20 +3,48 @@ extends _layout.jade
 block content
   //- h1 contact
 
-  form(action="/contact", method="post")
-    label(for="name")= __('contact.form.name')
-    input(name="name", id="name", required)
-    label(for="email")= __('contact.form.email')
-    input(name="email", id="email", type="email", required)
-    label(for="phone")= __('contact.form.phone')
-    input(name="phone", id="phone")
-    label(for="message")= __('contact.form.message')
-    textarea(name="message", id="message", required)
-    button(type="submit")= __('contact.form.submit')
+  .contact
+    dl
+      dt= __('contact.mail')
+      dd: a(href="mailto:info@db-construct.com") info@db-construct.com
+      dt= __('contact.phone.title')
+      dd
+        p
+          span= __('contact.phone.en')
+          | :&nbsp;
+          a(href="tel:+33 80 129 0019") +33 80 129 0019
+        p
+          span= __('contact.phone.th')
+          | :&nbsp;
+          a(href="tel:+33 88 269 2483") +33 88 269 2483
+      dt= __('contact.find')
+      dd facebook
 
-  if messages.error
-    p.alert.alert-error= __('contact.alert.error')
-  if messages.success
-    p.alert.alert-success= __('contact.alert.success')
+    form(action="/contact", method="post")
+      legend= __('contact.form.title')
+      label(for="name")= __('contact.form.name')
+      input(name="name", id="name", required)
+      label(for="email")= __('contact.form.email')
+      input(name="email", id="email", type="email", required)
+      label(for="phone")= __('contact.form.phone')
+      input(name="phone", id="phone")
+      label(for="message")= __('contact.form.message')
+      textarea(name="message", id="message", required)
+      button(type="submit")= __('contact.form.submit')
+
+    if messages.error
+      p.alert.alert-error= __('contact.alert.error')
+    if messages.success
+      p.alert.alert-success= __('contact.alert.success')
+
+  h1= __('contact.address')
+  .address
+    p
+      | 186/50 Chonlada Soi 8 Moo 6
+      br
+      | T. Nonghai Sansai Chiang Mai 50 290
+
+    .map
+      img(src="/image/400x300")
 
 

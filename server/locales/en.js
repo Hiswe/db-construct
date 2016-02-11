@@ -1,6 +1,6 @@
 {
 	"layout": {
-		"title": "layout.title",
+		"title": "DB Edil Construct",
 		"description": "layout.description"
 	},
 	"menu": {
@@ -98,11 +98,20 @@
 			"email": "email",
 			"phone": "phone (optional)",
 			"message": "message",
-			"submit": "submit"
+			"submit": "submit",
+			"title": "or use the form"
 		},
 		"alert": {
 			"success": "Your message has been sent!",
 			"error": "An error has occured. Please try with the email adress"
-		}
+		},
+		"mail": "Mail us",
+		"phone": {
+			"title": "Phone us",
+			"en": "English speaking",
+			"th": "Thai speaking"
+		},
+		"find": "Find us",
+		"address": "Address"
 	}
 }
