@@ -56,46 +56,52 @@ mq($$size) {
 }
 
 //////
-// CONTAINER
+// TYPO
 //////
 
-container() {
-  padding-left: 'calc(50% - %s)' % ($large-range / 2);
-  padding-right: @padding-left;
+font-title() {
+  font-family: 'Alfa Slab One', cursive;
+  font-weight: normal;
+  letter-spacing: 2px;
+}
+
+font-text() {
+  font-family: 'Lora', serif;
+  // font-weight: normal;
+  // font-style: normal;
 }
 
 //////
-// GRID
+// LAYOUT
 //////
+
+container() {
+  max-width: $max-width;
+  width: 'calc(%s - %s)' % (100% $gutter);
+
+  +mq('>=M') {
+    width: 'calc(%s - %s)' % (100% ($gutter * 2));
+  }
+}
+
+//----- GRID
 
 $cols             = 12;
 $big-gutter       = ($gutter * 2);
 
-col($i = 1, $$cols = $cols){
-  return ((100% / $$cols) * $i);
-}
-cell($i = 1, $$cols = $cols, $$gutter = $gutter) {
-  flex-basis: 'calc(%s - %s)' % (col($i, $$cols) $$gutter);
-  // flex-basis: col($i, $$cols);
-  // needed for firefox and IE
-  max-width: @flex-basis;
-  // padding: ($$gutter * .5)
-
-  // @media (max-width:599px) {
-  //   flex-basis: 'calc(%s - %s)' % (100% $$gutter);
-  //   max-width: @flex-basis;
-  // }
-}
-
 row($$gutter = $gutter) {
-  // margin: 0 ($$gutter * -.5);
+  margin-left: $$gutter * -.5;
+  margin-right: @margin-left;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+}
 
-  > .cell,
-  > [class^='cell-'],
-  > [class*=' cell-'] {
-    margin: 0 ($$gutter * .5);
-  }
+col($i = 1, $$cols = $cols){
+  return ((100% / $$cols) * $i);
+}
+
+cell($i = 1, $$cols = $cols, $$gutter = $gutter) {
+  flex-basis: 'calc(%s - %s)' % (col($i, $$cols) $$gutter);
+  max-width: @flex-basis;
 }

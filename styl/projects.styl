@@ -1,0 +1,44 @@
+.page-projects h1 {
+  text-align: center;
+}
+
+.projects {
+  +mq('>=M') {
+    row();
+  }
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  dl {
+    position: relative;
+    margin: 0 0 $half-gutter;
+
+    +mq('>=M') {
+      margin-bottom: $gutter;
+      cell(1, 2);
+    }
+  }
+  dt {
+    text-align: center;
+    width: 100%;
+    padding: $gutter;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    font-title();
+    font-size: 5vw;
+    +mq('>=M') {
+      font-size: 20px;
+    }
+  }
+  dd {
+    margin: 0;
+  }
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+}

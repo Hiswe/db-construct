@@ -1,6 +1,8 @@
 .page-home,
 .page-home main {
   max-width: none;
+  width: auto;
+  margin: 0;
   padding: 0;
 }
 
@@ -8,6 +10,7 @@
   position: relative;
   z-index: $zindex--carrousel;
   height: 70vh;
+  margin: 0 ($gutter * -1);
 
   +mq('>=L') {
     height: auto;
@@ -52,7 +55,7 @@
 
 
 .expertise {
-  max-width: $large-range;
+  container();
   margin: 0 auto;
   text-align: center;
 
@@ -84,11 +87,14 @@
   }
   dd {
     margin: 0;
+
     +mq('>=L') {
       cell(2, 3);
     }
   }
   img {
+    width: 100%;
     display: block;
+    object-fit: cover;
   }
 }

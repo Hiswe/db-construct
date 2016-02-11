@@ -2,10 +2,8 @@ extends _layout.jade
 
 block content
   h1 projects
-  ul
+  .projects
     for project in projects
-      li: dl
+      dl
         dt: a(href="/project/" + project)= __('projects.' + project + '.title')
-        dt: img(src="/image/600x400")
-
-
+        dd: a(href="/project/" + project): img(src="/image/600x350")
