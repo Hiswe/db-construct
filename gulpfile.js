@@ -64,9 +64,56 @@ gulp.task('css', function () {
 // JS
 ////////
 
+var browserify    = require('browserify');
+var babelify      = require('babelify');
+var envify        = require('envify/custom');
+var vinylBuffer   = require('vinyl-buffer');
+var source        = require('vinyl-source-stream');
+var watchify      = require('watchify');
+
 //----- LIBRARIES
 
 //----- APPLICATION
+
+gulp.task('app', function () {
+  var b = browserify({
+    cache:        {},
+    packageCache: {},
+    debug:        true,
+    entries:      ['./js-front/index.js']
+  });
+
+  b.transform(babelify, {presets: ['es2015']})
+  b.transform(envify({
+    _: 'purge',
+    NODE_ENV: isDev ? 'development' : 'production',
+    LOG: isDev,
+  }));
+
+  if (isDev) {
+    b = watchify(b);
+    b.on('update', function () {
+      bundleShare(b);
+    });
+  }
+
+  return bundleShare(b);
+
+});
+
+function bundleShare(b) {
+  $.util.log('bundle front app');
+
+  return b.bundle()
+    .pipe(source('db-construct.js'))
+    .pipe(vinylBuffer())
+    // .pipe($.if(!isDev, $.uglify()))
+    .pipe(gulp.dest('public'));
+}
+
+//----- ALL JS
+
+gulp.task('js', ['app']);
 
 ////////
 // ASSETS
@@ -112,7 +159,7 @@ gulp.task('browser-sync', ['nodemon'], function () {
   });
 });
 
-gulp.task('watch', ['browser-sync'], function () {
+gulp.task('watch', ['browser-sync', 'js'], function () {
   // !! don't put ./ before path
   // http://stackoverflow.com/questions/22391527/gulps-gulp-watch-not-triggered-for-new-or-deleted-files
   gulp.watch(['styl/**/*.styl'],  ['css']);

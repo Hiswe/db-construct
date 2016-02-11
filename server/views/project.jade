@@ -2,3 +2,6 @@ extends _layout.jade
 
 block content
   h1= __('projects.' + project + '.title')
+  ul
+    for point in __('projects.' + project + '.description').split('\n')
+      li= point

@@ -4,6 +4,27 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: 'Alfa Slab One';
+  font-style: normal;
+  font-weight: normal;
+  src: './asstes/Alfa_Slab_One-normal-400.woff';
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: normal;
+  src: './asstes/Lora-normal-400.woff';
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: bold;
+  src: './asstes/Lora-normal-700.woff';
+}
+
 html {
   // &[lang=th] {
   //   font-size: 20px;
@@ -11,18 +32,32 @@ html {
   background: #302D2C;
   color: white;
   font-size: $fs;
+  font-family: 'Lora', serif;
 }
 
 body {
   max-width: $large-range + $gutter * 2;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 main {
   display: block;
   padding: 0 $gutter;
+  flex: 1 0 auto;
 }
 
 img {
   max-width: 100%;
+}
+
+
+
+h1,
+h2 {
+  font-family: 'Alfa Slab One', cursive;
+  font-weight: normal;
+  letter-spacing: 2px;
 }

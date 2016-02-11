@@ -69,6 +69,11 @@ app.use(express.static('./dist'));
 // commited assets
 app.use(express.static('./public'));
 
+// placeholder mocking
+var mock      = require('./server/mock');
+
+app.get('/image/:dimensions', mock.image);
+
 //////
 // LOGGING
 //////
@@ -101,7 +106,6 @@ app.use(morgan(logResponse));
 var render    = require('./server/render');
 var contact   = require('./server/contact');
 var projects  = require('./server/projects');
-var mock      = require('./server/mock');
 
 // take care of language query params
 app.use(function(req, res, next) {
@@ -131,7 +135,6 @@ app.post('/contact',          contact.post);
 
 app.get('/process',           render.proc);
 app.get('/faq',               render.faq);
-app.get('/image/:dimensions', mock.image);
 app.get('/',                  render.home);
 
 //////

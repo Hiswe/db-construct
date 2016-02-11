@@ -9,3 +9,61 @@
 // page
 @import './home'
 @import './faq'
+
+.demo-grid {
+  width: 100%;
+  max-width: $max-width;
+  // container();
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 50%;
+  right: 0;
+  bottom: 0;
+  transform: translateX(-50%);
+  pointer-events: none;
+
+  ul, li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  ul {
+    row();
+  }
+
+  li {
+    cell(1, 1, 0px);
+    height: 100vh;
+    background: rgba(cyan, .3);
+    padding: 0 ($gutter / 2);
+    background-clip: content-box;
+    outline: 1px solid rgba(cyan, .7);
+
+    +mq('>=M') {
+      cell(1, 2, 0px);
+    }
+
+    +mq('>=L') {
+      cell(1, 3, 0px);
+    }
+
+    &:nth-child(2) {
+      display: none;
+
+      +mq('>=M') {
+        display: block;
+        outline: 0;
+      }
+    }
+
+    &:nth-child(3) {
+      display: none;
+
+      +mq('>=L') {
+        display: block;
+      }
+    }
+  }
+}

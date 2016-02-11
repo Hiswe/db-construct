@@ -84,6 +84,12 @@
 		"home-office-mae-rim": {
 			"title": "Home Office in Mae Rim",
 			"description": "Modern style two-story office and residence.\n Cantilevered terrace without supporting concrete beams."
+		},
+		"db-construct": {
+			"js": {
+				"title": "projects.db-construct.js.title",
+				"description": "projects.db-construct.js.description"
+			}
 		}
 	},
 	"contact": {

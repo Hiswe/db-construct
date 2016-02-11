@@ -32,7 +32,19 @@ html(lang=getLocale())
         a(href="/process", class= pageName == 'process' ? 'is-selected' : '')= __('menu.process')
         a(href="/faq", class= pageName == 'faq' ? 'is-selected' : '')= __('menu.faq')
         a(href="/contact", class= pageName == 'contact' ? 'is-selected' : '')= __('menu.contact')
-        a(href="?lang=en") EN
-        a(href="?lang=th") TH
+        if (getLocale() == 'en')
+          a(href="?lang=th") TH
+        else
+          a(href="?lang=en") EN
+
     main(role="main")
       block content
+    footer
+      | DB construct
+
+    .demo-grid: ul
+      li
+      li
+      li
+
+    script(src="/db-construct.js")

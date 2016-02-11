@@ -54,4 +54,41 @@
 .expertise {
   max-width: $large-range;
   margin: 0 auto;
+  text-align: center;
+
+  dl {
+    margin: $gutter 0 ;
+
+    +mq('>=M') {
+      row();
+    }
+
+    &:nth-of-type(odd) {
+      flex-direction: row-reverse;
+
+    }
+  }
+  dt,
+  dd {
+    order: 2;
+    +mq('>=M') {
+      cell(1, 2);
+    }
+  }
+  dt {
+    flex-center-align();
+    +mq('>=L') {
+      cell(1, 3);
+    }
+    background: $primary;
+  }
+  dd {
+    margin: 0;
+    +mq('>=L') {
+      cell(2, 3);
+    }
+  }
+  img {
+    display: block;
+  }
 }
