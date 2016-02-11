@@ -16,12 +16,21 @@
 			"email": "contact.form.email",
 			"phone": "contact.form.phone",
 			"message": "contact.form.message",
-			"submit": "contact.form.submit"
+			"submit": "contact.form.submit",
+			"title": "contact.form.title"
 		},
 		"alert": {
 			"error": "contact.alert.error",
 			"success": "contact.alert.success"
-		}
+		},
+		"mail": "contact.mail",
+		"phone": {
+			"title": "contact.phone.title",
+			"en": "contact.phone.en",
+			"th": "contact.phone.th"
+		},
+		"find": "contact.find",
+		"address": "contact.address"
 	},
 	"process": {
 		"planning": {

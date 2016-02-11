@@ -3,9 +3,15 @@
   "version": "0.0.0",
   "description": "Static website for DB Edil Construct",
   "main": "index.js",
+  "engines": {
+    "node": "5.0.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp dev"
+    "start": "gulp dev",
+    "release": "./bin/dist.sh",
+    "build-prod": "gulp build --prod",
+    "bump": "gulp bump"
   },
   "repository": {
     "type": "git",
@@ -45,6 +51,7 @@
     "browserify": "^13.0.0",
     "envify": "^3.4.0",
     "gulp": "^3.9.1",
+    "gulp-bump": "^1.0.0",
     "gulp-google-webfonts": "0.0.12",
     "gulp-if": "^2.0.0",
     "gulp-load-plugins": "^1.2.0",
@@ -54,6 +61,8 @@
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-stylus": "^2.3.0",
+    "gulp-uglify": "^1.5.2",
+    "gulp-uglifycss": "^1.0.5",
     "gulp-util": "^3.0.7",
     "jquery": "^2.2.0",
     "raf": "^3.1.0",

@@ -55,6 +55,7 @@ gulp.task('css', function () {
         // pxtorem({replace: true}),
       ]))
       .pipe($.rename('db-construct.css'))
+    .pipe($.if(!isDev, $.uglifycss()))
     .pipe(gulp.dest('public'))
     .pipe(reload({stream: true}));
     // .pipe($.if(isDev, cssDev(), cssProd()));
@@ -107,7 +108,7 @@ function bundleShare(b) {
   return b.bundle()
     .pipe(source('db-construct.js'))
     .pipe(vinylBuffer())
-    // .pipe($.if(!isDev, $.uglify()))
+    .pipe($.if(!isDev, $.uglify()))
     .pipe(gulp.dest('public'));
 }
 
@@ -168,3 +169,15 @@ gulp.task('watch', ['browser-sync', 'js'], function () {
 });
 
 gulp.task('dev', ['watch']);
+
+////////
+// DEPLOY
+////////
+
+gulp.task('bump', function(){
+  gulp.src('./*.json')
+  .pipe($.bump({version: args.pkg}))
+  .pipe(gulp.dest('./'));
+});
+
+gulp.task('build', ['fonts', 'js', 'css']);

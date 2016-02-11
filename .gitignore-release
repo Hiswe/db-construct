@@ -1,0 +1,15 @@
+/bin
+/js-front
+/node_modules
+/styl
+/.*
+!/.gitignore
+/*.html
+/*.js
+!/index.js
+/*.json
+!/package.json
+/*.md
+npm-debug.log
+.DS_Store
+fonts.list
