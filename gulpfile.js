@@ -110,6 +110,22 @@ gulp.task('js', ['app']);
 // ASSETS
 ////////
 
+//----- ICONS
+
+gulp.task('icons', function () {
+  return gulp
+    .src('public/icons/*.svg')
+    .pipe($.svgmin({ plugins: [
+      { removeAttrs: { attrs: ['fill', 'stroke'] } },
+    ]}))
+    .pipe($.svgSymbols({
+      id: 'icon-%f',
+      className: '.icon-%f',
+    }))
+    .pipe($.if( /[.]svg$/, gulp.dest('public')))
+    .pipe($.if( /[.]css$/, gulp.dest('styl')));
+});
+
 //----- FONTS
 
 gulp.task('del-fonts', function (cb) {

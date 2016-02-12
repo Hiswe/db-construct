@@ -1,8 +1,9 @@
 header {
-  text-align: center;
+  text-align: left;
   max-width: $large-range;
   width: 100%;
   margin: 0 auto;
+  padding: 0 $gutter;
 
   +mq('>=M') {
     display: flex;
@@ -11,6 +12,11 @@ header {
     margin-top: $gutter;
     position: relative;
     z-index: $zindex--header;
+  }
+
+  label,
+  input {
+    display: none;
   }
 }
 

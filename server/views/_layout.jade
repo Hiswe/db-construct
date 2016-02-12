@@ -1,3 +1,5 @@
+include mixins/icon
+
 doctype html
 html(lang=getLocale())
   head
@@ -27,6 +29,9 @@ html(lang=getLocale())
     header
       a.logo(href="/")
         img(src="/assets/logo-outline.svg", width="230", height="80")
+      label(for="toggle-menu")
+        +icon('menu')
+      input(type="checkbox", name="toggle-menu")
       nav
         a(href="/", class= pageName == 'home' ? 'is-selected' : '')= __('menu.home')
         a(href="/projects", class= pageName == 'projects' ? 'is-selected' : '')= __('menu.projects')
