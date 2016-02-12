@@ -4,8 +4,7 @@ block content
   #carrousel
     h1
       | #{__('home.baseline.1')}
-      br
-      | #{__('home.baseline.2')}
+      strong= __('home.baseline.2')
     ul.carrousel
       li: img(src="/image/1400x600")
       li: img(src="/image/1400x600")
@@ -15,14 +14,18 @@ block content
   .expertise
     h2= __('home.expertise.title')
     dl
-      dt= __('home.expertise.1')
+      dt
+        p= __('home.expertise.1')
       dd: img(src="/image/660x350")
     dl
-      dt= __('home.expertise.2')
+      dt
+        p= __('home.expertise.2')
       dd: img(src="/image/660x350")
     dl
-      dt= __('home.expertise.3')
+      dt
+        p= __('home.expertise.3')
       dd: img(src="/image/660x350")
     dl
-      dt= __('home.expertise.4')
+      dt
+        p= __('home.expertise.4')
       dd: img(src="/image/660x350")

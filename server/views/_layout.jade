@@ -20,12 +20,13 @@ html(lang=getLocale())
     //- link(rel="icon", href="/favicon.png", type="image/png")
 
     //- link(href='https://fonts.googleapis.com/css?family=PT+Sans:400,700', rel='stylesheet', type='text/css')
+    meta(name="viewport", content="width=device-width, initial-scale=1")
     link(rel="stylesheet", href="/db-construct.css")
 
   body(class="page-" + pageName)
     header
       a.logo(href="/")
-        img(src="/image/202x80")
+        img(src="/assets/logo-outline.svg", width="230", height="80")
       nav
         a(href="/", class= pageName == 'home' ? 'is-selected' : '')= __('menu.home')
         a(href="/projects", class= pageName == 'projects' ? 'is-selected' : '')= __('menu.projects')

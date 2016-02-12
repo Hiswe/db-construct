@@ -1,14 +1,11 @@
 header {
   text-align: center;
-  background: $primary;
   max-width: $large-range;
   width: 100%;
   margin: 0 auto;
 
   +mq('>=M') {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
   }
   +mq('>=L') {
     margin-top: $gutter;
@@ -19,10 +16,13 @@ header {
 
 nav {
   display: none;
+  background: $primary;
+  flex: 1 0 auto;
 
   +mq('>=M') {
     display: flex;
-    justify-content: space-around;
+    align-items: flex-end;
+    justify-content: flex-end;
   }
 
   a {
@@ -43,7 +43,18 @@ nav {
 
 .logo {
   display: inline-block;
+  padding: $half-gutter 0;
+
+  +mq('>=M') {
+    padding: 0;
+    margin-right: ($gutter * 2);
+  }
+
   img {
-    display: block;
+    +mq('==S') {
+      display: inline;
+      width: 50%;
+      height: auto;
+    }
   }
 }

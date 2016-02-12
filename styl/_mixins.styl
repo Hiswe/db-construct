@@ -60,13 +60,13 @@ mq($$size) {
 //////
 
 font-title() {
-  font-family: 'Alfa Slab One', cursive;
-  font-weight: normal;
+  font-family: 'Droid Serif', cursive;
+  font-weight: bold;
   letter-spacing: 2px;
 }
 
 font-text() {
-  font-family: 'Lora', serif;
+  font-family: 'Roboto', serif;
   // font-weight: normal;
   // font-style: normal;
 }
@@ -76,10 +76,9 @@ font-text() {
 //////
 
 container() {
-  max-width: $max-width;
-  width: 'calc(%s - %s)' % (100% $gutter);
-
+  // width: 'calc(%s - %s)' % (100% $gutter);
   +mq('>=M') {
+    max-width: $max-width;
     width: 'calc(%s - %s)' % (100% ($gutter * 2));
   }
 }

@@ -6,7 +6,7 @@ var gm      = require('gm');
 var config  = require('./config');
 
 if (config.isProd) {
-  gm = gm.subClass({imageMagick: true})
+  gm = gm.subClass({imageMagick: true});
 }
 
 function image(req, res, next) {
@@ -30,7 +30,7 @@ function image(req, res, next) {
   // text
   out = out.fill('#CCCCCC')
     .drawText(0, 0, width + ' x ' + height, 'center')
-    .font(path.join(__dirname, '../public/assets/Roboto-normal-900.woff'))
+    .font(path.join(__dirname, '../public/fonts/Roboto-normal-900.woff'))
     .fontSize(20);
   return out.stream('png').pipe(res);
 

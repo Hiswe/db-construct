@@ -24,6 +24,13 @@
     left: 0;
     transform: translate(0, -50%);
     margin: 0;
+    padding: 0 $gutter;
+    font-size: 28px;
+
+    strong {
+      display: block;
+      color: $accent;
+    }
   }
 
   ul,
@@ -39,10 +46,19 @@
   margin: 0 auto;
   text-align: center;
 
+  h2 {
+    color: $accent;
+    padding-top: $gutter;
+  }
+
+  p {
+    margin: 0;
+  }
+
   dl {
-    margin: $gutter 0 ;
 
     +mq('>=M') {
+      margin: $gutter 0;
       row();
     }
 
@@ -60,6 +76,9 @@
   }
   dt {
     flex-center-align();
+    padding: $half-gutter 0;
+    font-size: 20px;
+
     +mq('>=L') {
       cell(1, 3);
     }

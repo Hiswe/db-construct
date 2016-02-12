@@ -1,6 +1,7 @@
 'use strict';
 
 var _               = require('lodash');
+var del             = require('del');
 var gulp            = require('gulp');
 var $               = require('gulp-load-plugins')();
 var browserSync     = require('browser-sync').create();
@@ -27,16 +28,6 @@ console.log(cyan('build with env', isDev ? 'dev' : 'prod'));
 var autoprefixer  = require('autoprefixer');
 // var pxtorem       = require('postcss-pxtorem');
 
-// var cssDev        = lazypipe()
-//   .pipe(dest.tmp)
-//   // .pipe($.filter, ['*', '!*.map'])
-//   .pipe(reload, {stream: true});
-
-// var cssProd       = lazypipe()
-//   .pipe($.minifyCss)
-//   .pipe(addBanner)
-//   .pipe(dest.dist)
-
 gulp.task('css', function () {
   return gulp
     .src('styl/index.styl')
@@ -58,7 +49,6 @@ gulp.task('css', function () {
     .pipe($.if(!isDev, $.uglifycss()))
     .pipe(gulp.dest('public'))
     .pipe(reload({stream: true}));
-    // .pipe($.if(isDev, cssDev(), cssProd()));
 });
 
 ////////
@@ -122,11 +112,15 @@ gulp.task('js', ['app']);
 
 //----- FONTS
 
-gulp.task('fonts', function () {
+gulp.task('del-fonts', function (cb) {
+  return del(['public/fonts/*.woff'], cb);
+});
+
+gulp.task('fonts', ['del-fonts'], function () {
   return gulp
     .src('fonts.list')
     .pipe($.googleWebfonts())
-    .pipe($.if(/[.]woff$/, gulp.dest('public/assets')));
+    .pipe($.if(/[.]woff$/, gulp.dest('public/fonts')));
 });
 
 ////////
