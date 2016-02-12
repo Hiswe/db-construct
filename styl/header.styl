@@ -14,8 +14,25 @@ header {
     z-index: $zindex--header;
   }
 
-  label,
   input {
+    display: none;
+  }
+  label {
+    position: fixed;
+    top: $half-gutter;
+    right: $gutter;
+    background: $accent;
+    flex-center-align();
+    width: 40px;
+    height: @width;
+    cursor: pointer;
+    z-index: $zindex--hamburger;
+  }
+  input:checked ~ label {
+    background: $bg;
+  }
+  input:not(:checked) ~ label .icon-close,
+  input:checked ~ label .icon-menu {
     display: none;
   }
 }
@@ -24,6 +41,20 @@ nav {
   display: none;
   background: $primary;
   flex: 1 0 auto;
+
+  input:checked ~ & {
+    display: flex;
+  }
+
+  +mq('==S') {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: $zindex--menu-mobile;
+    flex-wrap: wrap;
+  }
 
   +mq('>=M') {
     display: flex;
@@ -35,14 +66,36 @@ nav {
     padding: 1em;
     color: white;
     text-decoration: none;
-    border-bottom: 4px solid transparent;
 
-    &.is-selected {
-      border-bottom-color: $accent;
+    +mq('==S') {
+      flex: 0 0 50%;
+      flex-center-align();
+      text-transform: uppercase;
+
+      &.is-selected {
+        background: rgba(white, .2);
+        pointer-events: none;
+        cursor: normal;
+      }
+
+      &:nth-child(even) {
+        border-left: 1px solid rgba(white, .2);
+      }
+      &:nth-child(2) ~ a {
+        border-top: 1px solid rgba(white, .2);
+      }
     }
 
-    &:hover {
-      text-decoration: underline;
+    +mq('>=M') {
+      border-bottom: 4px solid transparent;
+
+      &.is-selected {
+        border-bottom-color: $accent;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }
