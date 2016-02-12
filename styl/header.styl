@@ -27,6 +27,10 @@ header {
     height: @width;
     cursor: pointer;
     z-index: $zindex--hamburger;
+
+    +mq('>=M') {
+      display: none;
+    }
   }
   input:checked ~ label {
     background: $bg;
