@@ -1,6 +1,6 @@
 {
   "name": "db-construct",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Static website for DB Edil Construct",
   "main": "index.js",
   "engines": {
@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "gulp dev",
     "release": "./bin/dist.sh",
-    "build-prod": "gulp build --prod",
+    "build-prod": "gulp svg && gulp build --prod",
     "bump": "gulp bump",
     "logs": "heroku logs -n 10000"
   },
