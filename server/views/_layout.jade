@@ -27,7 +27,7 @@ html(lang=getLocale())
   body(class="page-" + pageName)
     header.main-header
       a.logo(href="/")
-        img(src="/assets/logo-outline.svg", width="230", height="80")
+        +svg-image('logo-outline')
       input#toggle-menu(type="checkbox")
       label.toggle-menu(for="toggle-menu")
         +icon('menu')

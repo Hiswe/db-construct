@@ -8,7 +8,11 @@
 #carrousel {
   position: relative;
   z-index: $zindex--carrousel;
-  height: 70vh;
+  // height: 70vh;
+
+  +mq('>=M') {
+    margin-top: $gutter;
+  }
 
   +mq('>=L') {
     height: auto;
@@ -25,6 +29,7 @@
     margin: 0;
     padding: 0 $gutter;
     font-size: 28px;
+    display: none;
 
     strong {
       display: block;

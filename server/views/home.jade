@@ -6,30 +6,38 @@ block content
       | #{__('home.baseline.1')}
       strong= __('home.baseline.2')
     ul.carrousel
-      li: img(src="/image/1400x600")
-      li: img(src="/image/1400x600")
-      li: img(src="/image/1400x600")
-      li: img(src="/image/1400x600")
+      li: picture
+        source(media="(min-width: 1024px)" srcset="/image/1400x600")
+        source(media="(min-width: 640px)" srcset="/image/920x500")
+        img(src="/image/580x580")
+      li: picture
+        source(media="(min-width: 1024px)" srcset="/image/1400x600")
+        source(media="(min-width: 640px)" srcset="/image/920x500")
+        img(src="/image/580x580")
+      li: picture
+        source(media="(min-width: 1024px)" srcset="/image/1400x600")
+        source(media="(min-width: 640px)" srcset="/image/920x500")
+        img(src="/image/580x580")
 
   .expertise
     h2= __('home.expertise.title')
     dl
       dt
         p= __('home.expertise.1')
-        +svg-images('residential-commercial')
+        +svg-image('residential-commercial')
       dd: img(src="/image/660x350")
     dl
       dt
         p= __('home.expertise.2')
-        +svg-images('interior')
+        +svg-image('interior')
       dd: img(src="/image/660x350")
     dl
       dt
         p= __('home.expertise.3')
-        +svg-images('swimming-pool')
+        +svg-image('swimming-pool')
       dd: img(src="/image/660x350")
     dl
       dt
         p= __('home.expertise.4')
-        +svg-images('hammer')
+        +svg-image('hammer')
       dd: img(src="/image/660x350")

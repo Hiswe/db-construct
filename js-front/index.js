@@ -1,19 +1,31 @@
-const $ = require('jquery');
+import svg4everybody from 'svg4everybody';
+
+// const $ = require('jquery');
 // const raf = require('raf');
 // import * as $$ from 'dominus';
 import logger from './_logger';
 
-// window.$$ = $$;
 
 const log     = logger('app', true);
-
 log('init');
 
+// enable support for external source
+svg4everybody();
+
+// http://gomakethings.com/ditching-jquery#cutting-the-mustard
+var supports = !!document.querySelector && !!window.addEventListener;
+if ( !supports ) return;
+
 if (process.env.NODE_ENV === 'development') {
-  let $grid = $('.demo-grid');
-  $(document).on('keyup', function(e) {
-    if (e.keyCode == 27) {
-      $grid.toggle();
-    };
-  });
+
+  let grid    = document.querySelector('.demo-grid');
+  let isOpen  = false;
+
+  document.addEventListener('keyup', toggleGrid);
+  function toggleGrid(e) {
+    if (e.keyCode !== 27) return;
+    if (isOpen) grid.style.display = 'none';
+    if (!isOpen) grid.style.display = 'block';
+    isOpen = !isOpen;
+  }
 }
