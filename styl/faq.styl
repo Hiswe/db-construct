@@ -5,9 +5,12 @@
     font-text();
     font-size: 20px;
     padding: $half-gutter;
+
+    +mq('>=M') {
+      margin: $gutter 0;
+    }
   }
   dl {
-    // max-width: col(2);
     padding: $half-gutter;
 
     +mq('>=M') {
@@ -18,6 +21,8 @@
     font-weight: bold;
     margin-bottom: 1em;
     font-title();
+    color: $accent;
+    font-size: 20px;
   }
 
   dd + dt {

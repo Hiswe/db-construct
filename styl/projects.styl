@@ -3,6 +3,8 @@
 }
 
 .projects {
+  margin-top: $gutter;
+
   +mq('>=M') {
     row();
   }
@@ -12,10 +14,9 @@
   }
   dl {
     position: relative;
-    margin: 0 0 $half-gutter;
+    margin: 0 0 $gutter;
 
     +mq('>=M') {
-      margin-bottom: $gutter;
       cell(1, 2);
     }
   }

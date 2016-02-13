@@ -1,14 +1,16 @@
-header {
+.main-header {
   text-align: left;
   max-width: $large-range;
   width: 100%;
   margin: 0 auto;
-  padding: 0 $gutter;
+  padding: 0 $half-gutter;
 
   +mq('>=M') {
     display: flex;
+    padding: 0 $gutter;
   }
   +mq('>=L') {
+    padding: 0;
     margin-top: $gutter;
     position: relative;
     z-index: $zindex--header;
@@ -17,7 +19,7 @@ header {
   input {
     display: none;
   }
-  label {
+  .toggle-menu {
     position: fixed;
     top: $half-gutter;
     right: $gutter;

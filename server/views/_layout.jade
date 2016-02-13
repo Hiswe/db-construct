@@ -14,23 +14,22 @@ html(lang=getLocale())
     //- meta(property="og:image", content="http://agence.badsender.com/wp-content/uploads/2014/09/logo_badsender_154x118.png")
     //- meta(property="og:description", content="Editeur graphique de templates email par Badsender")
     //- meta(property="og:url", content="http://agence.badsender.com")
-    //- meta(property="og:type", content="website")
+    meta(property="og:type", content="website")
 
     //- link(rel="canonical", href="http://agence.badsender.com")
 
     //- link(rel="shortcut icon", href="/favicon.png", type="image/png")
     //- link(rel="icon", href="/favicon.png", type="image/png")
 
-    //- link(href='https://fonts.googleapis.com/css?family=PT+Sans:400,700', rel='stylesheet', type='text/css')
     meta(name="viewport", content="width=device-width, initial-scale=1")
     link(rel="stylesheet", href="/db-construct.css")
 
   body(class="page-" + pageName)
-    header
+    header.main-header
       a.logo(href="/")
         img(src="/assets/logo-outline.svg", width="230", height="80")
       input#toggle-menu(type="checkbox")
-      label(for="toggle-menu")
+      label.toggle-menu(for="toggle-menu")
         +icon('menu')
         +icon('close')
       nav
