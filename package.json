@@ -54,6 +54,7 @@
     "envify": "^3.4.0",
     "gulp": "^3.9.1",
     "gulp-bump": "^1.0.0",
+    "gulp-cheerio": "^0.6.2",
     "gulp-google-webfonts": "0.0.12",
     "gulp-if": "^2.0.0",
     "gulp-load-plugins": "^1.2.0",

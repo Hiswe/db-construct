@@ -110,6 +110,33 @@ gulp.task('js', ['app']);
 // ASSETS
 ////////
 
+//----- SVG IMAGES
+
+gulp.task('svg-images', function () {
+  return gulp
+    .src('public/assets/*.svg')
+    // need gulp-cheerio for
+    // https://github.com/Hiswe/gulp-svg-symbols/issues/24
+    .pipe($.cheerio({
+      run: function ($, file) {
+        $('svg').each(function () {
+          $(this).attr('width', null);
+          $(this).attr('height', null);
+        });
+      },
+       parserOptions: {
+        xmlMode: true
+      }
+    }))
+    .pipe($.svgSymbols({
+      id: 'svg-%f',
+      className: '.svg-%f',
+    }))
+    .pipe($.rename({basename: 'svg-images'}))
+    .pipe($.if( /[.]svg$/, gulp.dest('public')))
+    .pipe($.if( /[.]css$/, gulp.dest('styl')));
+});
+
 //----- ICONS
 
 gulp.task('icons', function () {
@@ -138,6 +165,10 @@ gulp.task('fonts', ['del-fonts'], function () {
     .pipe($.googleWebfonts())
     .pipe($.if(/[.]woff$/, gulp.dest('public/fonts')));
 });
+
+//----- ALL ASSETS
+
+gulp.task('assets', ['icons', 'svg-images', 'fonts']);
 
 ////////
 // DEV
@@ -173,7 +204,8 @@ gulp.task('browser-sync', ['nodemon'], function () {
 gulp.task('watch', ['browser-sync', 'js'], function () {
   // !! don't put ./ before path
   // http://stackoverflow.com/questions/22391527/gulps-gulp-watch-not-triggered-for-new-or-deleted-files
-  gulp.watch(['styl/**/*.styl'],  ['css']);
+  gulp.watch(['styl/**/*.styl',
+              'styl/**/*.css'],  ['css']);
   // gulp.watch(['assets/js/**/*.js'],     ['app-watch'], reload);
   gulp.watch('server/views/**/*.jade').on('change', reload);
 });
