@@ -6,18 +6,11 @@ block content
       | #{__('home.baseline.1')}
       strong= __('home.baseline.2')
     ul.carrousel
-      li: picture
-        source(media="(min-width: 1024px)" srcset="/image/1400x600")
-        source(media="(min-width: 640px)" srcset="/image/920x500")
-        img(src="/image/580x580")
-      li: picture
-        source(media="(min-width: 1024px)" srcset="/image/1400x600")
-        source(media="(min-width: 640px)" srcset="/image/920x500")
-        img(src="/image/580x580")
-      li: picture
-        source(media="(min-width: 1024px)" srcset="/image/1400x600")
-        source(media="(min-width: 640px)" srcset="/image/920x500")
-        img(src="/image/580x580")
+      each val in [1, 2, 3]
+        li: picture
+          source(media="(min-width: 1024px)" srcset="/image/1400x600 1x, /image/2800x1200 2x")
+          source(media="(min-width: 640px)" srcset="/image/920x500 1x, /image/1840x1000 2x")
+          img(src="/image/580x580", srcset="/image/580x580 1x, /image/1160x1160 2x")
 
   .expertise
     h2= __('home.expertise.title')
@@ -28,8 +21,8 @@ block content
           p= __('home.expertise.' + val)
           +svg-image(drawings[val - 1])
         dd: picture
-          source(media="(min-width: 640px) and (max-width: 1023px)" srcset="/image/475x300")
-          img(src="/image/675x370")
+          source(media="(min-width: 640px) and (max-width: 1023px)" srcset="/image/475x300 1x, /image/950x600 2x")
+          img(src="/image/675x370", srcset="/image/675x370 1x, /image/1350x740 1x")
       //- dd: img(
       //-   src="/image/675x370",
       //-   srcset="/image/475x260 475w, /image/675x370 675w",
