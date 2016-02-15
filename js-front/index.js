@@ -1,4 +1,5 @@
 import svg4everybody from 'svg4everybody';
+import picturefill from 'picturefill';
 
 // const $ = require('jquery');
 // const raf = require('raf');
@@ -13,19 +14,23 @@ log('init');
 svg4everybody();
 
 // http://gomakethings.com/ditching-jquery#cutting-the-mustard
-var supports = !!document.querySelector && !!window.addEventListener;
-if ( !supports ) return;
+// !!document.querySelector;
+var enableJsApp = !!document.querySelector && !!window.addEventListener;
 
-if (process.env.NODE_ENV === 'development') {
+if (enableJsApp) {
 
-  let grid    = document.querySelector('.demo-grid');
-  let isOpen  = false;
+  if (process.env.NODE_ENV === 'development') {
 
-  document.addEventListener('keyup', toggleGrid);
-  function toggleGrid(e) {
-    if (e.keyCode !== 27) return;
-    if (isOpen) grid.style.display = 'none';
-    if (!isOpen) grid.style.display = 'block';
-    isOpen = !isOpen;
+    let grid    = document.querySelector('.demo-grid');
+    let isOpen  = false;
+
+    document.addEventListener('keyup', toggleGrid);
+    function toggleGrid(e) {
+      if (e.keyCode !== 27) return;
+      if (isOpen) grid.style.display = 'none';
+      if (!isOpen) grid.style.display = 'block';
+      isOpen = !isOpen;
+    }
   }
+
 }

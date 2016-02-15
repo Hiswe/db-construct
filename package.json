@@ -8,9 +8,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp dev",
+    "start": "node index.js",
+    "dev": "gulp dev",
     "release": "./bin/dist.sh",
-    "build-prod": "gulp build --prod",
+    "build-prod": "gulp svg && gulp build --prod",
     "bump": "gulp bump",
     "logs": "heroku logs -n 10000"
   },
@@ -70,6 +71,7 @@
     "gulp-uglifycss": "^1.0.5",
     "gulp-util": "^3.0.7",
     "jquery": "^2.2.0",
+    "picturefill": "^3.0.2",
     "raf": "^3.1.0",
     "svg4everybody": "^2.0.3",
     "vinyl-buffer": "^1.0.0",

@@ -99,7 +99,8 @@ function bundleShare(b) {
     .pipe(source('db-construct.js'))
     .pipe(vinylBuffer())
     .pipe($.if(!isDev, $.uglify()))
-    .pipe(gulp.dest('public'));
+    .pipe(gulp.dest('public'))
+    // .pipe(reload());
 }
 
 //----- ALL JS
@@ -168,6 +169,7 @@ gulp.task('fonts', ['del-fonts'], function () {
 
 //----- ALL ASSETS
 
+gulp.task('svg',    ['icons', 'svg-images']);
 gulp.task('assets', ['icons', 'svg-images', 'fonts']);
 
 ////////
@@ -207,6 +209,7 @@ gulp.task('watch', ['browser-sync', 'js'], function () {
   gulp.watch(['styl/**/*.styl',
               'styl/**/*.css'],  ['css']);
   // gulp.watch(['assets/js/**/*.js'],     ['app-watch'], reload);
+  gulp.watch(['public/*.js']).on('change', reload);
   gulp.watch('server/views/**/*.jade').on('change', reload);
 });
 
@@ -222,4 +225,4 @@ gulp.task('bump', function(){
   .pipe(gulp.dest('./'));
 });
 
-gulp.task('build', ['fonts', 'js', 'css']);
+gulp.task('build', ['assets', 'js', 'css']);

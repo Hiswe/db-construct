@@ -42,6 +42,7 @@ read version
 echo "version set to $version"
 
 # Make a copy of the current directory
+# http://stackoverflow.com/questions/3672480/cp-command-should-ignore-some-files
 origdir=`pwd`
 copydir=`mktemp -d /tmp/db-construct.XXX`
 echo "\nbegin copy…"
