@@ -1,39 +1,13 @@
 extends _layout.jade
 
 block content
-  dl
-    dt= __('process.planning.title')
-    dd= __('process.planning.description')
-    dd: ul.carrousel
-      li: img(src="/image/675x300")
-      li: img(src="/image/675x300")
-      li: img(src="/image/675x300")
-      li: img(src="/image/675x300")
-
-  dl
-    dt= __('process.construction.title')
-    dd= __('process.construction.description')
-    dd: ul.carrousel
-      li: img(src="/image/675x300")
-      li: img(src="/image/675x300")
-      li: img(src="/image/675x300")
-      li: img(src="/image/675x300")
-
-  dl
-    dt= __('process.completion.title')
-    dd= __('process.completion.description')
-    dd: ul.carrousel
-      li: img(src="/image/675x300")
-      li: img(src="/image/675x300")
-      li: img(src="/image/675x300")
-      li: img(src="/image/675x300")
-
-  dl
-    dt= __('process.interior.title')
-    dd= __('process.interior.description')
-    dd: ul.carrousel
-      li: img(src="/image/675x300")
-      li: img(src="/image/675x300")
-      li: img(src="/image/675x300")
-      li: img(src="/image/675x300")
-
+  each step in ['planning', 'construction', 'completion', 'interior']
+    dl
+      dt= __('process.' + step + '.title')
+      dd= __('process.' + step + '.description')
+      dd: ul.carrousel
+        each image in [1, 2, 3, 4]
+          li: picture
+            source(media="(min-width: 1024px)" srcset="/image/920x420 1x, /image/1840x840 2x")
+            source(media="(min-width: 640px)" srcset="/image/880x420 1x, /image/1760x840 2x")
+            img(src="/image/580x400", srcset="/image/580x400 1x, /image/1160x800 2x")

@@ -5,4 +5,7 @@ block content
     for project in projects
       dl
         dt: a(href="/project/" + project)= __('projects.' + project + '.title')
-        dd: a(href="/project/" + project): img(src="/image/600x350")
+        dd: a(href="/project/" + project)
+          picture
+            source(media="(max-width: 640px)" srcset="/image/600x450 1x, /image/1200x900 2x")
+            img(src="/image/600x350", srcset="/image/600x350 1x, /image/1200x700 2x")

@@ -14,7 +14,6 @@
 
 
     +mq('>=M') {
-      padding: 0;
       text-align: left;
       font-size: 24px;
       cell(1);
@@ -24,20 +23,20 @@
     &:first-of-type {
       padding: 0 $half-gutter $gutter;
       +mq('>=M') {
-        padding: 0;
         cell(2);
       }
     }
     &:last-of-type {
-      height: 50vh;
       +mq('>=M') {
-        margin-top: $half-gutter;
-        cell(3);
+        cell(1, 1);
       }
+    }
+  }
 
-      * {
-        height: 100%;
-      }
+  +mq('>=M') {
+    dt,
+    dd:first-of-type {
+      padding: 0 0 $half-gutter;
     }
   }
 }

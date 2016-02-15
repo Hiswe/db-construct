@@ -100,6 +100,7 @@ col($i = 1, $$cols = $default-cols){
 }
 
 cell($i = 1, $$cols = $default-cols, $$gutter = $gutter) {
-  flex-basis: 'calc(%s - %s)' % (col($i, $$cols) $$gutter);
+  $width = col($i, $$cols);
+  flex-basis: 'calc(%s - %s)' % ($width $$gutter);
   max-width: @flex-basis;
 }
