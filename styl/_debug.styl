@@ -12,17 +12,22 @@ body::before {
 }
 
 .demo-grid {
-  width: 100%;
   container();
   position: fixed;
   z-index: $zindex--debug - 1;
   top: 0;
-  left: 50%;
-  right: 0;
+  left: $gutter;
+  right: @left;
   bottom: 0;
-  transform: translateX(-50%);
   pointer-events: none;
   display: none;
+
+  +mq('>=M') {
+    // width: 100%;
+    left: 50%;
+    right: 0;
+    transform: translateX(-50%);
+  }
 
   ul, li {
     list-style: none;
@@ -38,9 +43,31 @@ body::before {
     cell(1, 1, 0px);
     height: 100vh;
     background: rgba(cyan, .3);
-    padding: 0 ($gutter / 2);
+    padding: 0 $half-gutter;
     background-clip: content-box;
-    outline: 1px solid rgba(cyan, .7);
+    position: relative;
+    // outline: 1px solid rgba(cyan, .7);
+    // &::before,
+    // &::after {
+    //   content: '';
+    //   position: absolute;
+    //   top: 0;
+    //   bottom: 0;
+    //   border-left: 1px solid rgba(cyan, .7);
+    //   +mq('==S') {
+    //     display: none;
+    //   }
+    // }
+    // &::before {
+    //   left: 0;
+    // }
+    // &::after {
+    //   right: 0;
+    // }
+
+    // + li::before {
+    //   display: none;
+    // }
 
     +mq('>=M') {
       cell(1, 2, 0px);
@@ -55,7 +82,7 @@ body::before {
 
       +mq('>=M') {
         display: block;
-        outline: 0;
+        // outline: 0;
       }
     }
 

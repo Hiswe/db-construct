@@ -9,12 +9,16 @@
   +mq('>=M') {
     display: flex;
     padding: 0;
+    height: 80px;
   }
+  // +mq('==M') {
+  //   margin-right: 0;
+  // }
   +mq('>=L') {
     margin-top: $gutter;
     position: relative;
     z-index: $zindex--header;
-    height: 80px;
+    // height: 80px;
   }
 
   input {
@@ -44,6 +48,31 @@
   }
 }
 
+.logo {
+  display: inline-block;
+  padding: $half-gutter 0;
+  align-self: flex-end;
+
+
+  +mq('>=M') {
+    padding: 0;
+    margin-right: ($gutter * 2);
+  }
+
+  svg {
+    +mq('==S') {
+      display: inline;
+      width: 50%;
+      height: 40px;
+    }
+    +mq('==M') {
+      height: 60px;
+      width: 230px * 0.75;
+    }
+  }
+}
+
+
 nav {
   display: none;
   background: $primary;
@@ -61,6 +90,11 @@ nav {
     bottom: 0;
     z-index: $zindex--menu-mobile;
     flex-wrap: wrap;
+  }
+
+  +mq('==M') {
+    padding-right: $gutter;
+    margin-right: $gutter * -1;
   }
 
   +mq('>=M') {
@@ -103,24 +137,6 @@ nav {
       &:hover {
         text-decoration: underline;
       }
-    }
-  }
-}
-
-.logo {
-  display: inline-block;
-  padding: $half-gutter 0;
-
-  +mq('>=M') {
-    padding: 0;
-    margin-right: ($gutter * 2);
-  }
-
-  svg {
-    +mq('==S') {
-      display: inline;
-      width: 50%;
-      height: 40px;
     }
   }
 }

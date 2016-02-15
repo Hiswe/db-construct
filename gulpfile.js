@@ -47,6 +47,7 @@ gulp.task('css', function () {
       ]))
       .pipe($.rename('db-construct.css'))
     .pipe($.if(!isDev, $.uglifycss()))
+    .pipe($.if(isDev, $.sourcemaps.write()))
     .pipe(gulp.dest('public'))
     .pipe(reload({stream: true}));
 });
