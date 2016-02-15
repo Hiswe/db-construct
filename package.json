@@ -1,6 +1,6 @@
 {
   "name": "db-construct",
-  "version": "0.0.0",
+  "version": "1.0.1",
   "description": "Static website for DB Edil Construct",
   "main": "index.js",
   "engines": {
@@ -58,6 +58,7 @@
     "gulp-cheerio": "^0.6.2",
     "gulp-google-webfonts": "0.0.12",
     "gulp-if": "^2.0.0",
+    "gulp-image-resize": "^0.7.1",
     "gulp-load-plugins": "^1.2.0",
     "gulp-nodemon": "^2.0.6",
     "gulp-plumber": "^1.1.0",
