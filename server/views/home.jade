@@ -21,23 +21,16 @@ block content
 
   .expertise
     h2= __('home.expertise.title')
-    dl
-      dt
-        p= __('home.expertise.1')
-        +svg-image('residential-commercial')
-      dd: img(src="/image/660x350")
-    dl
-      dt
-        p= __('home.expertise.2')
-        +svg-image('interior')
-      dd: img(src="/image/660x350")
-    dl
-      dt
-        p= __('home.expertise.3')
-        +svg-image('swimming-pool')
-      dd: img(src="/image/660x350")
-    dl
-      dt
-        p= __('home.expertise.4')
-        +svg-image('hammer')
-      dd: img(src="/image/660x350")
+    - var drawings = ['residential-commercial', 'interior', 'swimming-pool', 'hammer']
+    each val in [1, 2, 3, 4]
+      dl
+        dt
+          p= __('home.expertise.' + val)
+          +svg-image(drawings[val - 1])
+        dd: picture
+          source(media="(min-width: 640px) and (max-width: 1023px)" srcset="/image/475x300")
+          img(src="/image/675x370")
+      //- dd: img(
+      //-   src="/image/675x370",
+      //-   srcset="/image/475x260 475w, /image/675x370 675w",
+      //-   sizes="(min-width: 1072px) 675px, (min-width: 1024px) calc(66vw - 36px), (min-width: 640px) calc(50vw - 36px), 100vw")

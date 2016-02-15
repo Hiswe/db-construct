@@ -8,7 +8,6 @@
 #carrousel {
   position: relative;
   z-index: $zindex--carrousel;
-  // height: 70vh;
 
   +mq('>=M') {
     margin-top: $gutter;
@@ -65,6 +64,10 @@
     +mq('==S') {
       display: none;
     }
+
+    +mq('==M') {
+      height: 12.5vw;
+    }
   }
 
   dl {
@@ -107,8 +110,8 @@
   }
   img {
     width: 100%;
-    height: 100%;
+    // height: 100%;
     display: block;
-    object-fit: cover;
+    // object-fit: cover;
   }
 }
