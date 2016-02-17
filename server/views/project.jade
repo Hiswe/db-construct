@@ -2,6 +2,18 @@ extends _layout.jade
 
 block content
   h1= __('projects.' + project.name + '.title')
-  ul
-    for point in __('projects.' + project.name + '.description').split('\n')
-      li= point
+  ul.project-content.js-grid
+    //- description
+    li.project-description.grid-item.grid-item--width2: ul
+      for point in __('projects.' + project.name + '.description').split('\n')
+        li= point
+    //- images
+    - var image = 0;
+    while image < project.images
+      - image++;
+      li.project-image.grid-item: img(src='/image/400x300')
+    //- - var additionals = project.images % 3 + 1
+    //- - var additional = 0;
+    //- while additional < additionals
+    //-   - additional++;
+    //-   li

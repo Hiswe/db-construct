@@ -97,10 +97,11 @@ function bundleShare(b) {
   $.util.log('bundle front app');
 
   return b.bundle()
+    .on('error', onError)
     .pipe(source('db-construct.js'))
     .pipe(vinylBuffer())
     .pipe($.if(!isDev, $.uglify()))
-    .pipe(gulp.dest('public'));
+    .pipe(gulp.dest('public'))
 }
 
 //----- ALL JS

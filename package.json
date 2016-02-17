@@ -74,6 +74,7 @@
     "gulp-util": "^3.0.7",
     "jquery": "^2.2.0",
     "lazypipe": "^1.0.1",
+    "masonry-layout": "^4.0.0",
     "merge-stream": "^1.0.0",
     "picturefill": "^3.0.2",
     "raf": "^3.1.0",

@@ -1,0 +1,69 @@
+.page-project h1 {
+  color: $accent;
+}
+
+.project-image {
+  list-style: none;
+  padding: 0;
+}
+
+.project-image,
+.project-content {
+  list-style: none;
+  padding: 0;
+}
+
+.project-content {
+  // display: flex;
+  // flex-wrap: wrap;
+
+  &::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  +mq('>=L') {
+    // margin: 0 $half-gutter * -1;
+  // //   row();
+  }
+}
+.grid-sizer,
+.grid-item {
+  width: 'calc(%s - %s)' % (col(1) $gutter * 0.666 );
+  // width: col(1);
+}
+.grid-sizer {
+  height: 1px;
+  background: red;
+}
+.grid-item--width2 { width: col(2) }
+
+.project-description {
+  // flex: 0 0 100%;
+
+  // +mq('>=L') {
+  //   float: left;
+  //   width: 'calc(%s - %s)' % (col(2) $gutter);
+  //   margin: 0 $half-gutter;
+  //   // width: col(2);
+
+  //   // cell(2);
+  //   // align-self: flex-center;
+  // }
+}
+
+.project-image {
+
+  // +mq('>=L') {
+  //   width: col(1);
+  //   float: left;
+  //   width: 'calc(%s - %s)' % (col(1) $gutter);
+  //   margin: 0 $half-gutter;
+  // }
+}
+
+.project-description,
+.project-image {
+  margin-top: $gutter;
+}

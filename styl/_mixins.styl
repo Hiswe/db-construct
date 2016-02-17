@@ -76,7 +76,6 @@ font-text() {
 //////
 
 container() {
-  // width: 'calc(%s - %s)' % (100% $gutter);
   +mq('>=M') {
     max-width: $max-width;
     width: 'calc(%s - %s)' % (100% ($gutter * 2));
@@ -92,7 +91,8 @@ row($$gutter = $gutter) {
   margin-right: @margin-left;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  // justify-content: space-around;
+  justify-content: flex-start;
 }
 
 col($i = 1, $$cols = $default-cols){
@@ -102,5 +102,7 @@ col($i = 1, $$cols = $default-cols){
 cell($i = 1, $$cols = $default-cols, $$gutter = $gutter) {
   $width = col($i, $$cols);
   flex-basis: 'calc(%s - %s)' % ($width $$gutter);
+  margin-left: $half-gutter;
+  margin-right: @margin-left;
   max-width: @flex-basis;
 }
