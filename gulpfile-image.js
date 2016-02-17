@@ -167,6 +167,39 @@ gulp.task('process', ['clean-expertise'], function() {
 // PROJECT(S)
 ////////
 
+//----- PROJECTS COVER
+
+// source(media="(max-width: 640px)" srcset="/image/600x450 1x, /image/1200x900 2x")
+// img(src="/image/600x350", srcset="/image/600x350 1x, /image/1200x700 2x")
+
+var coversDst = `${dst}/project`;
+var coversSrc = lazypipe()
+  .pipe(gulp.src, [`${src}/project/**/*-cover.{jpg,JPG}`], {base: `${src}/project`})
+  .pipe(normalizeExt);
+
+gulp.task('project-cover', function() {
+  var write = lazypipe()
+  .pipe(gulp.dest, coversDst)
+  .pipe(unRetina)
+
+  var medium = coversSrc()
+    .pipe(medium2x())
+    .pipe(parallel($.imageResize(resize(1200, 900)), cpus))
+    .pipe(write())
+    .pipe(parallel($.imageResize(resize(600, 450)), cpus));
+
+  var small = coversSrc()
+    .pipe(small2x())
+    .pipe(parallel($.imageResize(resize(1200, 700)), cpus))
+    .pipe(write())
+    .pipe(parallel($.imageResize(resize(600, 350)), cpus));
+
+  return merge([medium, small])
+    .pipe(gulp.dest(coversDst));
+});
+
+//----- PROJECT
+
 var projectDst = `${dst}/project`;
 var projectSrc = lazypipe()
   .pipe(gulp.src, [`${src}/project/**/*.{jpg,JPG}`, `!${src}/project/**/*-cover.{jpg,JPG}`], {base: `${src}/project`})
@@ -188,4 +221,5 @@ gulp.task('project', ['clean-project'], function () {
     .pipe(parallel($.imageResize(resize(400, 300)), cpus))
     .pipe(gulp.dest(projectDst))
 });
+
 
