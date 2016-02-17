@@ -100,8 +100,7 @@ function bundleShare(b) {
     .pipe(source('db-construct.js'))
     .pipe(vinylBuffer())
     .pipe($.if(!isDev, $.uglify()))
-    .pipe(gulp.dest('public'))
-    // .pipe(reload());
+    .pipe(gulp.dest('public'));
 }
 
 //----- ALL JS
@@ -111,6 +110,10 @@ gulp.task('js', ['app']);
 ////////
 // ASSETS
 ////////
+
+//----- PIXEL IMAGES
+
+require('./gulpfile-image.js');
 
 //----- SVG IMAGES
 
