@@ -1,8 +1,7 @@
 extends _layout.jade
 
 block content
-  - var imageCount = [5, 5, 11, 12];
-  each step, index in ['planning', 'construction', 'completion', 'interior']
+  each step, index in steps
     dl
       dt= __('process.' + step + '.title')
       dd= __('process.' + step + '.description')

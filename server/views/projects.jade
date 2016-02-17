@@ -4,8 +4,8 @@ block content
   .projects
     for project in projects
       dl
-        dt: a(href="/project/" + project)= __('projects.' + project + '.title')
-        dd: a(href="/project/" + project)
+        dt: a(href="/project/" + project.name)= __('project.names.' + project.name + '.title')
+        dd: a(href="/project/" + project.name)
           picture
             source(media="(max-width: 640px)" srcset="/image/600x450 1x, /image/1200x900 2x")
             img(src="/image/600x350", srcset="/image/600x350 1x, /image/1200x700 2x")
