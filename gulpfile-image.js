@@ -27,6 +27,7 @@ function resize(width, height) {
 //----- RENAME
 
 var normalizeExt    = lazypipe().pipe($.rename, {extname: '.jpg'});
+var retina          = lazypipe().pipe($.rename, {suffix: '@2x'});
 var big2x           = lazypipe().pipe($.rename, {suffix: '-big@2x'});
 var medium2x        = lazypipe().pipe($.rename, {suffix: '-medium@2x'});
 var small2x         = lazypipe().pipe($.rename, {suffix: '-small@2x'});
@@ -161,3 +162,30 @@ gulp.task('process', ['clean-expertise'], function() {
   return merge([big, medium, small])
     .pipe(gulp.dest(processDst));
 });
+
+////////
+// PROJECT(S)
+////////
+
+var projectDst = `${dst}/project`;
+var projectSrc = lazypipe()
+  .pipe(gulp.src, [`${src}/project/**/*.{jpg,JPG}`, `!${src}/project/**/*-cover.{jpg,JPG}`], {base: `${src}/project`})
+  .pipe(normalizeExt);
+
+gulp.task('clean-project', function(cb) {
+  return del([projectDst], cb);
+});
+
+gulp.task('project', ['clean-project'], function () {
+  var write = lazypipe()
+  .pipe(gulp.dest, projectDst)
+  .pipe(unRetina)
+
+  return projectSrc()
+    .pipe(retina())
+    .pipe(parallel($.imageResize(resize(800, 600)), cpus))
+    .pipe(write())
+    .pipe(parallel($.imageResize(resize(400, 300)), cpus))
+    .pipe(gulp.dest(projectDst))
+});
+

@@ -11,9 +11,4 @@ block content
     - var image = 0;
     while image < project.images
       - image++;
-      li.project-image.grid-item: img(src='/image/400x300')
-    //- - var additionals = project.images % 3 + 1
-    //- - var additional = 0;
-    //- while additional < additionals
-    //-   - additional++;
-    //-   li
+      li.project-image.grid-item: img(src='/images/project/#{project.name}/#{project.name}-#{image}.jpg', srcset="/images/project/#{project.name}/#{project.name}-#{image}.jpg 1x, /images/project/#{project.name}/#{project.name}-#{image}@2-x.jpg 2x")
