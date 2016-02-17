@@ -14,53 +14,44 @@
 }
 
 .project-content {
-  // display: flex;
-  // flex-wrap: wrap;
-
-  &::after {
-    content: '';
-    display: block;
-    clear: both;
+  +mq('==M') {
+    row();
   }
 
-  +mq('>=L') {
-    // margin: 0 $half-gutter * -1;
-  // //   row();
+  +mq('<L') {
+    height: auto !important;
   }
 }
 .grid-sizer,
 .grid-item {
-  width: 'calc(%s - %s)' % (col(1) $gutter * 0.666 );
-  // width: col(1);
+  width: 100%;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  +mq('==M') {
+    cell(1, 2);
+  }
+  +mq('<L') {
+    position: static !important;
+  }
+  +mq('>=L') {
+    width: 'calc(%s - %s)' % (col(1) $gutter * 0.666 );
+  }
 }
-.grid-sizer {
-  height: 1px;
-  background: red;
+
+.grid-item--width2 {
+  +mq('>=L') {
+    width: col(2);
+  }
 }
-.grid-item--width2 { width: col(2) }
 
 .project-description {
-  // flex: 0 0 100%;
-
-  // +mq('>=L') {
-  //   float: left;
-  //   width: 'calc(%s - %s)' % (col(2) $gutter);
-  //   margin: 0 $half-gutter;
-  //   // width: col(2);
-
-  //   // cell(2);
-  //   // align-self: flex-center;
-  // }
-}
-
-.project-image {
-
-  // +mq('>=L') {
-  //   width: col(1);
-  //   float: left;
-  //   width: 'calc(%s - %s)' % (col(1) $gutter);
-  //   margin: 0 $half-gutter;
-  // }
+  +mq('==M') {
+    cell(1, 1);
+  }
 }
 
 .project-description,

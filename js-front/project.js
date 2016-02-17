@@ -19,7 +19,8 @@ function init() {
     columnWidth: '.js-grid-sizer',
     percentPosition: true,
     gutter: 24,
-    initLayout: false
+    initLayout: false,
+    transitionDuration: 0,
   });
 
   msnry.on('on', 'layoutComplete', function() {
