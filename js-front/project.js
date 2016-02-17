@@ -23,9 +23,9 @@ function init() {
     transitionDuration: 0,
   });
 
-  msnry.on('on', 'layoutComplete', function() {
-    console.log('layout is complete');
-  });
+  // msnry.on('on', 'layoutComplete', function() {
+  //   log('layout is complete');
+  // });
 
   window.addEventListener('load', function () {
     msnry.layout();
