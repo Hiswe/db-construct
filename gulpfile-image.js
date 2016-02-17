@@ -78,5 +78,44 @@ gulp.task('home-carrousel', ['clean-carrousel'], function () {
 
   return merge([big, medium, small])
     .pipe(gulp.dest(homeCarrouselDst))
-
 });
+
+//----- EXPERTISE
+
+// source(media="(min-width: 640px) and (max-width: 1023px)" srcset="/image/475x300 1x, /image/950x600 2x")
+// img(src="/image/675x370", srcset="/image/675x370 1x, /image/1350x740 1x")
+
+var homeExpertiseDst = `${dst}/home/expertise`;
+var homeExpertiseSrc = lazypipe()
+  .pipe(gulp.src, `${src}/home/expertise/*.{jpg,JPG}`)
+  .pipe(normalizeExt);
+
+gulp.task('clean-expertise', function(cb) {
+  return del([homeExpertiseDst], cb);
+});
+
+gulp.task('home-expertise', ['clean-expertise'], function () {
+  var write = lazypipe()
+  .pipe(gulp.dest, homeExpertiseDst)
+  .pipe(unRetina)
+
+  var medium = homeExpertiseSrc()
+    .pipe(medium2x())
+    .pipe(parallel($.imageResize(resize(1340, 740)), cpus))
+    .pipe(write())
+    .pipe(parallel($.imageResize(resize(675, 370)), cpus));
+
+  var small = homeExpertiseSrc()
+    .pipe(small2x())
+    .pipe(parallel($.imageResize(resize(950, 600)), cpus))
+    .pipe(write())
+    .pipe(parallel($.imageResize(resize(475, 300)), cpus));
+
+  return merge([medium, small])
+    .pipe(gulp.dest(homeExpertiseDst))
+});
+
+//----- ALL HOME
+
+gulp.task('home', ['home-carrousel', 'home-expertise']);
+

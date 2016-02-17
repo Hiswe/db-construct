@@ -6,11 +6,17 @@ block content
       | #{__('home.baseline.1')}
       strong= __('home.baseline.2')
     ul.carrousel
-      each val in [1, 2, 3]
+      each val in [1, 2, 3, 4, 5]
         li: picture
-          source(media="(min-width: 1024px)" srcset="/image/1400x600 1x, /image/2800x1200 2x")
-          source(media="(min-width: 640px)" srcset="/image/920x500 1x, /image/1840x1000 2x")
-          img(src="/image/580x580", srcset="/image/580x580 1x, /image/1160x1160 2x")
+          source(media="(min-width: 1024px)"
+          srcset="/images/home/carrousel/carrousel-#{val}-big.jpg 1x, /images/home/carrousel/carrousel-#{val}-big@2x.jpg 2x")
+          source(media="(min-width: 640px)"
+          srcset="/images/home/carrousel/carrousel-#{val}-medium.jpg 1x, /images/home/carrousel/carrousel-#{val}-medium@2x.jpg 2x")
+          img(src="/images/home/carrousel/carrousel-#{val}-small",
+          srcset="/images/home/carrousel/carrousel-#{val}-small.jpg 1x,/images/home/carrousel/carrousel-#{val}-small@2x.jpg 2x")
+          //- source(media="(min-width: 1024px)" srcset="/image/1400x600 1x, /image/2800x1200 2x")
+          //- source(media="(min-width: 640px)" srcset="/image/920x500 1x, /image/1840x1000 2x")
+          //- img(src="/image/580x580", srcset="/image/580x580 1x, /image/1160x1160 2x")
 
   .expertise
     h2= __('home.expertise.title')
@@ -21,9 +27,8 @@ block content
           p= __('home.expertise.' + val)
           +svg-image(drawings[val - 1])
         dd: picture
-          source(media="(min-width: 640px) and (max-width: 1023px)" srcset="/image/475x300 1x, /image/950x600 2x")
-          img(src="/image/675x370", srcset="/image/675x370 1x, /image/1350x740 1x")
-      //- dd: img(
-      //-   src="/image/675x370",
-      //-   srcset="/image/475x260 475w, /image/675x370 675w",
-      //-   sizes="(min-width: 1072px) 675px, (min-width: 1024px) calc(66vw - 36px), (min-width: 640px) calc(50vw - 36px), 100vw")
+          //- source(media="(min-width: 640px) and (max-width: 1023px)" srcset="/image/475x300 1x, /image/950x600 2x")
+          //- img(src="/image/675x370", srcset="/image/675x370 1x, /image/1350x740 1x")
+          source(media="(min-width: 640px) and (max-width: 1023px)" srcset="/images/home/expertise/expertise-#{val}-small.jpg 1x, /images/home/expertise/expertise-#{val}-small@2x.jpg 2x")
+          img(src="/images/home/expertise/expertise-#{val}-medium.jpg", srcset="/images/home/expertise/expertise-#{val}-medium.jpg 1x, /images/home/expertise/expertise-#{val}-medium@2x.jpg 1x")
+
