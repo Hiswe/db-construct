@@ -119,3 +119,45 @@ gulp.task('home-expertise', ['clean-expertise'], function () {
 
 gulp.task('home', ['home-carrousel', 'home-expertise']);
 
+////////
+// PROCESS
+////////
+
+// source(media="(min-width: 1024px)" srcset="/image/920x420 1x, /image/1840x840 2x")
+// source(media="(min-width: 640px)" srcset="/image/880x420 1x, /image/1760x840 2x")
+// img(src="/image/580x400", srcset="/image/580x400 1x, /image/1160x800 2x")
+
+var processDst = `${dst}/process`;
+var processSrc = lazypipe()
+  .pipe(gulp.src, `${src}/process/**/*.{jpg,JPG}`, {base: `${src}/process`})
+  .pipe(normalizeExt);
+
+gulp.task('clean-expertise', function(cb) {
+  return del([processDst], cb);
+});
+gulp.task('process', ['clean-expertise'], function() {
+  var write = lazypipe()
+  .pipe(gulp.dest, processDst)
+  .pipe(unRetina)
+
+  var big = processSrc()
+    .pipe(big2x())
+    .pipe(parallel($.imageResize(resize(1840, 840)), cpus))
+    .pipe(write())
+    .pipe(parallel($.imageResize(resize(920, 420)), cpus));
+
+  var medium = processSrc()
+    .pipe(medium2x())
+    .pipe(parallel($.imageResize(resize(1760, 840)), cpus))
+    .pipe(write())
+    .pipe(parallel($.imageResize(resize(880, 420)), cpus));
+
+  var small = processSrc()
+    .pipe(small2x())
+    .pipe(parallel($.imageResize(resize(1160, 800)), cpus))
+    .pipe(write())
+    .pipe(parallel($.imageResize(resize(580, 400)), cpus));
+
+  return merge([big, medium, small])
+    .pipe(gulp.dest(processDst));
+});

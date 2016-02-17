@@ -1,13 +1,19 @@
 extends _layout.jade
 
 block content
-  each step in ['planning', 'construction', 'completion', 'interior']
+  - var imageCount = [5, 5, 11, 12];
+  each step, index in ['planning', 'construction', 'completion', 'interior']
     dl
       dt= __('process.' + step + '.title')
       dd= __('process.' + step + '.description')
       dd: ul.carrousel
-        each image in [1, 2, 3, 4]
+        - var image = 0;
+        while image < imageCount[index]
+          - image++;
           li: picture
-            source(media="(min-width: 1024px)" srcset="/image/920x420 1x, /image/1840x840 2x")
-            source(media="(min-width: 640px)" srcset="/image/880x420 1x, /image/1760x840 2x")
-            img(src="/image/580x400", srcset="/image/580x400 1x, /image/1160x800 2x")
+            //- source(media="(min-width: 1024px)" srcset="/image/920x420 1x, /image/1840x840 2x")
+            //- source(media="(min-width: 640px)" srcset="/image/880x420 1x, /image/1760x840 2x")
+            //- img(src="/image/580x400", srcset="/image/580x400 1x, /image/1160x800 2x")
+            source(media="(min-width: 1024px)" srcset="/images/process/#{step}/#{step}-#{image}-big.jpg 1x, /images/process/#{step}/#{step}-#{image}-big@2x.jpg 2x")
+            source(media="(min-width: 640px)" srcset="/images/process/#{step}/#{step}-#{image}-medium.jpg 1x, /images/process/#{step}/#{step}-#{image}-medium@2x.jpg 2x")
+            img(src="/images/process/#{step}/#{step}-#{image}-small.jpg", srcset="/images/process/#{step}/#{step}-#{image}-small.jpg 1x, /images/process/#{step}/#{step}-#{image}-small@2x.jpg 2x")
