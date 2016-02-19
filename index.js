@@ -133,6 +133,11 @@ app.get('/process',           render.proc);
 app.get('/faq',               render.faq);
 app.get('/',                  render.home);
 
+// app.use(function (req, res, next) {
+//   res.status(404);
+//   next();
+// });
+
 //////
 // ERROR HANDLING
 //////
