@@ -3,7 +3,7 @@ extends _layout.jade
 block content
   h1.page-title= __('menu.process')
   each step, index in steps
-    dl
+    dl.process-step
       dt= __('process.' + step + '.title')
       dd= __('process.' + step + '.description')
       dd: ul.carrousel
