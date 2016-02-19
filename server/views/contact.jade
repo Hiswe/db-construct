@@ -18,7 +18,8 @@ block content
           | :&nbsp;
           a(href="tel:+33 88 269 2483") +33 88 269 2483
       dt= __('contact.find')
-      dd facebook
+      dd: a(href="https://www.facebook.com/Dbedil-622360387786880/", target="_blank")
+        +svg-image('logo-facebook')
 
     form(action="/contact", method="post")
       legend= __('contact.form.title')

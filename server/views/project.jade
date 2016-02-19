@@ -1,7 +1,7 @@
 extends _layout.jade
 
 block content
-  h1.page-title= __('projects.' + project.name + '.title')
+  h1= __('projects.' + project.name + '.title')
   ul.project-content.js-grid
     //- description
     li.project-description.grid-item.grid-item--width2: ul
