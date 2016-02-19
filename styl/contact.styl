@@ -5,7 +5,7 @@ legend {
 }
 
 .page-contact main {
-  +mq('==S') {
+  +mq('<M') {
     width: 100%;
     padding: 0 $gutter;
   }
@@ -67,7 +67,7 @@ form {
 .address {
   margin-top: $gutter;
 
-  +mq('>=M') {
+  +mq('>=S') {
     row();
     > * {
       cell(1, 2);

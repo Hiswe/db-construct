@@ -23,14 +23,27 @@ flex-center-align() {
 // $medium-range     = px2em(640), px2em(1023);
 // $large-range      = px2em(1024);
 
-$small-range      = 0, 639px;
-$medium-range     = 640px, 1023px;
-$large-range      = 1024px;
+$extra-small-range  = 0, 499px;
+$small-range        = 500px, 639px;
+$medium-range       = 640px, 1023px;
+$large-range        = 1024px;
 
 $max-width        = $large-range;
 
 mq($$size) {
-  if ($$size == "==S") {
+  if ($$size == "==XS") {
+    @media only screen and (max-width: $extra-small-range[1]) {
+      {block}
+    }
+  } else if ($$size == ">=S" ) {
+    @media only screen and (min-width: $small-range[0]) {
+      {block}
+    }
+  } else if ($$size == "==S") {
+    @media only screen and (min-width: $small-range[0]) and (max-width: $small-range[1]) {
+      {block}
+    }
+  } else if ($$size == "<M") {
     @media only screen and (max-width: $small-range[1]) {
       {block}
     }

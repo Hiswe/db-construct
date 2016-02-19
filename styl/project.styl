@@ -15,8 +15,14 @@
 }
 
 .project-content {
-  +mq('==M') {
+  +mq('>=S') {
     row();
+  }
+
+  +mq('>=L') {
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   +mq('<L') {
@@ -32,26 +38,40 @@
     height: auto;
   }
 
-  +mq('==M') {
+
+  +mq('>=S') {
     cell(1, 2);
   }
   +mq('<L') {
     position: static !important;
   }
   +mq('>=L') {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: none;
     width: 'calc(%s - %s)' % (col(1) $gutter * 0.666 );
   }
 }
 
 .grid-item--width2 {
   +mq('>=L') {
-    width: col(2);
+    width: 'calc(%s - %s)' % (col(2) $gutter * 0.333 );
   }
 }
 
 .project-description {
+  +mq('==S') {
+    cell(1, 1);
+  }
   +mq('==M') {
     cell(1, 1);
+  }
+}
+
+.grid-sizer {
+  // border-top: 1px solid red;
+  +mq('<M') {
+    display: none;
   }
 }
 
