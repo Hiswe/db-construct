@@ -1,0 +1,104 @@
+footer {
+  background: rgba(black, .4);
+  padding: $gutter;
+
+  +mq('>=M') {
+    padding: $gutter 0 ;
+    text-align: left;
+  }
+
+  a {
+    color: currentColor;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .in {
+    container();
+    margin: 0 auto;
+  }
+}
+
+.footer {
+  row();
+  +mq('==M') {
+    justify-content: flex-end;
+  }
+}
+
+.footer-name {
+  cell(1, 1);
+  text-align: center;
+
+  +mq('>=M') {
+    cell(1, 2);
+    text-align: left;
+  }
+}
+
+.footer-adress,
+.footer-contact {
+  cell(1, 1);
+
+  +mq('>=S') {
+    cell(1, 2);
+  }
+}
+
+.footer-adress {
+  padding: $half-gutter 0 0 45px;
+
+  +mq('>=S') {
+    padding: 0;
+  }
+}
+
+.footer-contact,
+.footer-adress,
+.footer-name {
+  // +mq('>=M') {
+  //   cell(1, 2);
+  // }
+  +mq('>=L') {
+    cell(1);
+  }
+}
+
+.footer dl {
+  display: flex;
+  flex-wrap: wrap;
+
+  dt {
+    flex: 0 0 45px;
+  }
+  dd {
+    flex: 1 0 calc(100% - 45px);
+  }
+  span {
+    display: block;
+
+    ~ span {
+      margin-top: $half-gutter;
+    }
+  }
+}
+.footer-name {
+  +mq('>=M') {
+    &::after {
+      content: attr(data-copyright);
+    }
+  }
+}
+
+.copyright {
+  display: block;
+  text-align: center;
+
+  +mq('>=M') {
+    display: none;
+    text-align: left;
+  }
+}

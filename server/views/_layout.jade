@@ -48,8 +48,30 @@ html(lang=getLocale())
 
     main(role="main")
       block content
-    footer
-      | DB construct ©2016
+    footer: .in
+      .footer
+        div.footer-name(data-copyright="D.B. Construct ©2016")
+          +svg-image('logo-db-construct-nb')
+          p D.B. Edil Construct Co. Ltd <br> Design &amp; build
+
+        dl.footer-contact
+          dt
+            +icon('mail')
+          dd
+            a(href="mailto:info@db-construct.com") info@db-construct.com
+          dt
+            +icon('phone')
+          dd
+            span= __('contact.phone.en')
+            a(href="tel:+33 80 129 0019") +33 80 129 0019
+            span= __('contact.phone.th')
+            a(href="tel:+33 88 269 2483") +33 88 269 2483
+        div.footer-adress
+          | 186/50 Chonlada Soi 8 Moo 6
+          br
+          | T. Nonghai Sansai Chiang Mai 50 290
+
+      p.copyright D.B. Construct ©2016
 
     .demo-grid: ul
       li
