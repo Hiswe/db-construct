@@ -113,5 +113,9 @@
 		},
 		"find": "Find us",
 		"address": "Address"
+	},
+	"address": {
+		"line-1": "265 moo.15 kasetpattana",
+		"line-2": "Paphai Sansai District Chiangmai 50290"
 	}
 }

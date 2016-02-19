@@ -41,9 +41,11 @@ block content
   h1= __('contact.address')
   .address
     p
-      | 186/50 Chonlada Soi 8 Moo 6
+      | #{__('address.line-1')}
+      //- | 186/50 Chonlada Soi 8 Moo 6
       br
-      | T. Nonghai Sansai Chiang Mai 50 290
+      | #{__('address.line-2')}
+      //- | T. Nonghai Sansai Chiang Mai 50 290
 
     .map
       img(src="/image/400x300")

@@ -12,25 +12,25 @@
 	},
 	"contact": {
 		"form": {
-			"name": "contact.form.name",
-			"email": "contact.form.email",
-			"phone": "contact.form.phone",
-			"message": "contact.form.message",
-			"submit": "contact.form.submit",
-			"title": "contact.form.title"
+			"name": "ชื่อ",
+			"email": "อีเมลล์",
+			"phone": "เบอร์โทร(อื่นๆ)",
+			"message": "ข้อความ",
+			"submit": "ยืนยัน",
+			"title": "หรือใช้เเบบฟอร์ม"
 		},
 		"alert": {
 			"error": "contact.alert.error",
 			"success": "contact.alert.success"
 		},
-		"mail": "contact.mail",
+		"mail": "ส่งจดหมายหาเรา",
 		"phone": {
-			"title": "contact.phone.title",
-			"en": "contact.phone.en",
-			"th": "contact.phone.th"
+			"title": "โทรหาเรา",
+			"en": "ติดต่อด้วยภาษาอังกฤษ",
+			"th": "ติดต่อด้วยภาษาไทย"
 		},
-		"find": "contact.find",
-		"address": "contact.address"
+		"find": "ค้นหาเรา",
+		"address": "ที่อยู่"
 	},
 	"process": {
 		"planning": {
@@ -107,5 +107,9 @@
 			"title": "deadlines มนั่ ใจไดแ้ ค่ไหน ว่างานจะเสร็จตามเป้ าหมายในระยะเวลาที่ตกลงไว้",
 			"description": "นอกจากคุณจะมนั่ ใจมาตรฐานงานก่อสร้างของเราไดแ้ ลว้ พวกเรายงั ภาคภูมิใจเป็นอย่างมากในความ ตรงต่อเวลาของเรา เราสามารถส่งมอบงานให้ท่านตรงตามแผนการทำงานที่รัดกุม และการทำงาน อนัรวดเร็วจากการประสานงานและวางแผนเป็นอย่างดี"
 		}
+	},
+	"address": {
+		"line-1": "265 หมู่ 15 หมู่บ้านเกษตรพัฒนา",
+		"line-2": "ตำบลป่าไผ่ อ.สันทราย จ.เชียงใหม่ 50290"
 	}
 }
