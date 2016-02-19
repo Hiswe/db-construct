@@ -1,6 +1,7 @@
 extends _layout.jade
 
 block content
+  h1.page-title= __('menu.process')
   each step, index in steps
     dl
       dt= __('process.' + step + '.title')

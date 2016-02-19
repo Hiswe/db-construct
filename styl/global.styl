@@ -66,3 +66,16 @@ footer {
   padding: $gutter 0;
   text-align: center;
 }
+
+.page-title {
+  text-align: center;
+  color: $accent;
+  text-transform: uppercase;
+  border-bottom: 1px solid currentColor;
+  margin: 0;
+  padding: 0 0 $gutter;
+
+  +mq('>=M') {
+    display: none;
+  }
+}

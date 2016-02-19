@@ -21,7 +21,10 @@ html(lang=getLocale())
     //- link(rel="shortcut icon", href="/favicon.png", type="image/png")
     //- link(rel="icon", href="/favicon.png", type="image/png")
 
-    meta(name="viewport", content="width=device-width, initial-scale=1")
+    //- meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1")
+    //- only specify initial-scale
+    //- http://webdesign.tutsplus.com/articles/quick-tip-dont-forget-the-viewport-meta-tag--webdesign-5972
+    meta(name="viewport", content="initial-scale=1")
     link(rel="stylesheet", href="/db-construct.css")
 
   body(class="page-" + pageName)
@@ -38,10 +41,10 @@ html(lang=getLocale())
         a(href="/process", class= pageName == 'process' ? 'is-selected' : '')= __('menu.process')
         a(href="/faq", class= pageName == 'faq' ? 'is-selected' : '')= __('menu.faq')
         a(href="/contact", class= pageName == 'contact' ? 'is-selected' : '')= __('menu.contact')
-        if (getLocale() == 'en')
-          a(href="?lang=th") TH
-        else
-          a(href="?lang=en") EN
+        - var lang = getLocale() == 'en' ? 'th' : 'en'
+        a(href="?lang=#{lang}")
+          +svg-image('flag-' + lang)
+
 
     main(role="main")
       block content

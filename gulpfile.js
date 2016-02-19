@@ -204,7 +204,11 @@ gulp.task('browser-sync', ['nodemon'], function () {
     proxy: 'http://localhost:3000',
     open: false,
     port: 7000,
-    ghostMode: false,
+    ghostMode: {
+      clicks: true,
+      forms: true,
+      scroll: false
+    },
   });
 });
 
