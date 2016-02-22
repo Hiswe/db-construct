@@ -41,7 +41,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 app.use(compression());
-app.use(favicon(path.join(__dirname, '/favicon.png')));
+app.use(favicon(path.join(__dirname, '/public/favicon.png')));
 
 var cookieSecret = 'keyboard cat';
 
@@ -132,6 +132,11 @@ app.post('/contact',          contact.post);
 app.get('/process',           render.proc);
 app.get('/faq',               render.faq);
 app.get('/',                  render.home);
+
+// app.use(function (req, res, next) {
+//   res.status(404);
+//   next();
+// });
 
 //////
 // ERROR HANDLING

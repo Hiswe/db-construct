@@ -2,7 +2,7 @@ import Masonry from 'masonry-layout';
 import logger from './_logger';
 import * as utils from './_utils';
 
-var log     = logger('project', true);
+var log     = logger('project', false);
 const $ui   = {};
 
 function init() {

@@ -1,0 +1,14 @@
+include ../mixins/icon.jade
+
+//- don't put icons.
+//- SVG issues when adding them with Vanilla JS
+//- see utils.js
+.js-carrousel-control.carrousel-control
+  a.js-prev(href="#")
+  a.js-next(href="#")
+
+  ul.js-carrousel-progress.carrousel-progress
+    - var current = 0;
+    while current < max
+      - current++;
+      li

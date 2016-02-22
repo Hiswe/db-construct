@@ -1,4 +1,8 @@
 .carrousel {
+  position: relative;
+}
+
+.carrousel .in {
   display: flex;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
@@ -19,5 +23,77 @@
   img {
     width: 100%;
     height: auto;
+  }
+}
+
+// with JS
+.carrousel.is-active {
+  overflow: hidden;
+  .in {
+    overflow: visible;
+  }
+}
+.carrousel.is-first .in {
+  li:last-child {
+    order: -1;
+  }
+}
+.carrousel.is-last .in {
+  li:first-child {
+    order: 2;
+  }
+}
+
+.js-prev,
+.js-next,
+.carrousel-progress {
+  position: absolute;
+  z-index: 2;
+  display: none;
+
+  +mq('>=M') {
+    display: block;
+  }
+}
+.js-prev,
+.js-next {
+  top: 50%;
+  +mq('>=L') {
+    margin-top: 50px;
+  }
+}
+.js-prev {
+  left: $gutter;
+  transform: translateY(-50%);
+}
+.js-next {
+  right: $gutter;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.carrousel-progress {
+  bottom: $gutter;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+
+  &,
+  li {
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    width: $half-gutter;
+    height: @width;
+    border-radius: @width;
+    flex: 0 0 @width;
+    margin: 0 ($half-gutter / 2);
+    border: 2px solid white;
+
+    &.is-active {
+      background: white;
+    }
   }
 }

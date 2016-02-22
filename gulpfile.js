@@ -58,6 +58,7 @@ gulp.task('css', function () {
 
 var browserify    = require('browserify');
 var babelify      = require('babelify');
+var jadeify       = require('jadeify');
 var envify        = require('envify/custom');
 var vinylBuffer   = require('vinyl-buffer');
 var source        = require('vinyl-source-stream');
@@ -76,6 +77,10 @@ gulp.task('app', function () {
   });
 
   b.transform(babelify, {presets: ['es2015']})
+  // can't compile mixins
+  // https://github.com/jadejs/jade/issues/1950
+  b.transform(jadeify, { compileDebug: isDev, pretty: isDev });
+
   b.transform(envify({
     _: 'purge',
     NODE_ENV: isDev ? 'development' : 'production',
