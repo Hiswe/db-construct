@@ -23,6 +23,7 @@
   img {
     width: 100%;
     height: auto;
+    pointer-events: none;
   }
 }
 
@@ -85,6 +86,7 @@
     flex: 0 0 @width;
     margin: 0 ($half-gutter / 2);
     border: 2px solid white;
+    transition: background .25s;
 
     &.is-active {
       background: white;

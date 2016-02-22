@@ -22,7 +22,8 @@ function setup(el, index) {
     slides: [...el.querySelectorAll('li')]
   };
   const length  = $ui.slides.length;
-  var current   = 0;
+  let current   = 0;
+  let isMoving  = false;
   if (!length) return log('abort');
   log('init with', length, 'slides');
 
@@ -33,7 +34,7 @@ function setup(el, index) {
   function bindUi() {
     $ui.carrousel = $ui.el.querySelector('.in');
     $ui.slides    = [...$ui.carrousel.querySelectorAll('li')];
-    // add controls
+    // controls
     $ui.control   = utils.parseHTML(controlTmpl({max: length}))[0];
     $ui.prev      = $ui.control.querySelector('.js-prev');
     $ui.next      = $ui.control.querySelector('.js-next');
@@ -50,6 +51,8 @@ function setup(el, index) {
   function bindEvents() {
     new Hammer($ui.prev).on('tap', () => { moveTo(-1) });
     new Hammer($ui.next).on('tap', () => { moveTo( 1) });
+    new Hammer($ui.el).on('swipe', e =>  { moveTo(e.direction === 2 ? 1 : -1 )} );
+    // after each transition reorgnaize the carrousel for the next one
     $ui.carrousel.addEventListener('transitionend', function () {
       // need the raf to prevent transition…
       raf( () => {organize(current) });
@@ -57,24 +60,28 @@ function setup(el, index) {
   }
 
   function organize(index) {
-    log('organize', index);
-
-    $ui.slides.forEach( slide => slide.style.order = 5 )
     var $previous = index === 0 ? $ui.slides[length - 1] : $ui.slides[index - 1];
     var $slide    = $ui.slides[index];
     var $next     = index + 1 < length ? $ui.slides[index + 1] : $ui.slides[0];
     $previous.style.order = 0;
     $slide.style.order    = 1;
     $next.style.order     = 2;
+    let $all              = [$previous, $slide, $next];
+    // put all the other at the end
+    $ui.slides.forEach( s => { if (!$all.includes(s)) s.style.order = 5; });
+
     utils.addClass($ui.carrousel, 'no-transition');
     setTransform(1);
-
+    // raf is needed here also to REALLY prevent transition
     raf(function () {
       utils.removeClass($ui.carrousel, 'no-transition');
+      isMoving  = false;
     });
   }
 
   function moveTo(direction) {
+    if (isMoving) return;
+    isMoving      = true;
     let nextState = current + direction;
     nextState     = nextState >= length ? 0 : nextState;
     nextState     = nextState < 0 ? length - 1 : nextState;
