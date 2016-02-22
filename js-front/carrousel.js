@@ -63,11 +63,12 @@ function setup(el, index) {
     var $previous = index === 0 ? $ui.slides[length - 1] : $ui.slides[index - 1];
     var $slide    = $ui.slides[index];
     var $next     = index + 1 < length ? $ui.slides[index + 1] : $ui.slides[0];
-    $previous.style.order = 0;
-    $slide.style.order    = 1;
-    $next.style.order     = 2;
-    let $all              = [$previous, $slide, $next];
-    // put all the other at the end
+    // nextnext is there because carrousel is only 90% wide
+    // when transitioning it makes a flicker if the last item just happen to nod be on the right position
+    var $nextnext = index + 2 < length ? $ui.slides[index + 2] : $ui.slides[0];
+    let $all              = [$previous, $slide, $next, $nextnext];
+    //
+    $all.forEach( (s, i) => { s.style.order = i;});
     $ui.slides.forEach( s => { if (!$all.includes(s)) s.style.order = 5; });
 
     utils.addClass($ui.carrousel, 'no-transition');
