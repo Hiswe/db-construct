@@ -1,4 +1,5 @@
 import Hammer       from 'hammerjs';
+import raf          from 'raf';
 
 import logger       from './_logger';
 import controlTmpl  from '../server/views/front-end/carrousel-control.jade';
@@ -27,10 +28,11 @@ function setup(el, index) {
 
   bindUi();
   bindEvents();
-  onFirst();
+  organize(0);
 
   function bindUi() {
     $ui.carrousel = $ui.el.querySelector('.in');
+    $ui.slides    = [...$ui.carrousel.querySelectorAll('li')];
     // add controls
     $ui.control   = utils.parseHTML(controlTmpl({max: length}))[0];
     $ui.prev      = $ui.control.querySelector('.js-prev');
@@ -41,67 +43,54 @@ function setup(el, index) {
     $ui.next.appendChild(utils.svgIcon('big-arrow'));
     el.appendChild($ui.control);
 
-
-
     utils.addClass($ui.el, 'is-active');
     utils.addClass($ui.nav[0], 'is-active');
   }
 
   function bindEvents() {
-    new Hammer($ui.prev).on('tap', prev);
-    new Hammer($ui.next).on('tap', next);
+    new Hammer($ui.prev).on('tap', () => { moveTo(-1) });
+    new Hammer($ui.next).on('tap', () => { moveTo( 1) });
+    $ui.carrousel.addEventListener('transitionend', function () {
+      // need the raf to prevent transition…
+      raf( () => {organize(current) });
+    });
+  }
 
-    function prev() {
-      log('prev');
-      moveTo(-1);
-    }
+  function organize(index) {
+    log('organize', index);
 
-    function next() {
-      log('next');
-      moveTo(1);
-    }
+    $ui.slides.forEach( slide => slide.style.order = 5 )
+    var $previous = index === 0 ? $ui.slides[length - 1] : $ui.slides[index - 1];
+    var $slide    = $ui.slides[index];
+    var $next     = index + 1 < length ? $ui.slides[index + 1] : $ui.slides[0];
+    $previous.style.order = 0;
+    $slide.style.order    = 1;
+    $next.style.order     = 2;
+    utils.addClass($ui.carrousel, 'no-transition');
+    setTransform(1);
+
+    raf(function () {
+      utils.removeClass($ui.carrousel, 'no-transition');
+    });
   }
 
   function moveTo(direction) {
     let nextState = current + direction;
-    nextState = nextState >= length ? 0 : nextState;
-    nextState = nextState < 0 ? length - 1 : nextState;
-    log(current, nextState);
-    if (nextState === 0) {
-      onFirst();
-    } else  if (nextState === length - 1) {
-      onLast();
-    } else {
-      onStep(nextState);
-    }
+    nextState     = nextState >= length ? 0 : nextState;
+    nextState     = nextState < 0 ? length - 1 : nextState;
+
+    // slide organization will be done on transition end;
+    setTransform(direction > 0 ? 2 : 0);
+
+    // update nav
     utils.removeClass($ui.nav[current], 'is-active');
     utils.addClass($ui.nav[nextState], 'is-active');
-    // $ui.nav()
+    // alldone!
     current = nextState;
   }
 
-  // on last : first-item become last
-  // on first : last-item become first
 
-  function onFirst() {
-    utils.removeClass($ui.el, 'is-last');
-    utils.addClass($ui.el, 'is-first');
-    getTransform(1);
-  }
-
-  function onLast() {
-    utils.removeClass($ui.el, 'is-first');
-    utils.addClass($ui.el, 'is-last');
-    getTransform(length - 2);
-  }
-
-  function onStep(step) {
-    utils.removeClass($ui.el, 'is-last');
-    utils.removeClass($ui.el, 'is-first');
-    getTransform(step);
-  }
-
-  function getTransform(step) {
+  function setTransform(step) {
     $ui.carrousel.style.transform = `translateX(-${step * 90}%)`;
   }
 }

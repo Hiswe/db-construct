@@ -30,20 +30,14 @@
 .carrousel.is-active {
   overflow: hidden;
   .in {
+    transition: all .5s;
     overflow: visible;
-  }
-}
-.carrousel.is-first .in {
-  li:last-child {
-    order: -1;
-  }
-}
-.carrousel.is-last .in {
-  li:first-child {
-    order: 2;
-  }
-}
 
+    &.no-transition {
+      transition: none;
+    }
+  }
+}
 .js-prev,
 .js-next,
 .carrousel-progress {
