@@ -25,6 +25,8 @@ var config        = require('./server/config');
 
 var app = express();
 
+app.locals.isDev  = config.isDev;
+
 // configure i18n
 i18n.configure({
   locales:        ['en', 'th',],
@@ -105,6 +107,7 @@ var projects  = require('./server/projects');
 
 // take care of language query params
 app.use(function(req, res, next) {
+
   if (req.query.lang) {
     res.cookie('dbconstruct', req.query.lang, { maxAge: 900000, httpOnly: true });
     res.setLocale(req.query.lang);

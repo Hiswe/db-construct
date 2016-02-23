@@ -76,11 +76,11 @@ html(lang=getLocale())
 
       p.copyright D.B. Construct ©2016
 
-    //- TODO should be on dev only
-    .demo-grid: ul
-      li
-      li
-      li
+    if isDev
+      .demo-grid: ul
+        li
+        li
+        li
 
     //- TODO maybe disable JS for <IE10
     script(src="/db-construct.js")
