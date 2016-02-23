@@ -1,4 +1,12 @@
 
+function $(selector, context = document) {
+  return context.querySelector(selector);
+}
+
+function $$(selector, context = document) {
+  return [...context.querySelectorAll(selector)];
+}
+
 function parseHTML(str) {
   var tmp = document.implementation.createHTMLDocument();
   tmp.body.innerHTML = str;
@@ -40,4 +48,4 @@ function ready(fn) {
   }
 }
 
-export {parseHTML, ready, svgIcon, addClass, removeClass};
+export {$, $$, parseHTML, ready, svgIcon, addClass, removeClass};

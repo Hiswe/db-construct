@@ -7,19 +7,20 @@ import * as utils   from './_utils';
 
 const log     = logger('carrousel', true);
 
+// TODO: auto-slide
+
 function init() {
-  var carrousels = [...document.querySelectorAll('.js-carrousel')];
+  var carrousels = utils.$$('.js-carrousel');
   if (!carrousels.length) return log('abort')
   log('init', carrousels.length, 'carrousels');
   carrousels.forEach(setup)
 }
 
 function setup(el, index) {
-  index++;
-  const log     = logger('carrousel_' + index, true);
+  const log     = logger('carrousel_' + index++, true);
   const $ui     = {
     el,
-    slides: [...el.querySelectorAll('li')]
+    slides: utils.$$('li', el)
   };
   const length  = $ui.slides.length;
   let current   = 0;
@@ -33,12 +34,12 @@ function setup(el, index) {
 
   function bindUi() {
     $ui.carrousel = $ui.el.querySelector('.in');
-    $ui.slides    = [...$ui.carrousel.querySelectorAll('li')];
+    $ui.slides    = utils.$$('li', $ui.carrousel);
     // controls
     $ui.control   = utils.parseHTML(controlTmpl({max: length}))[0];
-    $ui.prev      = $ui.control.querySelector('.js-prev');
-    $ui.next      = $ui.control.querySelector('.js-next');
-    $ui.nav       = [...$ui.control.querySelectorAll('.js-carrousel-progress li')];
+    $ui.prev      = utils.$('.js-prev', $ui.control);
+    $ui.next      = utils.$('.js-next', $ui.control);
+    $ui.nav       = utils.$$('.js-carrousel-progress li', $ui.control);
     // Has to create SVG in SVG namespace ¬_¬'
     $ui.prev.appendChild(utils.svgIcon('big-arrow'));
     $ui.next.appendChild(utils.svgIcon('big-arrow'));
