@@ -32,11 +32,17 @@ block content
       label(for="message")= __('contact.form.message')
       textarea(name="message", id="message", required)
       button(type="submit")= __('contact.form.submit')
+      p.alert.alert-error.js-error(class= messages.error ? "is-visible" : "")
+        +icon('warning')
+        span #{__('contact.alert.error')}&nbsp;
+        a(href="mailto:info@db-construct.com") info@db-construct.com
+      p.alert.alert-success.js-success(class= messages.success ? "is-visible" : "")
+        +icon('send')
+        span #{__('contact.alert.success')}
+      p.alert.alert-process.js-process
+        +icon('process')
+        span #{__('contact.alert.process')}
 
-    if messages.error
-      p.alert.alert-error= __('contact.alert.error')
-    if messages.success
-      p.alert.alert-success= __('contact.alert.success')
 
   h1= __('contact.address')
   .address

@@ -40,6 +40,10 @@ function svgIcon(name) {
   return svg;
 }
 
+function wait(duration = 1000) {
+  return new Promise( (resolve, reject) => {setTimeout(resolve, duration )});
+}
+
 function ready(fn) {
   if (document.readyState != 'loading'){
     fn();
@@ -48,4 +52,4 @@ function ready(fn) {
   }
 }
 
-export {$, $$, parseHTML, ready, svgIcon, addClass, removeClass};
+export {$, $$, parseHTML, ready, svgIcon, addClass, removeClass, wait};

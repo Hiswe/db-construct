@@ -46,6 +46,20 @@ form {
       background: darken($primary, 40%);
     }
   }
+
+  &.is-disabled {
+    label,
+    input,
+    textarea {
+      opacity: .5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    button  {
+      display: none;
+    }
+  }
 }
 
 
@@ -74,7 +88,6 @@ form {
     }
   }
 
-
   +mq('>=L') {
     > :first-child {
       cell(1);
@@ -83,4 +96,41 @@ form {
       cell(2);
     }
   }
+}
+
+.alert {
+  align-items: center;
+  padding: $half-gutter;
+  display: none;
+
+  &.is-visible {
+    display: flex;
+  }
+
+  span {
+    flex: 1 0 auto;
+  }
+
+  .icon {
+    flex: 0 0 34px;
+    stroke: currentColor;
+
+    &:first-child {
+      margin-right: $half-gutter;
+    }
+    ~ icon {
+      margin-left: auto;
+    }
+  }
+}
+
+.alert-success {
+  background: #A5CF52;
+  color: $bg;
+}
+.alert-error {
+  background: #E13C1F;
+}
+.alert-process {
+  background: #3096B6;
 }
