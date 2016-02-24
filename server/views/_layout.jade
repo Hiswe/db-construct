@@ -1,4 +1,5 @@
 include mixins/icon
+include mixins/ie
 
 doctype html
 html(lang=getLocale())
@@ -7,6 +8,7 @@ html(lang=getLocale())
     meta(http-equiv="Content-Type", content="text/html; charset=UTF-8")
     meta(name="Title", content=__('layout.title'))
     meta(name="description", content=__('layout.description'))
+    meta(http-equiv="x-ua-compatible", content="ie=edge")
     //- meta(name="keywords", content="emailing responsive, éditeur email, editeur emailing, éditeur template email, éditeur newsletter")
     //- meta(name="author", content="VOXmail")
     //- meta(name="application-name", content="Badsender Email Builder")
@@ -20,14 +22,18 @@ html(lang=getLocale())
 
     link(rel="shortcut icon", href="/favicon.png", type="image/png")
     link(rel="icon", href="/favicon.png", type="image/png")
-
     //- only specify initial-scale
     //- http://webdesign.tutsplus.com/articles/quick-tip-dont-forget-the-viewport-meta-tag--webdesign-5972
     meta(name="viewport", content="initial-scale=1")
-    //- maybe do a simple < IE10 stylesheets
-    //- https://css-tricks.com/how-to-create-an-ie-only-stylesheet/
-    //- http://blog.tompawlak.org/ie-conditional-comments-jade
-    link(rel="stylesheet", href="/db-construct-ie.css")
+
+    //- Gracefull degradation for old browsers
+    +ie()
+      link(rel="stylesheet", href="/db-construct-ie.css")
+      script(type="text/javascript", src="/libraries-ie.js")
+      script.
+        svg4everybody();
+    +notie()
+      link(rel="stylesheet", href="/db-construct.css")
 
   body(class="page-" + pageName)
 
@@ -82,5 +88,6 @@ html(lang=getLocale())
         li
         li
 
-    //- TODO maybe disable JS for <IE10
-    //- script(src="/db-construct.js")
+    //- Gracefull degradation for old browsers
+    +notie()
+      script(src="/db-construct.js")

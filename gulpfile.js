@@ -65,6 +65,15 @@ var watchify      = require('watchify');
 
 //----- LIBRARIES
 
+gulp.task('libraries-ie', function () {
+  gulp.src([
+    'node_modules/html5shiv/dist/html5shiv-min.js',
+    'node_modules/svg4everybody/dist/svg4everybody.legacy.min.js',
+  ])
+  .pipe($.concat('libraries-ie.js'))
+  .pipe(gulp.dest('public'));
+});
+
 //----- APPLICATION
 
 gulp.task('app', function () {
@@ -110,7 +119,7 @@ function bundleShare(b) {
 
 //----- ALL JS
 
-gulp.task('js', ['app']);
+gulp.task('js', ['app', 'libraries-ie']);
 
 ////////
 // ASSETS
