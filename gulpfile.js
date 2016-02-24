@@ -30,7 +30,7 @@ var autoprefixer  = require('autoprefixer');
 
 gulp.task('css', function () {
   return gulp
-    .src('styl/index.styl')
+    .src(['styl/db-construct.styl', 'styl/db-construct-ie.styl'])
     .pipe($.plumber({errorHandler: onError}))
     .pipe($.if(isDev, $.sourcemaps.init()))
       .pipe($.stylus({
@@ -45,7 +45,6 @@ gulp.task('css', function () {
         }),
         // pxtorem({replace: true}),
       ]))
-      .pipe($.rename('db-construct.css'))
     .pipe($.if(!isDev, $.uglifycss()))
     .pipe($.if(isDev, $.sourcemaps.write()))
     .pipe(gulp.dest('public'))

@@ -89,9 +89,14 @@ font-text() {
 //////
 
 container() {
-  +mq('>=M') {
-    max-width: $max-width;
-    width: 'calc(%s - %s)' % (100% ($gutter * 2));
+  if ($is-ie) {
+    width: 1024px;
+    margin: 0 auto;
+  } else {
+    +mq('>=M') {
+      max-width: $max-width;
+      width: 'calc(%s - %s)' % (100% ($gutter * 2));
+    }
   }
 }
 

@@ -27,7 +27,7 @@ html(lang=getLocale())
     //- maybe do a simple < IE10 stylesheets
     //- https://css-tricks.com/how-to-create-an-ie-only-stylesheet/
     //- http://blog.tompawlak.org/ie-conditional-comments-jade
-    link(rel="stylesheet", href="/db-construct.css")
+    link(rel="stylesheet", href="/db-construct-ie.css")
 
   body(class="page-" + pageName)
 
@@ -76,11 +76,11 @@ html(lang=getLocale())
 
       p.copyright D.B. Construct ©2016
 
-    //- TODO should be on dev only
-    .demo-grid: ul
-      li
-      li
-      li
+    if isDev
+      .demo-grid: ul
+        li
+        li
+        li
 
     //- TODO maybe disable JS for <IE10
-    script(src="/db-construct.js")
+    //- script(src="/db-construct.js")

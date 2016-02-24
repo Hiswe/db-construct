@@ -19,7 +19,6 @@ svg4everybody();
 promisePolyfill();
 
 // TODO handle IE9 Layout?
-// TODO ajaxify send mail
 // TODO light box page project
 
 // Flexbox check – IE10+

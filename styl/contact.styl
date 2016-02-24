@@ -11,58 +11,6 @@ legend {
   }
 }
 
-form {
-  padding-bottom: $half-gutter;
-
-  label {
-    display: block;
-    padding: $gutter 0 ($half-gutter / 2);
-  }
-  input,
-  textarea {
-    width: 100%;
-    background: none;
-    border: 1px solid rgba(white, .5);
-    padding: ($half-gutter / 2);
-    outline: 0;
-
-    &:focus {
-      border-color: $accent;
-    }
-  }
-
-  button {
-    background: $primary;
-    border: 0;
-    padding: $half-gutter $gutter;
-    margin-top: $half-gutter;
-    cursor: pointer;
-    outline: 0;
-
-    &:hover {
-      background: lighten($primary, 10%);
-    }
-    &:active {
-      background: darken($primary, 40%);
-    }
-  }
-
-  &.is-disabled {
-    label,
-    input,
-    textarea {
-      opacity: .5;
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-
-    button  {
-      display: none;
-    }
-  }
-}
-
-
 .page-contact {
   dd {
     padding: $half-gutter 0;
@@ -96,41 +44,4 @@ form {
       cell(2);
     }
   }
-}
-
-.alert {
-  align-items: center;
-  padding: $half-gutter;
-  display: none;
-
-  &.is-visible {
-    display: flex;
-  }
-
-  span {
-    flex: 1 0 auto;
-  }
-
-  .icon {
-    flex: 0 0 34px;
-    stroke: currentColor;
-
-    &:first-child {
-      margin-right: $half-gutter;
-    }
-    ~ icon {
-      margin-left: auto;
-    }
-  }
-}
-
-.alert-success {
-  background: #A5CF52;
-  color: $bg;
-}
-.alert-error {
-  background: #E13C1F;
-}
-.alert-process {
-  background: #3096B6;
 }
