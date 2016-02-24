@@ -84,7 +84,7 @@ nav {
     display: flex;
   }
 
-  +mq('==S') {
+  +mq('<M') {
     position: fixed;
     top: 0;
     left: 0;
@@ -101,19 +101,19 @@ nav {
 
   +mq('>=M') {
     display: flex;
-    align-items: flex-end;
     justify-content: flex-end;
   }
 
   a {
-    padding: 1em;
+    padding: 2.75em 1em 0;
     color: white;
     text-decoration: none;
 
-    +mq('==S') {
+    +mq('<M') {
       flex: 0 0 50%;
       flex-center-align();
       text-transform: uppercase;
+      padding: 0;
 
       &.is-selected {
         background: rgba(white, .2);
@@ -137,7 +137,7 @@ nav {
       }
 
       &:hover {
-        text-decoration: underline;
+        background: rgba(white, .2);
       }
     }
   }

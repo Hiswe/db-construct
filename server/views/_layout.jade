@@ -25,12 +25,11 @@ html(lang=getLocale())
     //- only specify initial-scale
     //- http://webdesign.tutsplus.com/articles/quick-tip-dont-forget-the-viewport-meta-tag--webdesign-5972
     meta(name="viewport", content="initial-scale=1")
-
     //- Gracefull degradation for old browsers
     +ie()
       link(rel="stylesheet", href="/db-construct-ie.css")
       script(type="text/javascript", src="/libraries-ie.js")
-      script.
+      script(type="text/javascript").
         svg4everybody();
     +notie()
       link(rel="stylesheet", href="/db-construct.css")
