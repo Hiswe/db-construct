@@ -17,7 +17,6 @@ const configs = {
     icon:      'arrow-small',
   }
 };
-// TODO: auto-slide
 
 function init() {
   var carrousels = utils.$$('.js-carrousel');
@@ -116,7 +115,6 @@ function setup(el, index) {
     // alldone!
     current = nextState;
   }
-
 
   function setTransform(step) {
     $ui.carrousel.style.transform = `translateX(-${step * 90}%)`;
