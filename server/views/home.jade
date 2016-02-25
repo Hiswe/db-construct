@@ -5,7 +5,7 @@ block content
     h1
       | #{__('home.baseline.1')}
       strong= __('home.baseline.2')
-    .carrousel.js-carrousel: ul.in
+    .carrousel.js-carrousel(data-carrousel="home"): ul.in
       each val in [1, 2, 3, 4, 5]
         li: picture
           source(media="(min-width: 1024px)"

@@ -1,6 +1,6 @@
 {
 	"layout": {
-		"title": "layout.title",
+		"title": "DB Edil Construct",
 		"description": "layout.description"
 	},
 	"menu": {
@@ -21,7 +21,8 @@
 		},
 		"alert": {
 			"error": "contact.alert.error",
-			"success": "contact.alert.success"
+			"success": "contact.alert.success",
+			"process": "contact.alert.process"
 		},
 		"mail": "ส่งจดหมายหาเรา",
 		"phone": {

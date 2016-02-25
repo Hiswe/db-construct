@@ -6,7 +6,17 @@ import controlTmpl  from '../server/views/front-end/carrousel-control.jade';
 import * as utils   from './_utils';
 
 const log     = logger('carrousel', true);
-
+const configs = {
+  delay: 5 * 1000,
+  home: {
+    autoSlide: true,
+    icon:       'big-arrow'
+  },
+  process: {
+    autoSlide: false,
+    icon:      'arrow-small',
+  }
+};
 // TODO: auto-slide
 
 function init() {
@@ -22,9 +32,11 @@ function setup(el, index) {
     el,
     slides: utils.$$('li', el)
   };
+  const conf    = configs[el.getAttribute('data-carrousel')];
   const length  = $ui.slides.length;
   let current   = 0;
   let isMoving  = false;
+  let timer     = false;
   if (!length) return log('abort');
   log('init with', length, 'slides');
 
@@ -41,8 +53,8 @@ function setup(el, index) {
     $ui.next      = utils.$('.js-next', $ui.control);
     $ui.nav       = utils.$$('.js-carrousel-progress li', $ui.control);
     // Has to create SVG in SVG namespace ¬_¬'
-    $ui.prev.appendChild(utils.svgIcon('big-arrow'));
-    $ui.next.appendChild(utils.svgIcon('big-arrow'));
+    $ui.prev.appendChild(utils.svgIcon(conf.icon));
+    $ui.next.appendChild(utils.svgIcon(conf.icon));
     el.appendChild($ui.control);
 
     utils.addClass($ui.el, 'is-active');
@@ -58,6 +70,11 @@ function setup(el, index) {
       // need the raf to prevent transition…
       raf( () => {organize(current) });
     });
+  }
+
+  function autoSlide() {
+    log('auto-slide');
+    timer = setTimeout( () => { moveTo(1) }, configs.delay);
   }
 
   function organize(index) {
@@ -78,6 +95,7 @@ function setup(el, index) {
     raf(function () {
       utils.removeClass($ui.carrousel, 'no-transition');
       isMoving  = false;
+      if (conf.autoSlide) autoSlide();
     });
   }
 
@@ -87,6 +105,7 @@ function setup(el, index) {
     let nextState = current + direction;
     nextState     = nextState >= length ? 0 : nextState;
     nextState     = nextState < 0 ? length - 1 : nextState;
+    if (timer)    clearTimeout(timer);
 
     // slide organization will be done on transition end;
     setTransform(direction > 0 ? 2 : 0);

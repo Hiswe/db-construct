@@ -103,7 +103,7 @@
 		},
 		"alert": {
 			"success": "Your message has been sent!",
-			"error": "An error has occured. Please try with the email adress",
+			"error": "An error has occurred. Please try with the email address",
 			"process": "Wait a moment, your message is being send!"
 		},
 		"mail": "Mail us",

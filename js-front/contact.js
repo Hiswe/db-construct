@@ -72,6 +72,8 @@ function send() {
 
 // https://github.com/github/fetch#handling-http-error-statuses
 function checkStatus(response) {
+  response = response[1];
+  log(response);
   if (response.status >= 200 && response.status < 300) {
     return response
   } else {
