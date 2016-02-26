@@ -30,11 +30,20 @@
       }
     }
   }
+  .image-wrapper {
+    image-container();
+    image-ratio(580, 400);
+    +mq('>=M') {
+      image-ratio(880, 420);
+    }
 
-  // li {
-  //   position: relative;
-  //   padding-top: ;
-  // }
+    +mq('>=L') {
+      image-ratio(920, 420);
+    }
+    img {
+      image-absolute();
+    }
+  }
 
   +mq('>=M') {
     dt,

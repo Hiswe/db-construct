@@ -8,10 +8,13 @@ block content
       for point in __('projects.' + project.name + '.description').split('\n')
         li= point
     //- images
-    //- source(media="(max-width: 640px)" srcset="/image/600x450 1x, /image/1200x900 2x")
-    //- img(src="/image/600x350", srcset="/image/600x350 1x, /image/1200x700 2x")
     - var image = 0;
     while image < project.images
       - image++;
-      li.project-image.grid-item: img(src='/images/project/#{project.name}/#{project.name}-#{image}.jpg',
-      srcset="/images/project/#{project.name}/#{project.name}-#{image}.jpg 1x, /images/project/#{project.name}/#{project.name}-#{image}@2x.jpg 2x")
+      li.project-image.grid-item: .image-container
+        //- img(src='/images/project/#{project.name}/#{project.name}-#{image}.jpg',
+        //- srcset="/images/project/#{project.name}/#{project.name}-#{image}.jpg 1x, /images/project/#{project.name}/#{project.name}-#{image}@2x.jpg 2x")
+        +image({
+          base: 'project/' + project.name,
+          src: project.name + '-' + image,
+        })

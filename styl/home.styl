@@ -57,6 +57,20 @@
       color: $accent;
     }
   }
+  .image-wrapper {
+    image-container()
+    image-ratio(580, 580);
+
+    +mq('>=M') {
+      image-ratio(920, 500);
+    }
+    +mq('>=L') {
+      image-ratio(1400, 600);
+    }
+    img {
+      image-absolute();
+    }
+  }
 }
 
 
@@ -120,10 +134,20 @@
 
     +mq('>=L') {
       cell(2, 3);
+      // image-ratio();
+    }
+  }
+  .image-wrapper {
+    image-container()
+    image-ratio(675, 370);
+
+    +mq('==M') {
+      image-ratio(475, 300);
     }
   }
   img {
-    width: 100%;
-    display: block;
+    image-absolute();
+    // width: 100%;
+    // display: block;
   }
 }

@@ -6,38 +6,48 @@ block content
       | #{__('home.baseline.1')}
       strong= __('home.baseline.2')
     .carrousel.js-carrousel(data-carrousel="home"): ul.in
+      - var base = 'home/carrousel';
+      //- source(media="(min-width: 1024px)" srcset="/image/1400x600 1x, /image/2800x1200 2x")
+      //- source(media="(min-width: 640px)" srcset="/image/920x500 1x, /image/1840x1000 2x")
+      //- img(src="/image/580x580", srcset="/image/580x580 1x, /image/1160x1160 2x")
       each val in [1, 2, 3, 4, 5]
-        li: picture
+        li: .image-wrapper: picture
           +image-source()
-            source(media="(min-width: 1024px)"
-            data-srcset="/images/home/carrousel/carrousel-#{val}-big.jpg 1x, /images/home/carrousel/carrousel-#{val}-big@2x.jpg 2x")
-            source(media="(min-width: 500px)"
-            data-srcset="/images/home/carrousel/carrousel-#{val}-medium.jpg 1x, /images/home/carrousel/carrousel-#{val}-medium@2x.jpg 2x")
+            +source({
+              media: '(min-width: 1024px)',
+              base: base,
+              src: 'carrousel-' + val + '-big'
+            })
+            +source({
+              media: '(min-width: 500px)',
+              base: base,
+              src: 'carrousel-' + val + '-medium'
+            })
           +image({
-            src: "/images/home/carrousel/carrousel-" + val + "-medium.jpg",
-            srcset: "/images/home/carrousel/carrousel-" + val + "-small.jpg 1x,/images/home/carrousel/carrousel-" + val + "-small@2x.jpg 2x"})
-          //- img.lazyload(data-src="/images/home/carrousel/carrousel-#{val}-medium.jpg",
-          //- data-srcset=)
-          //- source(media="(min-width: 1024px)" srcset="/image/1400x600 1x, /image/2800x1200 2x")
-          //- source(media="(min-width: 640px)" srcset="/image/920x500 1x, /image/1840x1000 2x")
-          //- img(src="/image/580x580", srcset="/image/580x580 1x, /image/1160x1160 2x")
+            base: base,
+            src: "carrousel-" + val + "-medium",
+            srcset: "carrousel-" + val + "-small"
+          })
 
   .expertise
     h2= __('home.expertise.title')
     - var drawings = ['residential-commercial', 'interior', 'swimming-pool', 'hammer']
+    - var base = 'home/expertise';
     each val in [1, 2, 3, 4]
       dl
         dt
           p= __('home.expertise.' + val)
           +svg-image(drawings[val - 1])
-        dd: picture
+        dd: .image-wrapper: picture
           //- source(media="(min-width: 640px) and (max-width: 1023px)" srcset="/image/475x300 1x, /image/950x600 2x")
           //- img(src="/image/675x370", srcset="/image/675x370 1x, /image/1350x740 1x")
           +image-source()
-            source(
-              media="(min-width: 640px) and (max-width: 1023px)"
-              data-srcset="/images/home/expertise/expertise-#{val}-small.jpg 1x, /images/home/expertise/expertise-#{val}-small@2x.jpg 2x")
-          img.lazyload(
-            data-src="/images/home/expertise/expertise-#{val}-medium.jpg",
-            data-srcset="/images/home/expertise/expertise-#{val}-medium.jpg 1x, /images/home/expertise/expertise-#{val}-medium@2x.jpg 1x")
-
+            +source({
+              media: '(min-width: 640px) and (max-width: 1023px)',
+              base: base,
+              src: 'expertise-' + val + '-small'
+            })
+          +image({
+            base: base,
+            src: "expertise-" + val + "-medium",
+          })

@@ -15,8 +15,14 @@ flex-center-align() {
   justify-content: center;
 }
 
-image-ratio(width, height) {
-  padding-top: (height / width) * 100%;
+image-container() {
+  position: relative;
+  background: rgba(black, .4);
+}
+
+image-ratio(width, height, divider = 1) {
+  height: 0;
+  padding-bottom: ((height / width) / divider) * 100%;
 }
 
 image-absolute() {
@@ -114,7 +120,7 @@ container() {
 
 //----- GRID
 
-$default-cols             = 3;
+$default-cols = 3;
 
 row($$gutter = $gutter) {
   margin-left: $$gutter * -.5;

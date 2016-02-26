@@ -22,10 +22,8 @@ function init() {
     initLayout: false,
     transitionDuration: 0,
   });
-
-  window.addEventListener('load', function () {
-    msnry.layout();
-  });
+  utils.addClass($ui.grid, 'is-loaded');
+  msnry.layout();
 }
 
 function bindUi() {

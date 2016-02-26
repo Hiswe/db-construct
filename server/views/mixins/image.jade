@@ -3,12 +3,24 @@ mixin image-source
   block
   | <!--[if IE 9]></video><![endif]-->
 
+mixin source(img)
+  - var src     = '/images/' + img.base + '/'+ img.src;
+  - var srcset  = src  + '.jpg ' +  '1x, ' + src  + '@2x.jpg 2x';
+  source(
+    media=img.media
+    srcset=srcset
+  )
+  //- source(media="(max-width: 640px)" srcset="/images/project/#{project.name}/#{project.name}-cover-medium.jpg 1x, /images/project/#{project
+
 mixin image(img)
-  noscript: img(src=img.src)
+  - var src     = '/images/' + img.base + '/'+ img.src;
+  - var set     = img.srcset ? '/images/' + img.base + '/'+ img.srcset : src
+  - var srcset  = set  + '.jpg ' +  '1x, ' + set  + '@2x.jpg 2x';
+  noscript: img(src=src)
   img.lazyload(
-    src=img.src
-    data-srcset=img.srcset
-    )
+    src=src + '.jpg'
+    srcset=srcset
+  )
   //- img.lazyload(
   //-   src=img.src
   //-   srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="

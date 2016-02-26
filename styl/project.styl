@@ -3,15 +3,22 @@
   text-align: center;
 }
 
-.project-image {
-  list-style: none;
-  padding: 0;
-}
-
 .project-image,
 .project-content {
   list-style: none;
   padding: 0;
+}
+
+.project-image {
+  list-style: none;
+
+  .image-container {
+    image-container();
+    image-ratio(800, 600);
+  }
+  img {
+    image-absolute();
+  }
 }
 
 .project-content {
@@ -20,15 +27,25 @@
   }
 
   +mq('>=L') {
-    display: block;
-    margin-left: 0;
-    margin-right: 0;
+    // wait masonry initialization
+    &.is-loaded {
+      display: block;
+      margin-left: 0;
+      margin-right: 0;
+    }
+    &:not(.is-loaded) .project-image {
+      cell(1);
+    }
+    &:not(.is-loaded) .grid-item--width2 {
+      cell(2);
+    }
   }
 
   +mq('<L') {
     height: auto !important;
   }
 }
+
 .grid-sizer,
 .grid-item {
   width: 100%;
@@ -54,16 +71,17 @@
 }
 
 .grid-item--width2 {
+
   +mq('>=L') {
     width: 'calc(%s - %s)' % (col(2) $gutter * 0.333 );
+    .project-content:not(.is-loaded) & {
+      cell(1, 1);
+    }
   }
 }
 
 .project-description {
-  +mq('==S') {
-    cell(1, 1);
-  }
-  +mq('==M') {
+  +mq('<L') {
     cell(1, 1);
   }
 }
