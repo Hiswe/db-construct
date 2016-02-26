@@ -14,7 +14,7 @@ function project(req, res, next) {
   });
 }
 function projects(req, res, next) {
-  return res.render('projects', {
+  return res.render('project-list', {
     projects: projectsDb.projects,
   });
 }

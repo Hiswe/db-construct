@@ -8,12 +8,16 @@ block content
     .carrousel.js-carrousel(data-carrousel="home"): ul.in
       each val in [1, 2, 3, 4, 5]
         li: picture
-          source(media="(min-width: 1024px)"
-          srcset="/images/home/carrousel/carrousel-#{val}-big.jpg 1x, /images/home/carrousel/carrousel-#{val}-big@2x.jpg 2x")
-          source(media="(min-width: 500px)"
-          srcset="/images/home/carrousel/carrousel-#{val}-medium.jpg 1x, /images/home/carrousel/carrousel-#{val}-medium@2x.jpg 2x")
-          img(src="/images/home/carrousel/carrousel-#{val}-medium.jpg",
-          srcset="/images/home/carrousel/carrousel-#{val}-small.jpg 1x,/images/home/carrousel/carrousel-#{val}-small@2x.jpg 2x")
+          +image-source()
+            source(media="(min-width: 1024px)"
+            data-srcset="/images/home/carrousel/carrousel-#{val}-big.jpg 1x, /images/home/carrousel/carrousel-#{val}-big@2x.jpg 2x")
+            source(media="(min-width: 500px)"
+            data-srcset="/images/home/carrousel/carrousel-#{val}-medium.jpg 1x, /images/home/carrousel/carrousel-#{val}-medium@2x.jpg 2x")
+          +image({
+            src: "/images/home/carrousel/carrousel-" + val + "-medium.jpg",
+            srcset: "/images/home/carrousel/carrousel-" + val + "-small.jpg 1x,/images/home/carrousel/carrousel-" + val + "-small@2x.jpg 2x"})
+          //- img.lazyload(data-src="/images/home/carrousel/carrousel-#{val}-medium.jpg",
+          //- data-srcset=)
           //- source(media="(min-width: 1024px)" srcset="/image/1400x600 1x, /image/2800x1200 2x")
           //- source(media="(min-width: 640px)" srcset="/image/920x500 1x, /image/1840x1000 2x")
           //- img(src="/image/580x580", srcset="/image/580x580 1x, /image/1160x1160 2x")
@@ -29,6 +33,11 @@ block content
         dd: picture
           //- source(media="(min-width: 640px) and (max-width: 1023px)" srcset="/image/475x300 1x, /image/950x600 2x")
           //- img(src="/image/675x370", srcset="/image/675x370 1x, /image/1350x740 1x")
-          source(media="(min-width: 640px) and (max-width: 1023px)" srcset="/images/home/expertise/expertise-#{val}-small.jpg 1x, /images/home/expertise/expertise-#{val}-small@2x.jpg 2x")
-          img(src="/images/home/expertise/expertise-#{val}-medium.jpg", srcset="/images/home/expertise/expertise-#{val}-medium.jpg 1x, /images/home/expertise/expertise-#{val}-medium@2x.jpg 1x")
+          +image-source()
+            source(
+              media="(min-width: 640px) and (max-width: 1023px)"
+              data-srcset="/images/home/expertise/expertise-#{val}-small.jpg 1x, /images/home/expertise/expertise-#{val}-small@2x.jpg 2x")
+          img.lazyload(
+            data-src="/images/home/expertise/expertise-#{val}-medium.jpg",
+            data-srcset="/images/home/expertise/expertise-#{val}-medium.jpg 1x, /images/home/expertise/expertise-#{val}-medium@2x.jpg 1x")
 

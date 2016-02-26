@@ -65,11 +65,25 @@ app.set('view engine', 'jade');
 
 //----- STATIC
 
+function slowAssets(req, res, next) {
+  if (/\.(jpg||jpeg||png||svg)$/i.test(req.url)) {
+    setTimeout(next, 2000 + Math.round(2000 * Math.random()))
+  } else {
+    next();
+  }
+}
+
+if (config.isDev) {
+  console.log(chalk.yellow('slowing assets'));
+  app.use(slowAssets)
+}
+
 app.use(express.static(path.join(__dirname, './public')));
 
 // placeholder mocking
 var mock      = require('./server/mock');
 
+// if (config.isDev) app.get('/image/:dimensions', mock.image);
 app.get('/image/:dimensions', mock.image);
 
 //////

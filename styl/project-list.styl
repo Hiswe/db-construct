@@ -17,6 +17,7 @@
   dl {
     position: relative;
     margin: 0 0 $gutter;
+    background: rgba(black, .4);
 
     +mq('>=S') {
       cell(1, 2);
@@ -38,10 +39,15 @@
     }
   }
   dd {
-    margin: 0;
+    position: relative;
+    overflow: hidden;
+    image-ratio(1200, 900);
+
+    +mq('>=M') {
+      image-ratio(1200, 700);
+    }
   }
   img {
-    width: 100%;
-    object-fit: cover;
+    image-absolute()
   }
 }

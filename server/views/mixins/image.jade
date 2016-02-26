@@ -1,0 +1,19 @@
+mixin image-source
+  | <!--[if IE 9]><video style="display: none;><![endif]-->
+  block
+  | <!--[if IE 9]></video><![endif]-->
+
+mixin image(img)
+  noscript: img(src=img.src)
+  img.lazyload(
+    src=img.src
+    data-srcset=img.srcset
+    )
+  //- img.lazyload(
+  //-   src=img.src
+  //-   srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+  //-   data-srcset=img.srcset
+  //-   )
+  //- | #{img.src}
+  //- | #{img.srcset}
+

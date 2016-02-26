@@ -1,5 +1,6 @@
 include mixins/icon
 include mixins/ie
+include mixins/image
 
 doctype html
 html(lang=getLocale())
@@ -34,7 +35,7 @@ html(lang=getLocale())
     +notie()
       link(rel="stylesheet", href="/db-construct.css")
 
-  body(class="page-" + pageName)
+  body.no-script(class="page-" + pageName)
 
     header.main-header
       a.logo(href="/")

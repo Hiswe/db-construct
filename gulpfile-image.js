@@ -56,8 +56,10 @@ gulp.task('clean-carrousel', function(cb) {
 
 gulp.task('home-carrousel', ['clean-carrousel'], function () {
   var write = lazypipe()
+  .pipe($.imagemin)
   .pipe(gulp.dest, homeCarrouselDst)
   .pipe(unRetina)
+
 
   var big = homeCarrouselSrc()
     .pipe(big2x())
@@ -78,6 +80,7 @@ gulp.task('home-carrousel', ['clean-carrousel'], function () {
     .pipe(parallel($.imageResize(resize(580, 580)), cpus));
 
   return merge([big, medium, small])
+    .pipe($.imagemin())
     .pipe(gulp.dest(homeCarrouselDst))
 });
 
@@ -89,7 +92,8 @@ gulp.task('home-carrousel', ['clean-carrousel'], function () {
 var homeExpertiseDst = `${dst}/home/expertise`;
 var homeExpertiseSrc = lazypipe()
   .pipe(gulp.src, `${src}/home/expertise/*.{jpg,JPG}`)
-  .pipe(normalizeExt);
+  .pipe(normalizeExt)
+  .pipe(gulp.dest, homeExpertiseDst)
 
 gulp.task('clean-expertise', function(cb) {
   return del([homeExpertiseDst], cb);
@@ -97,6 +101,7 @@ gulp.task('clean-expertise', function(cb) {
 
 gulp.task('home-expertise', ['clean-expertise'], function () {
   var write = lazypipe()
+  .pipe($.imagemin)
   .pipe(gulp.dest, homeExpertiseDst)
   .pipe(unRetina)
 
@@ -113,6 +118,7 @@ gulp.task('home-expertise', ['clean-expertise'], function () {
     .pipe(parallel($.imageResize(resize(475, 300)), cpus));
 
   return merge([medium, small])
+    .pipe($.imagemin())
     .pipe(gulp.dest(homeExpertiseDst))
 });
 
@@ -138,6 +144,7 @@ gulp.task('clean-expertise', function(cb) {
 });
 gulp.task('process', ['clean-expertise'], function() {
   var write = lazypipe()
+  .pipe($.imagemin)
   .pipe(gulp.dest, processDst)
   .pipe(unRetina)
 
@@ -160,7 +167,8 @@ gulp.task('process', ['clean-expertise'], function() {
     .pipe(parallel($.imageResize(resize(580, 400)), cpus));
 
   return merge([big, medium, small])
-    .pipe(gulp.dest(processDst));
+    .pipe($.imagemin())
+    .pipe(gulp.dest(processDst))
 });
 
 ////////
@@ -179,6 +187,7 @@ var coversSrc = lazypipe()
 
 gulp.task('project-cover', function() {
   var write = lazypipe()
+  .pipe($.imagemin)
   .pipe(gulp.dest, coversDst)
   .pipe(unRetina)
 
@@ -195,6 +204,7 @@ gulp.task('project-cover', function() {
     .pipe(parallel($.imageResize(resize(600, 350)), cpus));
 
   return merge([medium, small])
+    .pipe($.imagemin())
     .pipe(gulp.dest(coversDst));
 });
 
@@ -211,6 +221,7 @@ gulp.task('clean-project', function(cb) {
 
 gulp.task('project', ['clean-project'], function () {
   var write = lazypipe()
+  .pipe($.imagemin)
   .pipe(gulp.dest, projectDst)
   .pipe(unRetina)
 
@@ -219,7 +230,16 @@ gulp.task('project', ['clean-project'], function () {
     .pipe(parallel($.imageResize(resize(800, 600)), cpus))
     .pipe(write())
     .pipe(parallel($.imageResize(resize(400, 300)), cpus))
+    .pipe($.imagemin())
     .pipe(gulp.dest(projectDst))
 });
 
+//----- ALL PROJECTs
 
+gulp.task('projects', ['project', 'project-cover'])
+
+////////
+// ALL
+////////
+
+gulp.task('images', ['home', 'projects', 'process']);

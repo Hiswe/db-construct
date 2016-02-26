@@ -1,5 +1,7 @@
+// https://github.com/aFarkas/lazysizes
+// http://afarkas.github.io/lazysizes/#examples
+import 'lazysizes';
 import svg4everybody from 'svg4everybody';
-import picturefill from 'picturefill';
 import {polyfill as promisePolyfill} from 'es6-promise';
 import 'whatwg-fetch';
 
@@ -28,6 +30,8 @@ if (style.webkitFlexWrap == '' || style.msFlexWrap == '' || style.flexWrap == ''
   hasFlex = true;
 }
 
+document.body.classList.remove('no-script');
+
 // DOM VanillaJS check
 // http://gomakethings.com/ditching-jquery#cutting-the-mustard – IE9+
 var enableJsApp = !!document.querySelector && !!window.addEventListener;
@@ -35,7 +39,6 @@ var enableJsApp = !!document.querySelector && !!window.addEventListener;
 init();
 
 function init() {
-
   // “disable” JS for < IE10
   if (!enableJsApp && !hasFlex) { return log('app disbaled'); };
 

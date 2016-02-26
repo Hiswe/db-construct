@@ -23,6 +23,7 @@ body {
 main {
   display: block;
   flex: 1 0 auto;
+  width: 100%;
   container();
   margin: 0 auto;
   padding-bottom: $gutter;
@@ -74,4 +75,15 @@ textarea {
   +mq('>=M') {
     display: none;
   }
+}
+.no-js img.lazyload {
+  display: none;
+}
+.lazyload,
+.lazyloading {
+  opacity: 0;
+}
+.lazyloaded {
+  opacity: 1;
+  transition: opacity 300ms;
 }

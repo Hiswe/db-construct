@@ -3,7 +3,7 @@ import serialize from 'form-serialize';
 import logger from './_logger';
 import * as utils from './_utils';
 
-var log       = logger('form', true);
+var log       = logger('form', false);
 const $ui     = {};
 
 function init() {

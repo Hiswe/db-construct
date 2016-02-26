@@ -15,6 +15,18 @@ flex-center-align() {
   justify-content: center;
 }
 
+image-ratio(width, height) {
+  padding-top: (height / width) * 100%;
+}
+
+image-absolute() {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  object-fit: cover;
+}
+
 //////
 // MEDIA QUERIES
 //////

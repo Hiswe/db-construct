@@ -14,18 +14,11 @@ function parseHTML(str) {
 };
 
 function addClass(el, className) {
-  el.classList ? el.classList.add(className) : el.className += ' ' + className;
+  el.classList.add(className);
 }
 
 function removeClass(el, className) {
-  if (el.classList) {
-    el.classList.remove(className);
-  } else {
-    let classNames = className.split(' ').join('|');
-    // let classNames = new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi');
-    classNames = new RegExp(`(^|\\b)${classNames}(\\b|$)`, 'gi');
-    el.className = el.className.replace(classNames, ' ');
-  }
+  el.classList.remove(className);
 }
 
 // Has to create SVG in SVG namespace ¬_¬'

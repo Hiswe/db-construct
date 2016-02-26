@@ -5,8 +5,9 @@ import logger       from './_logger';
 import controlTmpl  from '../server/views/front-end/carrousel-control.jade';
 import * as utils   from './_utils';
 
-const log     = logger('carrousel', true);
-const configs = {
+const isLogging = false;
+const log       = logger('carrousel', isLogging);
+const configs   = {
   delay: 5 * 1000,
   home: {
     autoSlide: true,
@@ -15,7 +16,7 @@ const configs = {
   process: {
     autoSlide: false,
     icon:      'arrow-small',
-  }
+  },
 };
 
 function init() {
@@ -26,7 +27,7 @@ function init() {
 }
 
 function setup(el, index) {
-  const log     = logger('carrousel_' + index++, true);
+  const log     = logger('carrousel_' + index++, isLogging);
   const $ui     = {
     el,
     slides: utils.$$('li', el)

@@ -69,6 +69,7 @@ gulp.task('libraries-ie', function () {
   gulp.src([
     'node_modules/html5shiv/dist/html5shiv-min.js',
     'node_modules/svg4everybody/dist/svg4everybody.legacy.min.js',
+    'node_modules/lazysizes/lazysizes.min.js',
   ])
   .pipe($.concat('libraries-ie.js'))
   .pipe(gulp.dest('public'));

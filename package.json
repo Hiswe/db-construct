@@ -13,6 +13,7 @@
     "release": "./bin/dist.sh",
     "build-prod": "gulp svg && gulp build --prod",
     "bump": "gulp bump",
+    "images": "gulp home && gulp projects && gulp process",
     "logs": "heroku logs -n 10000"
   },
   "repository": {
@@ -63,6 +64,7 @@
     "gulp-google-webfonts": "0.0.12",
     "gulp-if": "^2.0.0",
     "gulp-image-resize": "^0.7.1",
+    "gulp-imagemin": "^2.4.0",
     "gulp-load-plugins": "^1.2.0",
     "gulp-nodemon": "^2.0.6",
     "gulp-plumber": "^1.1.0",
@@ -80,6 +82,7 @@
     "jadeify": "^4.6.0",
     "jquery": "^2.2.0",
     "lazypipe": "^1.0.1",
+    "lazysizes": "^1.4.0",
     "masonry-layout": "^4.0.0",
     "merge-stream": "^1.0.0",
     "picturefill": "^3.0.2",
