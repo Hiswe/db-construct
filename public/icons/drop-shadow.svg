@@ -12,7 +12,7 @@
     <feOffset dx="2" dy="2" result="offsetblur"/> <!-- how much to offset -->
     <feMerge>
       <feMergeNode/> <!-- this contains the offset blurred image -->
-      <feMergeNode in="SourceGraphic" opacity="0.5"/> <!-- this contains the element that the filter is applied to -->
+      <feMergeNode in="SourceGraphic"/> <!-- this contains the element that the filter is applied to -->
     </feMerge>
   </filter></defs>
 </svg>

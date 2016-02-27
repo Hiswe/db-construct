@@ -5,7 +5,7 @@ import logger       from './_logger';
 import controlTmpl  from '../server/views/front-end/carrousel-control.jade';
 import * as utils   from './_utils';
 
-const isLogging = true;
+const isLogging = false;
 const log       = logger('carrousel', isLogging);
 const configs   = {
   delay: 5 * 1000,
@@ -16,7 +16,6 @@ const configs   = {
   process: {
     autoSlide: false,
     icon:      ['arrow-small-left', 'arrow-small-right'],
-    // icon:      'clapou',
   },
 };
 
@@ -67,7 +66,9 @@ function setup(el, index) {
     new Hammer($ui.next).on('tap', () => { moveTo( 1) });
     new Hammer($ui.el).on('swipe', e =>  { moveTo(e.direction === 2 ? 1 : -1 )} );
     // after each transition reorgnaize the carrousel for the next one
-    $ui.carrousel.addEventListener('transitionend', function () {
+    $ui.carrousel.addEventListener('transitionend', function (e) {
+      if (e.propertyName !== 'transform') return;
+      log('transition end');
       // need the raf to prevent transition…
       raf( () => {organize(current) });
     });
@@ -106,7 +107,11 @@ function setup(el, index) {
     let nextState = current + direction;
     nextState     = nextState >= length ? 0 : nextState;
     nextState     = nextState < 0 ? length - 1 : nextState;
-    if (timer)    clearTimeout(timer);
+    if (timer) {
+      log('clear', timer);
+      clearTimeout(timer);
+      timer = false;
+    };
 
     // slide organization will be done on transition end;
     setTransform(direction > 0 ? 2 : 0);
@@ -119,7 +124,7 @@ function setup(el, index) {
   }
 
   function setTransform(step) {
-    $ui.carrousel.style.transform = `translateX(-${step * 90}%)`;
+    $ui.carrousel.style.transform = `translate3d(-${step * 90}%, 0px, 0px)`;
   }
 }
 
