@@ -58,7 +58,6 @@
     }
   }
   .image-wrapper {
-    image-container()
     image-ratio(580, 580);
 
     +mq('>=M') {
@@ -66,9 +65,6 @@
     }
     +mq('>=L') {
       image-ratio(1400, 600);
-    }
-    img {
-      image-absolute();
     }
   }
 }
@@ -109,7 +105,6 @@
 
     &:nth-of-type(odd) {
       flex-direction: row-reverse;
-
     }
   }
   dt,
@@ -134,20 +129,13 @@
 
     +mq('>=L') {
       cell(2, 3);
-      // image-ratio();
     }
   }
   .image-wrapper {
-    image-container()
     image-ratio(675, 370);
 
     +mq('==M') {
       image-ratio(475, 300);
     }
-  }
-  img {
-    image-absolute();
-    // width: 100%;
-    // display: block;
   }
 }

@@ -76,6 +76,11 @@ textarea {
     display: none;
   }
 }
+
+//////
+// LAZYLOAD IMAGES
+//////
+
 .no-js img.lazyload {
   display: none;
 }
@@ -86,4 +91,12 @@ textarea {
 .lazyloaded {
   opacity: 1;
   transition: opacity 300ms;
+}
+
+.image-wrapper {
+  image-container();
+
+  img {
+    image-absolute();
+  }
 }

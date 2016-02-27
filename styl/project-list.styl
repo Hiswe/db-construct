@@ -38,17 +38,11 @@
       font-size: 20px;
     }
   }
-  dd {
-    image-container();
-    // position: relative;
-    // overflow: hidden;
+  .image-wrapper {
     image-ratio(1200, 900);
 
     +mq('>=M') {
       image-ratio(1200, 700);
     }
-  }
-  img {
-    image-absolute()
   }
 }
