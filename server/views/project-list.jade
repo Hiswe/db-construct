@@ -6,7 +6,7 @@ block content
     for project in projects
       dl
         dt: a(href="/project/" + project.name)= __('projects.' + project.name + '.title')
-        dd.image-wrapper: a(href="/project/" + project.name)
+        dd: a.image-wrapper(href="/project/" + project.name)
           - var base = 'project/' + project.name;
           picture
             //- source(media="(max-width: 640px)" srcset="/image/600x450 1x, /image/1200x900 2x")

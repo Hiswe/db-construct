@@ -11,10 +11,14 @@ block content
     - var image = 0;
     while image < project.images
       - image++;
-      li.project-image.grid-item: .image-wrapper
-        //- img(src='/images/project/#{project.name}/#{project.name}-#{image}.jpg',
-        //- srcset="/images/project/#{project.name}/#{project.name}-#{image}.jpg 1x, /images/project/#{project.name}/#{project.name}-#{image}@2x.jpg 2x")
-        +image({
-          base: 'project/' + project.name,
-          src: project.name + '-' + image,
-        })
+      li.project-image.grid-item
+        a.image-wrapper(
+          href='/images/project/' + project.name + '/' + project.name + '-' + image + '-original.jpg'
+          target="_blank"
+        )
+          //- img(src='/images/project/#{project.name}/#{project.name}-#{image}.jpg',
+          //- srcset="/images/project/#{project.name}/#{project.name}-#{image}.jpg 1x, /images/project/#{project.name}/#{project.name}-#{image}@2x.jpg 2x")
+          +image({
+            base: 'project/' + project.name,
+            src: project.name + '-' + image,
+          })

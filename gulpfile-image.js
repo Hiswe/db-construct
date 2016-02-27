@@ -27,12 +27,17 @@ function resize(width, height) {
 //----- RENAME
 
 var normalizeExt    = lazypipe().pipe($.rename, {extname: '.jpg'});
-var retina          = lazypipe().pipe($.rename, {suffix: '@2x'});
+
 var big2x           = lazypipe().pipe($.rename, {suffix: '-big@2x'});
 var medium2x        = lazypipe().pipe($.rename, {suffix: '-medium@2x'});
 var small2x         = lazypipe().pipe($.rename, {suffix: '-small@2x'});
+var retina          = lazypipe().pipe($.rename, {suffix: '@2x'});
 var unRetina        = lazypipe().pipe($.rename, function (path) {
   path.basename = path.basename.replace('@2x', '');
+});
+var original        = lazypipe().pipe($.rename, {suffix: '-original'});
+var unOriginal      = lazypipe().pipe($.rename, function (path) {
+  path.basename = path.basename.replace('-original', '');
 });
 
 ////////
@@ -185,7 +190,11 @@ var coversSrc = lazypipe()
   .pipe(gulp.src, [`${src}/project/**/*-cover.{jpg,JPG}`], {base: `${src}/project`})
   .pipe(normalizeExt);
 
-gulp.task('project-cover', function() {
+gulp.task('clean-project-cover', function(cb) {
+  return del([`${coversDst}/**/*-cover.{jpg,JPG}`], cb);
+});
+
+gulp.task('project-cover', ['clean-project-cover'], function() {
   var write = lazypipe()
   .pipe($.imagemin)
   .pipe(gulp.dest, coversDst)
@@ -212,11 +221,11 @@ gulp.task('project-cover', function() {
 
 var projectDst = `${dst}/project`;
 var projectSrc = lazypipe()
-  .pipe(gulp.src, [`${src}/project/**/*.{jpg,JPG}`, `!${src}/project/**/*-cover.{jpg,JPG}`], {base: `${src}/project`})
+  .pipe(gulp.src, [`${coversDst}/**/*.{jpg,JPG}`, `!${coversDst}/**/*-cover.{jpg,JPG}`], {base: `${src}/project`})
   .pipe(normalizeExt);
 
 gulp.task('clean-project', function(cb) {
-  return del([projectDst], cb);
+  return del([`${src}/project/**/*.{jpg,JPG}`, `!${src}/project/**/*-cover.{jpg,JPG}`], cb);
 });
 
 gulp.task('project', ['clean-project'], function () {
@@ -226,6 +235,10 @@ gulp.task('project', ['clean-project'], function () {
   .pipe(unRetina)
 
   return projectSrc()
+    .pipe(original())
+    .pipe($.imagemin())
+    .pipe(gulp.dest(projectDst))
+    .pipe(unOriginal())
     .pipe(retina())
     .pipe(parallel($.imageResize(resize(800, 600)), cpus))
     .pipe(write())
