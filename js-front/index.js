@@ -12,8 +12,9 @@ import project from './project';
 import carrousel from './carrousel';
 import contact from './contact';
 import map, {mapInit} from './map';
+import * as utils from './_utils';
 
-const log     = logger('app', false);
+const log     = logger('app', true);
 log('init');
 
 // enable support for external source
@@ -52,9 +53,18 @@ function init() {
   window.dbConstruct = {mapInit: mapInit};
   map();
 
-
   // DEBUG
   if (process.env.NODE_ENV === 'development') {
+    const gridTmpl = `
+      <div class="demo-grid">
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+    `;
+    utils.$('body').appendChild(utils.parseHTML(gridTmpl)[0]);
     let grid    = document.querySelector('.demo-grid');
     let isOpen  = false;
     document.addEventListener('keyup', toggleGrid);

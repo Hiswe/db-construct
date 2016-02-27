@@ -3,6 +3,8 @@ include mixins/ie
 include mixins/image
 
 doctype html
+//- TBD add a simple manifest
+//- manifest="cache.manifest"
 html(lang=getLocale())
   head
     title= __('layout.title')
@@ -84,12 +86,6 @@ html(lang=getLocale())
           | #{__('address.line-2')}
 
       p.copyright D.B. Construct ©2016
-
-    if isDev
-      .demo-grid: ul
-        li
-        li
-        li
 
     //- Gracefull degradation for old browsers
     +notie()

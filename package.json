@@ -65,6 +65,7 @@
     "gulp-if": "^2.0.0",
     "gulp-image-resize": "^0.7.1",
     "gulp-imagemin": "^2.4.0",
+    "gulp-jade": "^1.1.0",
     "gulp-load-plugins": "^1.2.0",
     "gulp-nodemon": "^2.0.6",
     "gulp-plumber": "^1.1.0",
