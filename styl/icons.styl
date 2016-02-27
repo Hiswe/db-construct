@@ -27,3 +27,16 @@
     height: 15px;
   }
 }
+.icon-arrow-small-left,
+.icon-arrow-small-right {
+  fill: $accent;
+  filter: url('/svg-symbols.svg#dropshadow');
+  transition: fill .3s;
+
+  &:hover {
+    fill: lighten($accent, 20%);
+  }
+  &:active {
+    fill: white;
+  }
+}

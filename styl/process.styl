@@ -52,3 +52,27 @@
     }
   }
 }
+.page-process {
+  .carrousel-progress {
+    display: none;
+  }
+  .carrousel-control {
+    position: absolute;
+    bottom: ($half-gutter / 2);
+    right: $half-gutter;
+    vertical-align: bottom;
+  }
+  .js-prev,
+  .js-next {
+    position: static;
+    display: inline-block;
+    transform: none;
+    background: rgba(black, .5);
+  }
+  .js-next {
+    margin-left: ($half-gutter / 2);
+  }
+  svg {
+    display: block;
+  }
+}

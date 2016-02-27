@@ -6,7 +6,7 @@ block content
     dl.process-step
       dt= __('process.' + step + '.title')
       dd= __('process.' + step + '.description')
-      dd: .carrousel(data-carrousel="process"): ul.in
+      dd: .carrousel.js-carrousel(data-carrousel="process"): ul.in
         - var image = 0;
         - var base = 'process/' + step;
         while image < imageCount[index]

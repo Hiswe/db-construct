@@ -163,6 +163,8 @@ gulp.task('icons', function () {
   return gulp
     .src('public/icons/*.svg')
     .pipe($.svgmin({ plugins: [
+      { removeUselessDefs: false },
+      { cleanupIDs: false },
       { removeAttrs: { attrs: ['fill', 'stroke'] } },
     ]}))
     .pipe($.svgSymbols({

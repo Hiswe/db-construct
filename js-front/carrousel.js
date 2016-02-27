@@ -5,7 +5,7 @@ import logger       from './_logger';
 import controlTmpl  from '../server/views/front-end/carrousel-control.jade';
 import * as utils   from './_utils';
 
-const isLogging = false;
+const isLogging = true;
 const log       = logger('carrousel', isLogging);
 const configs   = {
   delay: 5 * 1000,
@@ -15,7 +15,8 @@ const configs   = {
   },
   process: {
     autoSlide: false,
-    icon:      'arrow-small',
+    icon:      ['arrow-small-left', 'arrow-small-right'],
+    // icon:      'clapou',
   },
 };
 
@@ -53,8 +54,8 @@ function setup(el, index) {
     $ui.next      = utils.$('.js-next', $ui.control);
     $ui.nav       = utils.$$('.js-carrousel-progress li', $ui.control);
     // Has to create SVG in SVG namespace ¬_¬'
-    $ui.prev.appendChild(utils.svgIcon(conf.icon));
-    $ui.next.appendChild(utils.svgIcon(conf.icon));
+    $ui.prev.appendChild(utils.svgIcon(Array.isArray(conf.icon) ? conf.icon[0] : conf.icon));
+    $ui.next.appendChild(utils.svgIcon(Array.isArray(conf.icon) ? conf.icon[1] : conf.icon));
     el.appendChild($ui.control);
 
     utils.addClass($ui.el, 'is-active');

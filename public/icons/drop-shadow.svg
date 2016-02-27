@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg viewBox="0 0 0 0">
+<defs><filter id="dropshadow" height="64px">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="0"/> <!-- stdDeviation is how much to blur -->
+    <!-- recolor shadow -->
+    <feColorMatrix in="SourceGraphic"
+          type="matrix"
+          values="0 0 0 0 0
+                  0 0 0 0 0
+                  0 0 0 0 0
+                  0 0 0 .75 0" />
+    <feOffset dx="2" dy="2" result="offsetblur"/> <!-- how much to offset -->
+    <feMerge>
+      <feMergeNode/> <!-- this contains the offset blurred image -->
+      <feMergeNode in="SourceGraphic" opacity="0.5"/> <!-- this contains the element that the filter is applied to -->
+    </feMerge>
+  </filter></defs>
+</svg>

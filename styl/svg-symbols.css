@@ -1,3 +1,13 @@
+.icon-arrow-small-left {
+  width: 40px;
+  height: 40px;
+}
+
+.icon-arrow-small-right {
+  width: 40px;
+  height: 40px;
+}
+
 .icon-big-arrow {
   width: 60px;
   height: 180px;
@@ -6,6 +16,11 @@
 .icon-close {
   width: 20px;
   height: 20px;
+}
+
+.icon-drop-shadow {
+  width: 0px;
+  height: 0px;
 }
 
 .icon-facebook {
