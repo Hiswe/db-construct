@@ -11,6 +11,7 @@ import logger from './_logger';
 import project from './project';
 import carrousel from './carrousel';
 import contact from './contact';
+import map, {mapInit} from './map';
 
 const log     = logger('app', false);
 log('init');
@@ -47,6 +48,10 @@ function init() {
   project();
   contact();
   carrousel();
+  // google map new a global callback
+  window.dbConstruct = {mapInit: mapInit};
+  map();
+
 
   // DEBUG
   if (process.env.NODE_ENV === 'development') {
