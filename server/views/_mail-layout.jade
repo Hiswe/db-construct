@@ -1,0 +1,63 @@
+div(style="background-color: #222222; width: 100%;")
+  table(align="center", bgcolor="#FFFFFF", border="0", cellpadding="0", cellspacing="0", style="width: 635px;")
+    tr: td(colspan="3", height="30", bgcolor="#222222")
+    tr: td(colspan="3", align="center", height="90")
+      //- h1(style="color: #C70082; font-family: Helvetica, Arial, sans-serif") Banjai Garden
+      include ../../public/logo-db-construct-color.svg
+    tr: td(colspan="3", height="15")
+    tr
+      td(width="15")
+      td
+        block content
+      td(width="15")
+    //- tr
+    //-   td(width="15")
+    //-   td(style="line-height: 2; font-family: Helvetica, Arial, sans-serif"): b You can answer this email by clicking on the adress below:
+    //-   td(width="15")
+    //- tr
+    //-   td(width="15")
+    //-   td(style="line-height: 2; font-family: Helvetica, Arial, sans-serif")
+    //-     b From:&nbsp;
+    //-     a(href="mailto:#{email}?subject=#{subject}&body=<br />#{formatedMessage}" style="color:#C70082; text-decoration: none")= name
+    //-     | &nbsp;
+    //-     a(href="mailto:#{email}?subject=#{subject}&body=<br />#{formatedMessage}" style="color:#C70082; text-decoration: none")= '<' + email + '>'
+    //-   td(width="15")
+    //- tr: td(colspan="3", height="15")
+    //- tr
+    //-   td(width="15")
+    //-   td(style="line-height: 2; font-family: Helvetica, Arial, sans-serif"): b Message:
+    //-   td(width="15")
+    //- tr
+    //-   td(width="15")
+    //-   td: table(border="0", cellpadding="0", cellspacing="0"): tr
+    //-     td(width="15")
+    //-     td(style="line-height: 2; font-family: Helvetica, Arial, sans-serif")!= formatedMessage
+    //-     td(width="15")
+    //-   td(width="15")
+    //- tr
+    //-   td(width="15")
+    //-   td(style="line-height: 2") &nbsp;
+    //-   td(width="15")
+    //- tr
+    //-   td(width="15")
+    //-   td()
+    //-     a(href="mailto:#{email}?subject=#{subject}&body=<br />#{formatedMessage}" style="display: block; padding: 15px; text-decoration: none; background: #C70082; color: #FFFFFF; text-align: center; ; font-family: Helvetica, Arial, sans-serif") Answer
+    //-   td(width="15")
+    tr
+      td(width="15")
+      td(style="line-height: 2")
+        table(style="width: 100%", border="0", cellpadding="0", cellspacing="0",)
+          tr
+            td
+              include ../../public/icons/phone.svg
+            td
+              include ../../public/icons/facebook.svg
+          tr
+            td= __('contact.phone.en')
+
+            td= __('contact.phone.th')
+              //- include ../../public/icons/facebook.svg
+      td(width="15")
+    tr
+    tr: td(colspan="3", height="15")
+    tr: td(colspan="3", height="30", bgcolor="#222222")
