@@ -60,10 +60,13 @@ function send() {
   let contact = fetch('/contact', {
     method: 'post',
     headers: {
+      // This is for express to catch a XHR
       'X-Requested-With': 'XMLHttpRequest',
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
+    // send session (fetch API by default omit it)
+    // https://medium.com/@un.deter.red/fetch-doesn-t-send-cookies-by-default-f99ca4111774#.gsh5pk9a4
     credentials: 'include',
     body: JSON.stringify(serialize($ui.form, {hash: true})),
   })

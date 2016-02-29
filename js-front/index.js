@@ -1,3 +1,5 @@
+// NTH === Nice To Have
+
 // https://github.com/aFarkas/lazysizes
 // http://afarkas.github.io/lazysizes/#examples
 import 'lazysizes';
@@ -14,7 +16,7 @@ import contact from './contact';
 import map, {mapInit} from './map';
 import * as utils from './_utils';
 
-const log     = logger('app', true);
+const log     = logger('app', false);
 log('init');
 
 // enable support for external source

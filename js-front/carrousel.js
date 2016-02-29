@@ -1,3 +1,6 @@
+// NTH no playing when page not visible
+// https://www.npmjs.com/package/visibilityjs
+// import Visibility   from 'visibilityjs';
 import Hammer       from 'hammerjs';
 import raf          from 'raf';
 
@@ -39,6 +42,7 @@ function setup(el, index) {
   let timer     = false;
   if (!length) return log('abort');
   log('init with', length, 'slides');
+  // log(Visibility.visible());
 
   bindUi();
   bindEvents();

@@ -6,7 +6,7 @@
 	},
 	"mailing": {
 		"hello": "Dear customer,",
-		"line-1": "Thank you for your contact, we have receipt your message and will reply your mail as soon as possible.",
+		"line-1": "Thank you for your contact, we have received your message and will reply as soon as possible.",
 		"bye": "Best regards"
 	},
 	"menu": {
