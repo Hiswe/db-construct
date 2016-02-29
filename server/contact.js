@@ -1,9 +1,15 @@
 'use strict';
 
+var fs          = require('fs');
+var path        = require('path');
 var nodemailer  = require('nodemailer');
 
 var config      = require('./config');
 var transporter = nodemailer.createTransport(config.emailTransport);
+var mailing     = {
+  en: fs.readFileSync(path.join(__dirname, '../public/mail-customer-en.html')),
+  th: fs.readFileSync(path.join(__dirname, '../public/mail-customer-th.html')),
+};
 
 function getContact(req, res, next) {
   return res.render('contact');
@@ -36,17 +42,22 @@ function postMessage(req, res, next) {
 // nodemailer:
 // If callback argument is not set then the method returns a Promise object.
 function sendMails(req) {
-  var contactMail      = transporter.sendMail({
+  let domenicoMsg       = req.body.message.replace(/\n/g, '<br>');
+  if (req.body.phone) domenicoMsg = `${domenicoMsg}
+<p>Phone: <a href="tel:${req.body.phone}">${req.body.phone}</a></p>
+`;
+  var contactMail       = transporter.sendMail({
     from:     req.body.email,
     to:       config.emailOptions.to,
-    subject:  `[DBCONSTRUCT] a message from: ${req.body.name}`,
-    html:     'contact mail',
+    // subject:  `[DBCONSTRUCT] information demand ${req.body.name}`,
+    subject:  `[DB-CONSTRUCT] information demand`,
+    html:     domenicoMsg,
   });
   var confirmationMail  = transporter.sendMail({
     from:     config.emailOptions.to,
     to:       req.body.email,
-    subject:  `[DBCONSTRUCT] Thank your for your message!`,
-    html:     'confirmation mail',
+    subject:  `[DB-CONSTRUCT] Thank your for your message!`,
+    html:     mailing[req.getLocale()],
   });
   return Promise.all([contactMail, confirmationMail])
 }

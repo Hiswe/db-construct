@@ -64,7 +64,8 @@ function send() {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(serialize($ui.form, {hash: true}))
+    credentials: 'include',
+    body: JSON.stringify(serialize($ui.form, {hash: true})),
   })
 
   return Promise.all([utils.wait(2000), contact]);

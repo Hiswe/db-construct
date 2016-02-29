@@ -14,3 +14,4 @@ npm-debug.log
 .DS_Store
 fonts.list
 /image-source
+/tmp

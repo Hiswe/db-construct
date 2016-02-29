@@ -220,7 +220,8 @@ gulp.task('mail', function() {
     en: JSON.parse(fs.readFileSync(__dirname + '/server/locales/en.js')),
     th: JSON.parse(fs.readFileSync(__dirname + '/server/locales/th.js')),
   };
-
+  // I18N should handle this
+  // https://www.npmjs.com/package/i18n#some-words-on-register-option
   function getParams(lang) {
     return {
       // pretty: isDev,
