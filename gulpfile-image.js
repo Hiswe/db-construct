@@ -221,11 +221,11 @@ gulp.task('project-cover', ['clean-project-cover'], function() {
 
 var projectDst = `${dst}/project`;
 var projectSrc = lazypipe()
-  .pipe(gulp.src, [`${coversDst}/**/*.{jpg,JPG}`, `!${coversDst}/**/*-cover.{jpg,JPG}`], {base: `${src}/project`})
+  .pipe(gulp.src, [`${src}/project/**/*.{jpg,JPG}`, `!${src}/project/**/*-cover.{jpg,JPG}`], {base: `${src}/project`})
   .pipe(normalizeExt);
 
 gulp.task('clean-project', function(cb) {
-  return del([`${src}/project/**/*.{jpg,JPG}`, `!${src}/project/**/*-cover.{jpg,JPG}`], cb);
+  return del([`${dst}/project/**/*.{jpg,JPG}`, `!${dst}/project/**/*-cover.{jpg,JPG}`], cb);
 });
 
 gulp.task('project', ['clean-project'], function () {
@@ -236,6 +236,7 @@ gulp.task('project', ['clean-project'], function () {
 
   return projectSrc()
     .pipe(original())
+    .pipe(parallel($.imageResize(resize(2300, 1720)), cpus))
     .pipe($.imagemin())
     .pipe(gulp.dest(projectDst))
     .pipe(unOriginal())

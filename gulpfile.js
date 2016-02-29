@@ -1,9 +1,11 @@
 'use strict';
 
 var _               = require('lodash');
+var fs              = require('fs');
 var del             = require('del');
 var gulp            = require('gulp');
 var $               = require('gulp-load-plugins')();
+var merge           = require('merge-stream');
 var browserSync     = require('browser-sync').create();
 var reload          = browserSync.reload;
 var args            = require('yargs').argv;
@@ -188,14 +190,100 @@ gulp.task('fonts', ['del-fonts'], function () {
     .pipe($.if(/[.]woff$/, gulp.dest('public/fonts')));
 });
 
+//----- APP-CACHE MANIFEST
+// TBD
+gulp.task('manifest', function(){
+  gulp.src([
+      'dist/**/*',
+      '!dist/**/*.otf',
+      '!dist/**/*.md',
+      // '!dist/medias/*',
+      '!dist/*-standalone.*',
+    ])
+    .pipe(gp.manifest({
+      // hash: true,
+      timestamp: true,
+      preferOnline: true,
+      network: ['http://*', 'https://*', '*'],
+      filename: 'cache.manifest',
+      exclude: 'cache.manifest'
+     }))
+    .pipe(gulp.dest('dist'))
+    .pipe(gp.notify(msg('Maj')));
+});
+
+//----- RENDER MAIL
+
+gulp.task('mail', function() {
+  var mailSrc = 'server/views/mail*.jade';
+  var dico = {
+    en: JSON.parse(fs.readFileSync(__dirname + '/server/locales/en.js')),
+    th: JSON.parse(fs.readFileSync(__dirname + '/server/locales/th.js')),
+  };
+
+  function getParams(lang) {
+    return {
+      // pretty: isDev,
+      locals: {
+        bg: '#302D2C',
+        primary: '#2A5D61',
+        accent: '#F5A956',
+        // isStatic: true,
+        // revisions: revisions,
+        getLocale: function () { return lang; },
+        __: function (key) {
+          var current = dico[lang];
+          if (!/\./.test(key)) return current[key]
+          key = key.split('.');
+          var result = current;
+          key.forEach(function (part) {
+            result = result[part];
+          })
+          return result;
+        }
+      },
+    };
+  }
+
+  var en =  gulp
+    .src(mailSrc)
+    .pipe($.jade(getParams('en')))
+    .pipe($.rename({suffix: '-en'}))
+
+  var th =  gulp
+    .src(mailSrc)
+    .pipe($.jade(getParams('th')))
+    .pipe($.rename({suffix: '-th'}))
+
+  return merge(en, th)
+    .pipe($.replace('<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">', ''))
+    .pipe(gulp.dest('public'))
+    .pipe($.headerFooter({
+      header: `
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+          `,
+      footer: `</body></html>`,
+      filter: function (file){ return true; }
+    }))
+    .pipe($.htmlPrettify({indent_char: ' ', indent_size: 2}))
+    .pipe(gulp.dest('tmp'))
+});
+
 //----- ALL ASSETS
 
 gulp.task('svg',    ['icons', 'svg-images']);
-gulp.task('assets', ['icons', 'svg-images', 'fonts']);
+gulp.task('assets', ['icons', 'svg-images', 'fonts', 'mail']);
 
 ////////
 // DEV
 ////////
+
+//----- SERVER
 
 var nodemonOptions = {
   script: 'index.js',
@@ -229,13 +317,15 @@ gulp.task('browser-sync', ['nodemon'], function () {
 });
 
 gulp.task('watch', ['browser-sync', 'js'], function () {
+  gulp.watch(['server/views/**/mail-*.jade',
+              'server/views/**/_mail-*.jade'], ['mail']);
   // !! don't put ./ before path
   // http://stackoverflow.com/questions/22391527/gulps-gulp-watch-not-triggered-for-new-or-deleted-files
   gulp.watch(['styl/**/*.styl',
               'styl/**/*.css'],  ['css']);
-  // gulp.watch(['assets/js/**/*.js'],     ['app-watch'], reload);
   gulp.watch(['public/*.js']).on('change', reload);
   gulp.watch('server/views/**/*.jade').on('change', reload);
+
 });
 
 gulp.task('dev', ['watch']);
