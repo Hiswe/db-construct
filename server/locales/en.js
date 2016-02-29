@@ -1,7 +1,13 @@
 {
 	"layout": {
 		"title": "DB Edil Construct",
-		"description": "layout.description"
+		"description": "Quality Construction Contractor in chiangmai by the expert with more than 30 years experience",
+		"keywords": "construction, chiangmai, Thailand, building, house, home"
+	},
+	"mailing": {
+		"hello": "Dear customer,",
+		"line-1": "Thank you for your contact, we have receipt your message and will reply your mail as soon as possible.",
+		"bye": "Best regards"
 	},
 	"menu": {
 		"home": "home",
