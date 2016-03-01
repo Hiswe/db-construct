@@ -73,10 +73,10 @@ function slowAssets(req, res, next) {
   }
 }
 
-// if (config.isDev) {
-//   console.log(chalk.yellow('slowing assets'));
-//   app.use(slowAssets)
-// }
+if (config.isDev) {
+  console.log(chalk.yellow('slowing assets'));
+  app.use(slowAssets)
+}
 
 app.use(express.static(path.join(__dirname, './public')));
 

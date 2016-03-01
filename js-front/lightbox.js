@@ -37,7 +37,6 @@ function bindEvents() {
     open();
     build(e);
   });
-  document.addEventListener('lazybeforeunveil', show);
 }
 
 ////////
@@ -63,30 +62,34 @@ function close() {
 
 function build(e) {
   var $link = $(e.currentTarget);
-  $ui.lightbox.append(makeImage($link.attr('href')));
-  $ui.img = $ui.lightbox.find('.js-lightbox-img');
+  var url   = $link.attr('href');
+  $ui.lightbox.append(`<div class="lightbox-image js-lightbox-image"></div>`);
+  $ui.img = $ui.lightbox.find('.js-lightbox-image');
+  bgLoad(url, function () {
+    log('loaded', $ui.img);
+    $ui.img
+      .css('backgroundImage', `url(${url})`)
+      .addClass('is-loaded');
+  });
 }
 
-function show(e) {
-  let $img = $(e.target);
-  if (!$img.hasClass('js-lightbox-img')) return;
-  log('image loaded');
-  $img
-    .css('backgroundImage', `url(${$img.attr('data-src')})`)
-    .addClass('is-loaded');
-}
+// from:
+// https://github.com/aFarkas/lazysizes/blob/gh-pages/plugins/unveilhooks/ls.unveilhooks.js#L33
 
-function makeImage(href) {
-  return `<div class="lightbox-image lazyload js-lightbox-img" data-src=${href}></div>`;
-}
-
-function next(e) {
-
-}
-
-function prev(e) {
-
-}
+function bgLoad(url, cb){
+  let img       = document.createElement('img');
+  img.onload    = function () {
+    img.onload  = null;
+    img.onerror = null;
+    img = null;
+    cb();
+  };
+  img.onerror = img.onload;
+  img.src     = url;
+  if (img && img.complete && img.onload) {
+    img.onload();
+  }
+};
 
 ////////
 // EXPORTS
