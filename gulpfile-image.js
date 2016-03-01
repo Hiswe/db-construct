@@ -18,7 +18,7 @@ function resize(width, height) {
   return {
     width:        width,
     height:       height,
-    crop:         true,
+    crop:         (width === 0 || height === 0) ? false : true,
     upscale:      false,
     // imageMagick:  true
   }
@@ -39,6 +39,27 @@ var original        = lazypipe().pipe($.rename, {suffix: '-original'});
 var unOriginal      = lazypipe().pipe($.rename, function (path) {
   path.basename = path.basename.replace('-original', '');
 });
+
+//----- AUTO ORIENT
+
+var autoOrient = lazypipe()
+  .pipe($.gm, function (gmfile) {
+    return gmfile.autoOrient();
+  })
+
+////////
+// PREPARE SRC IMG
+////////
+
+// parallel($.imageResize(resize(2800, 1200)), cpus)
+
+// gulp.task('orient', function () {
+//   gulp.src(`${src}/**/*.{jpg,JPG}`, {base: src})
+//     .pipe(parallel($.gm(function (gmfile) {
+//       return gmfile.autoOrient();
+//     })), cpus))
+//     .pipe(gulp.dest(src));
+// });
 
 ////////
 // HOME
@@ -222,10 +243,11 @@ gulp.task('project-cover', ['clean-project-cover'], function() {
 var projectDst = `${dst}/project`;
 var projectSrc = lazypipe()
   .pipe(gulp.src, [`${src}/project/**/*.{jpg,JPG}`, `!${src}/project/**/*-cover.{jpg,JPG}`], {base: `${src}/project`})
-  .pipe(normalizeExt);
+  .pipe(normalizeExt)
+  .pipe(autoOrient);
 
 gulp.task('clean-project', function(cb) {
-  return del([`${dst}/project/**/*.{jpg,JPG}`, `!${dst}/project/**/*-cover.{jpg,JPG}`], cb);
+  return del([`${dst}/project/**/*.jpg`, `!${dst}/project/**/*-cover*.jpg`], cb);
 });
 
 gulp.task('project', ['clean-project'], function () {
@@ -236,7 +258,7 @@ gulp.task('project', ['clean-project'], function () {
 
   return projectSrc()
     .pipe(original())
-    .pipe(parallel($.imageResize(resize(2300, 1720)), cpus))
+    .pipe(parallel($.imageResize(resize(0, 1720)), cpus))
     .pipe($.imagemin())
     .pipe(gulp.dest(projectDst))
     .pipe(unOriginal())

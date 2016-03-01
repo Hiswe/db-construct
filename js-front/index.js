@@ -14,6 +14,7 @@ import project from './project';
 import carrousel from './carrousel';
 import contact from './contact';
 import map, {mapInit} from './map';
+import lightbox from './lightbox';
 import * as utils from './_utils';
 
 const log     = logger('app', false);
@@ -51,6 +52,7 @@ function init() {
   project();
   contact();
   carrousel();
+  lightbox();
   // google map new a global callback
   window.dbConstruct = {mapInit: mapInit};
   map();

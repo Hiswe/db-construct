@@ -2,7 +2,7 @@ extends _layout.jade
 
 block content
   h1= __('projects.' + project.name + '.title')
-  ul.project-content.js-grid
+  ul.project-content.js-grid.js-lightbox
     //- description
     li.project-description.grid-item.grid-item--width2: ul
       for point in __('projects.' + project.name + '.description').split('\n')
@@ -12,7 +12,7 @@ block content
     while image < project.images
       - image++;
       li.project-image.grid-item
-        a.image-wrapper(
+        a.image-wrapper.js-lightbox-item(
           href='/images/project/' + project.name + '/' + project.name + '-' + image + '-original.jpg'
           target="_blank"
         )
