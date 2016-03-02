@@ -47,6 +47,7 @@ function bindEvents() {
     open();
     build(e);
   });
+  document.addEventListener('keyup', onEscape);
 }
 
 ////////
@@ -54,6 +55,11 @@ function bindEvents() {
 ////////
 
 let isOpen = false;
+
+function onEscape(e) {
+  if (e.keyCode !== 27) return;
+  close();
+}
 
 function open() {
   if (isOpen) return;
