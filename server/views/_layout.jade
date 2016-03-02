@@ -6,7 +6,7 @@ doctype html
 //- Manifest is deprecated http://caniuse.com/#feat=offline-apps
 //- should switch to service workers
 //- as it needs an https connection won't do it for this simple website
-html(lang=getLocale(), manifest="/cache.manifest")
+html(lang=getLocale(), manifest=  isDev ? "" : "/cache.manifest")
   head
     title= __('layout.title')
     meta(http-equiv="Content-Type", content="text/html; charset=UTF-8")

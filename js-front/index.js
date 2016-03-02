@@ -2,6 +2,7 @@
 
 // https://github.com/aFarkas/lazysizes
 // http://afarkas.github.io/lazysizes/#examples
+import 'picturefill';
 import 'lazysizes';
 import svg4everybody from 'svg4everybody';
 import {polyfill as promisePolyfill} from 'es6-promise';

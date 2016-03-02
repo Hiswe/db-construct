@@ -7,11 +7,11 @@ block content
       strong= __('home.baseline.2')
     .carrousel.js-carrousel(data-carrousel="home"): ul.in
       - var base = 'home/carrousel';
-      //- source(media="(min-width: 1024px)" srcset="/image/1400x600 1x, /image/2800x1200 2x")
-      //- source(media="(min-width: 640px)" srcset="/image/920x500 1x, /image/1840x1000 2x")
-      //- img(src="/image/580x580", srcset="/image/580x580 1x, /image/1160x1160 2x")
       each val in [1, 2, 3, 4, 5]
         li: .image-wrapper: picture
+          //- source(media="(min-width: 1024px)" data-srcset="/image/1400x600 1x, /image/2800x1200 2x")
+          //- source(media="(min-width: 640px)" data-srcset="/image/920x500 1x, /image/1840x1000 2x")
+          //- img.lazyload(src="/image/580x580", data-srcset="/image/580x580 1x, /image/1160x1160 2x")
           +image-source()
             +source({
               media: '(min-width: 1024px)',
