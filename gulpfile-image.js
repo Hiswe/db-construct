@@ -5,8 +5,8 @@ var $               = require('gulp-load-plugins')();
 var del             = require('del');
 var lazypipe        = require('lazypipe');
 var parallel        = require('concurrent-transform');
-var os              = require('os');
 var merge           = require('merge-stream');
+var os              = require('os');
 var cpus            = os.cpus().length;
 
 var src             = 'image-source';
@@ -45,21 +45,7 @@ var unOriginal      = lazypipe().pipe($.rename, function (path) {
 var autoOrient = lazypipe()
   .pipe($.gm, function (gmfile) {
     return gmfile.autoOrient();
-  })
-
-////////
-// PREPARE SRC IMG
-////////
-
-// parallel($.imageResize(resize(2800, 1200)), cpus)
-
-// gulp.task('orient', function () {
-//   gulp.src(`${src}/**/*.{jpg,JPG}`, {base: src})
-//     .pipe(parallel($.gm(function (gmfile) {
-//       return gmfile.autoOrient();
-//     })), cpus))
-//     .pipe(gulp.dest(src));
-// });
+  });
 
 ////////
 // HOME

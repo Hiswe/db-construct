@@ -10,6 +10,8 @@ var browserSync     = require('browser-sync').create();
 var reload          = browserSync.reload;
 var args            = require('yargs').argv;
 var cyan            = require('chalk').cyan;
+var os              = require('os');
+var cpus            = os.cpus().length;
 
 var isDev           = args.prod !== true;
 
@@ -75,7 +77,7 @@ var watchify      = require('watchify');
 
 gulp.task('libraries-ie', function () {
   gulp.src([
-    'node_modules/html5shiv/dist/html5shiv-min.js',
+    'node_modules/html5shiv/dist/html5shiv.min.js',
     'node_modules/svg4everybody/dist/svg4everybody.legacy.min.js',
     'node_modules/lazysizes/lazysizes.min.js',
   ])
@@ -165,7 +167,7 @@ gulp.task('svg-images', function () {
     .pipe($.if( /[.]css$/, gulp.dest('styl')));
 });
 
-//----- ICONS
+//----- SVG ICONS
 
 gulp.task('icons', function () {
   return gulp
@@ -181,6 +183,37 @@ gulp.task('icons', function () {
     }))
     .pipe($.if( /[.]svg$/, gulp.dest('public')))
     .pipe($.if( /[.]css$/, gulp.dest('styl')));
+});
+
+//----- SVG ASSETS FALLBACK
+
+// need to set proper sizes…
+gulp.task('prepare-svg-fallback', function () {
+  return gulp
+    .src(['public/assets/*.svg', 'public/icons/*.svg', '!public/icons/drop-shadow.svg'])
+    .pipe($.cheerio({
+      run: function ($, file) {
+        $('svg').each(function () {
+          let width = $(this).attr('width')
+          if (width !== '100%') return;
+          let viewbox = $(this).attr('viewBox').split(' ');
+          $(this).attr('width', viewbox[2] + 'px');
+          $(this).attr('height', viewbox[3] + 'px');
+        });
+      },
+       parserOptions: {
+        xmlMode: true
+      }
+    }))
+    .pipe(gulp.dest('tmp'));
+})
+
+gulp.task('svg-fallback', ['prepare-svg-fallback'], function () {
+  return gulp
+    .src(['tmp/*.svg'])
+    // https://www.npmjs.com/package/gulp-svg2png#svg2pngscaling-verbose-concurrency
+    .pipe($.svg2png(1, false, cpus))
+    .pipe(gulp.dest('public/fallback'));
 });
 
 //----- FONTS

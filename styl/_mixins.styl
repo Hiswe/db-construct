@@ -16,22 +16,28 @@ flex-center-align() {
 }
 
 image-container() {
-  position: relative;
-  display: block;
-  background: rgba(black, .4);
+  if (!$is-ie) {
+    position: relative;
+    display: block;
+    background: rgba(black, .4);
+  }
 }
 
 image-ratio(width, height, divider = 1) {
-  height: 0;
-  padding-bottom: ((height / width) / divider) * 100%;
+  if (!$is-ie) {
+    height: 0;
+    padding-bottom: ((height / width) / divider) * 100%;
+  }
 }
 
 image-absolute() {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  object-fit: cover;
+  if (!$is-ie) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+  }
 }
 
 //////

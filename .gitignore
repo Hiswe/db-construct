@@ -38,6 +38,7 @@ node_modules
 /public/cache.manifest
 /public/fonts
 /public/images
+/public/fallback
 .dbconstructrc
 /image-source
 /tmp

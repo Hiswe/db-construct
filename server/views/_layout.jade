@@ -31,10 +31,14 @@ html(lang=getLocale(), manifest= isDev ? false : "/cache.manifest")
     meta(name="viewport", content="initial-scale=1")
     //- Gracefull degradation for old browsers
     +ie()
-      link(rel="stylesheet", href="/db-construct-ie.css")
       script(type="text/javascript", src="/libraries-ie.js")
       script(type="text/javascript").
-        svg4everybody();
+        svg4everybody({
+          fallback: function (src, svg, use) {
+            return '/fallback/' + /#(?:svg|icon)-(.*)/.exec(src)[1] + '.png';
+          }
+        });
+      link(rel="stylesheet", href="/db-construct-ie.css")
     +notie()
       link(rel="stylesheet", href="/db-construct.css")
 

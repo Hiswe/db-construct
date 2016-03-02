@@ -16,6 +16,14 @@ npm install
 
 ### make a release
 
+don't forget to 
+
+```
+npm run images
+```
+
+if it's first installation or assets have changed!
+
 ```
 npm run release
 ```
@@ -23,7 +31,7 @@ npm run release
 ### dev server
 
 ```
-npm run release
+npm run dev
 ```
 
 ### heroku configuration
