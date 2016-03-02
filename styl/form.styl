@@ -19,18 +19,19 @@ form {
   }
 
   button {
-    background: $primary;
+    background: $accent;
     border: 0;
     padding: $half-gutter $gutter;
     margin-top: $half-gutter;
     cursor: pointer;
     outline: 0;
+    color: $bg;
 
     &:hover {
-      background: lighten($primary, 10%);
+      background: lighten($accent, 50%);
     }
     &:active {
-      background: darken($primary, 40%);
+      background: darken($accent, 40%);
     }
   }
 
