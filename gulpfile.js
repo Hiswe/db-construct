@@ -28,6 +28,7 @@ console.log(cyan('build with env', isDev ? 'dev' : 'prod'));
 ////////
 
 var autoprefixer  = require('autoprefixer');
+var cssurl        = require('postcss-url');
 // var pxtorem       = require('postcss-pxtorem');
 
 gulp.task('css', function () {
@@ -44,6 +45,11 @@ gulp.task('css', function () {
       .pipe($.postcss([
         autoprefixer({
           browsers: ['> 1%', 'IE 9'],
+        }),
+        cssurl({
+          url: 'inline',
+          maxSize: 15,
+          basePath: __dirname + '/public',
         }),
         // pxtorem({replace: true}),
       ]))
