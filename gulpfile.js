@@ -191,16 +191,21 @@ gulp.task('fonts', ['del-fonts'], function () {
 });
 
 //----- APP-CACHE MANIFEST
-// TBD
+
+// Deprecated http://caniuse.com/#feat=offline-apps
+// should switch to service workers
+// as it needs an https connection won't do it for this simple website
+// https://ponyfoo.com/articles/simple-offline-site-serviceworker
 gulp.task('manifest', function(){
-  gulp.src([
-      'dist/**/*',
-      '!dist/**/*.otf',
-      '!dist/**/*.md',
-      // '!dist/medias/*',
-      '!dist/*-standalone.*',
+  return gulp.src([
+      'public/*.css',
+      '!public/*-ie.css',
+      'public/*.js',
+      '!public/*-ie.js',
+      'public/svg-*.svg',
+      'public/*.png',
     ])
-    .pipe(gp.manifest({
+    .pipe($.manifest({
       // hash: true,
       timestamp: true,
       preferOnline: true,
@@ -208,8 +213,7 @@ gulp.task('manifest', function(){
       filename: 'cache.manifest',
       exclude: 'cache.manifest'
      }))
-    .pipe(gulp.dest('dist'))
-    .pipe(gp.notify(msg('Maj')));
+    .pipe(gulp.dest('public'))
 });
 
 //----- RENDER MAIL
@@ -266,8 +270,7 @@ gulp.task('mail', function() {
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   </head>
-  <body>
-          `,
+  <body>`,
       footer: `</body></html>`,
       filter: function (file){ return true; }
     }))
@@ -278,7 +281,8 @@ gulp.task('mail', function() {
 //----- ALL ASSETS
 
 gulp.task('svg',    ['icons', 'svg-images']);
-gulp.task('assets', ['icons', 'svg-images', 'fonts', 'mail']);
+// gulp.task('assets', ['icons', 'svg-images', 'fonts', 'mail']);
+gulp.task('assets', ['icons', 'svg-images', 'manifest', 'mail']);
 
 ////////
 // DEV

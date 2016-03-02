@@ -38,6 +38,17 @@ if (style.webkitFlexWrap == '' || style.msFlexWrap == '' || style.flexWrap == ''
 
 document.body.classList.remove('no-script');
 
+// Double reload the app (search “Double-reload needed” in the link below)
+// http://gregsramblings.com/2012/05/28/html5-application-cache-how-to/
+if (window.applicationCache) {
+  applicationCache.addEventListener('updateready', function() {
+    if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+      window.applicationCache.swapCache();
+      window.location.reload();
+    }
+  });
+}
+
 init();
 
 // need to wrap in a funciton for being abled to do a return
