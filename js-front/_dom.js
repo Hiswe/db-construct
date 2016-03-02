@@ -112,7 +112,14 @@ method.remove = function remove() {
 // TRAVERSING
 //////
 
-//----- TREE TRAVERSAL
+//----- Filtering
+
+method.eq = function eq(index) {
+  if (this[index]) return new Minidom(this[index]);
+  return new Minidom();
+}
+
+//----- Tree traversal
 
 function findEl(el, selector) {
   return $(selector, el);
@@ -152,6 +159,18 @@ method.on = function (event, cb) {
 }
 
 //////
+// CORE
+//////
+
+//----- DOM Element Methods
+
+method.index = function index(el) {
+  el = isDom(el) ? el : isMinidom(el) ? el[0] : false;
+  if (!el) return -1;
+  return this.indexOf(el);
+}
+
+//////
 // CONSTRUCTOR
 //////
 
@@ -167,7 +186,7 @@ function isDom(el) {
 // TODO should handle SVG ¬_¬'
 function parseHTML(str) {
   var tmp = document.implementation.createHTMLDocument();
-  tmp.body.innerHTML = str;
+  tmp.body.innerHTML = str.trim();
   return tmp.body.children;
 };
 
@@ -182,4 +201,14 @@ function $(selector, context = document) {
   return new Minidom(...context.querySelectorAll(selector));
 }
 
-export {$ as default};
+//////
+// MISC
+//////
+
+// DOM VanillaJS check
+// http://gomakethings.com/ditching-jquery#cutting-the-mustard – IE9+
+function hasSupport() {
+  return !!document.querySelector && !!window.addEventListener;
+}
+
+export {$ as default, hasSupport};

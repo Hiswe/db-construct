@@ -1,10 +1,16 @@
-import raf from 'raf';
-import logger from './_logger';
-import {svgIcon} from './_utils';
-import $ from './_dom';
+import raf        from 'raf';
 
-const log = logger('lightbox', true);
-const $ui  = {};
+import logger     from './_logger';
+import {svgIcon}  from './_utils';
+import $          from './_dom';
+
+const log   = logger('lightbox', false);
+const $ui   = {
+  img: false,
+};
+let length    = 0;
+let index     = false;
+let isLoading = false;
 
 function init() {
   $ui.el = $('.js-lightbox');
@@ -18,6 +24,7 @@ function init() {
 function bindUi() {
   $ui.body     = $('body');
   $ui.items    = $('.js-lightbox-item', $ui.el[0]);
+  length       = $ui.items.length;
   $ui.lightbox = $(`
 <div class="lightbox-wrapper js-lightbox">
   <div class="lightbox-close js-lightbox-close"></div>
@@ -41,7 +48,9 @@ function bindUi() {
 }
 
 function bindEvents() {
-  $ui.lightbox.on('click', close);
+  $ui.close.on('click', close);
+  $ui.prev.on('click', prev);
+  $ui.next.on('click', next);
   $ui.items.on('click', function (e) {
     e.preventDefault();
     open();
@@ -68,37 +77,70 @@ function open() {
   isOpen = true;
 }
 
-function close() {
+function close(e) {
   if (!isOpen) return;
+  if (e && e.defaultPrevented) return;
   $ui.lightbox.removeClass('is-open');
   log('close');
-  isOpen = false;
+  isOpen  = false;
   $ui.img.remove();
+  $ui.img = false;
 }
 
 function build(e) {
   var $link = $(e.currentTarget);
+  index = $ui.items.index($link);
   var url   = $link.attr('href');
+  log('index is', index);
   $ui.lightbox.append(`<div class="lightbox-image js-lightbox-image"></div>`);
   $ui.img = $ui.lightbox.find('.js-lightbox-image');
-  bgLoad(url, function () {
-    log('loaded', $ui.img);
-    $ui.img
-      .css('backgroundImage', `url(${url})`)
-      .addClass('is-loaded');
-  });
+  bgLoad(url, onImageLoaded);
+}
+
+function onImageLoaded(url) {
+  // lightbox can be closed before the end of a loading
+  if (!$ui.img) return isLoading = false;
+  log('loaded');
+  $ui.img
+    .css('backgroundImage', `url(${url})`)
+    .addClass('is-loaded');
+  isLoading = false;
+}
+
+function prev(e) {
+  log('prev');
+  e.preventDefault();
+  moveTo(-1);
+}
+
+function next(e) {
+  log('next');
+  e.preventDefault();
+  moveTo(1);
+}
+
+function moveTo(direction) {
+  if (!$ui.img) return;
+  if (isLoading) return;
+  let nextIndex = direction + index;
+  nextIndex     = nextIndex < 0 ? length - 1 : nextIndex >= length ? 0 : nextIndex;
+  let url       = $ui.items.eq(nextIndex).attr('href');
+  log('move to', url);
+  $ui.img.removeClass('is-loaded');
+  index         = nextIndex;
+  bgLoad(url, onImageLoaded);
 }
 
 // from:
 // https://github.com/aFarkas/lazysizes/blob/gh-pages/plugins/unveilhooks/ls.unveilhooks.js#L33
-
-function bgLoad(url, cb){
+function bgLoad(url, cb) {
+  isLoading     = true;
   let img       = document.createElement('img');
   img.onload    = function () {
     img.onload  = null;
     img.onerror = null;
-    img = null;
-    cb();
+    img         = null;
+    cb(url);
   };
   img.onerror = img.onload;
   img.src     = url;

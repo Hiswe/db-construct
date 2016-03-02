@@ -16,6 +16,7 @@ import contact from './contact';
 import map, {mapInit} from './map';
 import lightbox from './lightbox';
 import * as utils from './_utils';
+import {default as $, hasSupport} from './_dom';
 
 const log     = logger('app', false);
 log('init');
@@ -37,15 +38,12 @@ if (style.webkitFlexWrap == '' || style.msFlexWrap == '' || style.flexWrap == ''
 
 document.body.classList.remove('no-script');
 
-// DOM VanillaJS check
-// http://gomakethings.com/ditching-jquery#cutting-the-mustard – IE9+
-var enableJsApp = !!document.querySelector && !!window.addEventListener;
-
 init();
 
+// need to wrap in a funciton for being abled to do a return
 function init() {
   // “disable” JS for < IE10
-  if (!enableJsApp && !hasFlex) { return log('app disbaled'); };
+  if (!hasSupport() && !hasFlex) { return log('app disbaled'); };
 
   log('app enabled');
 
