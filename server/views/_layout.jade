@@ -81,10 +81,15 @@ html(lang=getLocale(), manifest=  isDev ? "" : "/cache.manifest")
           dt: a(href="https://www.facebook.com/Dbedil-622360387786880/", target="_blank")
             +icon('facebook')
           dd.footer-facebook: a(href="https://www.facebook.com/Dbedil-622360387786880/", target="_blank") facebook
-        div.footer-adress
-          | #{__('address.line-1')}
-          br
-          | #{__('address.line-2')}
+        dl.footer-adress
+          dt
+            +icon('address')
+          dd
+            a(href="https://www.google.com/maps/@18.9018117,99.0655523,17z" target="_blank")
+              | #{__('address.line-1')}
+              br
+              | #{__('address.line-2')}
+
 
       p.copyright D.B. Construct ©2016
 

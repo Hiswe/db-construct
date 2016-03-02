@@ -49,10 +49,13 @@ footer {
 }
 
 .footer-adress {
-  padding: $half-gutter 0 0 45px;
+  padding-top: $half-gutter;
 
-  +mq('>=S') {
-    padding: 0;
+  +mq('>=L') {
+    padding-top: 0;
+  }
+  dt {
+    text-align: center;
   }
 }
 
