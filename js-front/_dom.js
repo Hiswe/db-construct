@@ -1,7 +1,7 @@
 import poser from 'poser'
 
-const _dom    = poser.Array();
-const method  = _dom.prototype;
+const Minidom = poser.Array();
+const method  = Minidom.prototype;
 
 //////
 // ATTRIBUTES / CSS
@@ -121,7 +121,7 @@ function findEl(el, selector) {
 method.find = function fin(selector) {
   var result = [];
   this.forEach( el => result.push(...findEl(el, selector)));
-  return new _dom(...result);
+  return new Minidom(...result);
 }
 
 function getParent(el) {
@@ -129,7 +129,7 @@ function getParent(el) {
 }
 
 method.parent = function parent() {
-  return new _dom(...this.map(getParent));
+  return new Minidom(...this.map(getParent));
 }
 
 //////
@@ -137,6 +137,10 @@ method.parent = function parent() {
 //////
 
 //----- Event Handler Attachment
+
+// TODO: event delegation
+// http://stackoverflow.com/questions/23508221/vanilla-javascript-event-delegation#23978597
+// http://stackoverflow.com/questions/24117369/vanilla-js-event-delegation-dealing-with-child-elements-of-the-target-element
 
 function addEvent(el, event, cb) {
   el.addEventListener(event, cb);
@@ -151,8 +155,8 @@ method.on = function (event, cb) {
 // CONSTRUCTOR
 //////
 
-function isInstance(el) {
-  return el instanceof _dom;
+function isMinidom(el) {
+  return el instanceof Minidom;
 }
 
 function isDom(el) {
@@ -169,13 +173,13 @@ function parseHTML(str) {
 
 function $(selector, context = document) {
   // already an instance
-  if (isInstance(selector)) return selector;
+  if (isMinidom(selector)) return selector;
   // dom object
-  if (isDom(selector)) return new _dom(selector);
+  if (isDom(selector)) return new Minidom(selector);
   // dom creation
-  if (/</.test(selector)) return new _dom(...parseHTML(selector));
+  if (/</.test(selector)) return new Minidom(...parseHTML(selector));
   // selector
-  return new _dom(...context.querySelectorAll(selector));
+  return new Minidom(...context.querySelectorAll(selector));
 }
 
 export {$ as default};

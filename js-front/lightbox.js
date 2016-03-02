@@ -21,17 +21,27 @@ function bindUi() {
   $ui.lightbox = $(`
 <div class="lightbox-wrapper js-lightbox">
   <div class="lightbox-close js-lightbox-close"></div>
+  <div class="lightbox-navigation">
+    <div class="lightbox-prev js-lightbox-prev"></div>
+    <div class="lightbox-next js-lightbox-next"></div>
+  </div>
+  <div class="lightbox-loader js-lightbox-loader"></div>
 </div>
 `);
+  $ui.prev          = $ui.lightbox.find('.js-lightbox-prev');
+  $ui.next          = $ui.lightbox.find('.js-lightbox-next');
   $ui.close         = $ui.lightbox.find('.js-lightbox-close');
-  $ui.close.append(svgIcon('close'));
+  $ui.loader        = $ui.lightbox.find('.js-lightbox-loader');
   $ui.imageWrapper  = $ui.lightbox.find('.lightbox');
+  // add SVG icons…
+  $ui.prev.append(svgIcon('arrow-small-left'));
+  $ui.next.append(svgIcon('arrow-small-right'));
+  $ui.close.append(svgIcon('close-square'));
+  $ui.loader.append(svgIcon('process'));
 }
 
 function bindEvents() {
-  $ui.lightbox.on('click', function (e) {
-    close();
-  });
+  $ui.lightbox.on('click', close);
   $ui.items.on('click', function (e) {
     e.preventDefault();
     open();
