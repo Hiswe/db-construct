@@ -19,7 +19,7 @@ mixin image(img)
   noscript: img(src=src)
   img.lazyload(
     src=src + '.jpg'
-    srcset=srcset
+    data-srcset=srcset
   )
   //- img.lazyload(
   //-   src=img.src
