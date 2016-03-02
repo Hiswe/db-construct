@@ -8,6 +8,8 @@
 #carrousel {
   position: relative;
   z-index: $zindex--carrousel;
+  // fix IE10 horizontal scrollbar
+  overflow: hidden;
 
   +mq('>=M') {
     margin-top: $gutter;

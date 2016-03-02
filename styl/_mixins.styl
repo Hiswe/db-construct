@@ -147,4 +147,7 @@ cell($i = 1, $$cols = $default-cols, $$gutter = $gutter) {
   margin-left: $half-gutter;
   margin-right: @margin-left;
   max-width: @flex-basis;
+  // IE 10 support
+  // https://github.com/philipwalton/flexbugs#8-flex-basis-doesnt-support-calc
+  width: @flex-basis;
 }

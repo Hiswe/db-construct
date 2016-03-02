@@ -1,3 +1,7 @@
+import arrayfrom from 'array.from';
+arrayfrom.shim();
+// in IE10 array.from is not supported.
+// must be polyfilled
 import poser from 'poser'
 
 const Minidom = poser.Array();
@@ -203,7 +207,9 @@ function isDom(el) {
 
 // TODO should handle SVG ¬_¬'
 function parseHTML(str) {
-  var tmp = document.implementation.createHTMLDocument();
+  // IE10 need an argument…
+  // http://stackoverflow.com/questions/15016416/write-html-string-to-a-document-and-read-its-outer-html-in-ie10
+  var tmp = document.implementation.createHTMLDocument('title');
   tmp.body.innerHTML = str.trim();
   return tmp.body.children;
 };

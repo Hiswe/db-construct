@@ -78,9 +78,12 @@ footer {
     flex: 0 0 45px;
   }
   dd {
-    flex: 1 0 calc(100% - 45px);
+    flex-basis: calc(100% - 45px);
     padding-bottom: $half-gutter;
     padding-top: 4px;
+    // IE 10 support
+    // https://github.com/philipwalton/flexbugs#8-flex-basis-doesnt-support-calc
+    width: @flex-basis;
 
     &.footer-facebook {
       padding-top: 8px;

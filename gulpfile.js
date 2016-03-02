@@ -46,7 +46,7 @@ gulp.task('css', function () {
       }))
       .pipe($.postcss([
         autoprefixer({
-          browsers: ['> 1%', 'IE 9'],
+          browsers: ['> 1%', 'IE 9', 'IE 10', 'IE 11', 'last 2 versions'],
         }),
         cssurl({
           url: 'inline',

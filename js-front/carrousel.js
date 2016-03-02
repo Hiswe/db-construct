@@ -1,15 +1,16 @@
 // NTH no playing when page not visible
 // https://www.npmjs.com/package/visibilityjs
 // import Visibility   from 'visibilityjs';
-import Hammer       from 'hammerjs';
-import raf          from 'raf';
+import Hammer         from 'hammerjs';
+import raf            from 'raf';
+import transitionend  from 'transitionend-property';
 
-import logger       from './_logger';
-import controlTmpl  from '../server/views/front-end/carrousel-control.jade';
-import {svgIcon}    from './_utils';
-import $            from './_dom';
+import logger         from './_logger';
+import controlTmpl    from '../server/views/front-end/carrousel-control.jade';
+import {svgIcon}      from './_utils';
+import $              from './_dom';
 
-const isLogging = false;
+const isLogging = true;
 const log       = logger('carrousel', isLogging);
 const configs   = {
   delay: 5 * 1000,
@@ -51,7 +52,6 @@ function setup(el, index) {
 
   function bindUi() {
     $ui.carrousel = $ui.el.find('.in');
-    // $ui.slides    = $ui.carrousel.find('li');
     // controls
     $ui.control   = $(controlTmpl({max: length}));
     $ui.prev      = $ui.control.find('.js-prev');
@@ -71,7 +71,7 @@ function setup(el, index) {
     new Hammer($ui.next[0]).on('tap', () => { moveTo( 1) });
     new Hammer($ui.el[0]).on('swipe', e =>  { moveTo(e.direction === 2 ? 1 : -1 )} );
     // after each transition reorgnaize the carrousel for the next one
-    $ui.carrousel.on('transitionend', function (e) {
+    $ui.carrousel.on(transitionend, function (e) {
       if (e.propertyName !== 'transform') return;
       log('transition end');
       // need the raf to prevent transition…
@@ -92,9 +92,11 @@ function setup(el, index) {
     // when transitioning it makes a flicker if the last item just happen to nod be on the right position
     var $nextnext = $ui.slides.eq(index + 2 < length ? index + 2 : 0);
     let $all      = $previous.add($slide).add($next).add($nextnext);
-    //
+    // IE10: -ms-flex-order
     $all.css('order', (elem, i) => i );
-    $ui.slides.forEach( s => { if (!$all.includes(s)) s.style.order = 5; });
+    $all.css('-ms-flex-order', (elem, i) => i );
+    $ui.slides.forEach( s => { if ($all.indexOf(s) < 0) s.style.order = 5; });
+    $ui.slides.forEach( s => { if ($all.indexOf(s) < 0) s.style['-ms-flex-order'] = 5; });
 
     $ui.carrousel.addClass('no-transition');
     setTransform(1);

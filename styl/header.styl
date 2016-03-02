@@ -108,6 +108,8 @@ nav {
     padding: 2.75em 1em 0;
     color: white;
     text-decoration: none;
+    // needed for IE10 to apply padding, even in flex magic case
+    display: inline-block;
 
     +mq('<M') {
       flex: 0 0 50%;
