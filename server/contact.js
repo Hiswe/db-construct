@@ -19,7 +19,7 @@ function postMessage(req, res, next) {
   if (req.xhr) console.log('ajax request');
   console.log(req.body);
   if (!req.body.name || !req.body.email || !req.body.message) {
-    return mailError({message: 'form is not valid'});
+    return mailError(new Error('form is not valid'));
   }
 
   sendMails(req)

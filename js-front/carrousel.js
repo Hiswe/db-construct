@@ -6,7 +6,8 @@ import raf          from 'raf';
 
 import logger       from './_logger';
 import controlTmpl  from '../server/views/front-end/carrousel-control.jade';
-import * as utils   from './_utils';
+import {svgIcon}    from './_utils';
+import $            from './_dom';
 
 const isLogging = false;
 const log       = logger('carrousel', isLogging);
@@ -23,7 +24,7 @@ const configs   = {
 };
 
 function init() {
-  var carrousels = utils.$$('.js-carrousel');
+  var carrousels = $('.js-carrousel');
   if (!carrousels.length) return log('abort')
   log('init', carrousels.length, 'carrousels');
   carrousels.forEach(setup)
@@ -32,8 +33,8 @@ function init() {
 function setup(el, index) {
   const log     = logger('carrousel_' + index++, isLogging);
   const $ui     = {
-    el,
-    slides: utils.$$('li', el)
+    el:     $(el),
+    slides: $('li', el)
   };
   const conf    = configs[el.getAttribute('data-carrousel')];
   const length  = $ui.slides.length;
@@ -49,28 +50,28 @@ function setup(el, index) {
   organize(0);
 
   function bindUi() {
-    $ui.carrousel = $ui.el.querySelector('.in');
-    $ui.slides    = utils.$$('li', $ui.carrousel);
+    $ui.carrousel = $ui.el.find('.in');
+    // $ui.slides    = $ui.carrousel.find('li');
     // controls
-    $ui.control   = utils.parseHTML(controlTmpl({max: length}))[0];
-    $ui.prev      = utils.$('.js-prev', $ui.control);
-    $ui.next      = utils.$('.js-next', $ui.control);
-    $ui.nav       = utils.$$('.js-carrousel-progress li', $ui.control);
+    $ui.control   = $(controlTmpl({max: length}));
+    $ui.prev      = $ui.control.find('.js-prev');
+    $ui.next      = $ui.control.find('.js-next');
+    $ui.nav       = $ui.control.find('.js-carrousel-progress li');
     // Has to create SVG in SVG namespace ¬_¬'
-    $ui.prev.appendChild(utils.svgIcon(Array.isArray(conf.icon) ? conf.icon[0] : conf.icon));
-    $ui.next.appendChild(utils.svgIcon(Array.isArray(conf.icon) ? conf.icon[1] : conf.icon));
-    el.appendChild($ui.control);
+    $ui.prev.append(svgIcon(Array.isArray(conf.icon) ? conf.icon[0] : conf.icon));
+    $ui.next.append(svgIcon(Array.isArray(conf.icon) ? conf.icon[1] : conf.icon));
+    $ui.el.append($ui.control);
 
-    utils.addClass($ui.el, 'is-active');
-    utils.addClass($ui.nav[0], 'is-active');
+    $ui.el.addClass('is-active');
+    $ui.nav.eq(0).addClass('is-active');
   }
 
   function bindEvents() {
-    new Hammer($ui.prev).on('tap', () => { moveTo(-1) });
-    new Hammer($ui.next).on('tap', () => { moveTo( 1) });
-    new Hammer($ui.el).on('swipe', e =>  { moveTo(e.direction === 2 ? 1 : -1 )} );
+    new Hammer($ui.prev[0]).on('tap', () => { moveTo(-1) });
+    new Hammer($ui.next[0]).on('tap', () => { moveTo( 1) });
+    new Hammer($ui.el[0]).on('swipe', e =>  { moveTo(e.direction === 2 ? 1 : -1 )} );
     // after each transition reorgnaize the carrousel for the next one
-    $ui.carrousel.addEventListener('transitionend', function (e) {
+    $ui.carrousel.on('transitionend', function (e) {
       if (e.propertyName !== 'transform') return;
       log('transition end');
       // need the raf to prevent transition…
@@ -84,22 +85,22 @@ function setup(el, index) {
   }
 
   function organize(index) {
-    var $previous = index === 0 ? $ui.slides[length - 1] : $ui.slides[index - 1];
-    var $slide    = $ui.slides[index];
-    var $next     = index + 1 < length ? $ui.slides[index + 1] : $ui.slides[0];
+    var $previous = $ui.slides.eq(index === 0 ? length - 1 : index - 1);
+    var $slide    = $ui.slides.eq(index);
+    var $next     = $ui.slides.eq(index + 1 < length ? index + 1 : 0);
     // nextnext is there because carrousel is only 90% wide
     // when transitioning it makes a flicker if the last item just happen to nod be on the right position
-    var $nextnext = index + 2 < length ? $ui.slides[index + 2] : $ui.slides[0];
-    let $all              = [$previous, $slide, $next, $nextnext];
+    var $nextnext = $ui.slides.eq(index + 2 < length ? index + 2 : 0);
+    let $all      = $previous.add($slide).add($next).add($nextnext);
     //
-    $all.forEach( (s, i) => { s.style.order = i;});
+    $all.css('order', (elem, i) => i );
     $ui.slides.forEach( s => { if (!$all.includes(s)) s.style.order = 5; });
 
-    utils.addClass($ui.carrousel, 'no-transition');
+    $ui.carrousel.addClass('no-transition');
     setTransform(1);
     // raf is needed here also to REALLY prevent transition
     raf(function () {
-      utils.removeClass($ui.carrousel, 'no-transition');
+      $ui.carrousel.removeClass('no-transition');
       isMoving  = false;
       if (conf.autoSlide) autoSlide();
     });
@@ -121,14 +122,14 @@ function setup(el, index) {
     setTransform(direction > 0 ? 2 : 0);
 
     // update nav
-    utils.removeClass($ui.nav[current], 'is-active');
-    utils.addClass($ui.nav[nextState], 'is-active');
+    $ui.nav.eq(current).removeClass('is-active');
+    $ui.nav.eq(nextState).addClass('is-active');
     // alldone!
     current = nextState;
   }
 
   function setTransform(step) {
-    $ui.carrousel.style.transform = `translate3d(-${step * 90}%, 0px, 0px)`;
+    $ui.carrousel.css('transform', `translate3d(-${step * 90}%, 0px, 0px)`);
   }
 }
 

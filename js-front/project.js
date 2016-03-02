@@ -1,6 +1,6 @@
 import Masonry from 'masonry-layout';
 import logger from './_logger';
-import * as utils from './_utils';
+import $          from './_dom';
 
 var log     = logger('project', false);
 const $ui   = {};
@@ -8,13 +8,13 @@ const $ui   = {};
 function init() {
   log('init');
 
-  $ui.grid = document.querySelector('.js-grid');
-  if (!$ui.grid) return log('abort');
+  $ui.grid = $('.js-grid');
+  if (!$ui.grid.length) return log('abort');
 
   bindUi();
 
   log('init masonry');
-  var msnry = new Masonry($ui.grid, {
+  var msnry = new Masonry($ui.grid[0], {
     itemSelector: '.grid-item',
     columnWidth: '.js-grid-sizer',
     percentPosition: true,
@@ -22,14 +22,14 @@ function init() {
     initLayout: false,
     transitionDuration: 0,
   });
-  utils.addClass($ui.grid, 'is-loaded');
+  $ui.grid.addClass('is-loaded');
   msnry.layout();
 }
 
 function bindUi() {
   log($ui.grid);
-  $ui.spacer = utils.parseHTML('<div class="js-grid-sizer grid-sizer"></div>');
-  $ui.grid.insertBefore($ui.spacer[0], $ui.grid.firstChild);
+  $ui.spacer = $('<div class="js-grid-sizer grid-sizer"></div>');
+  $ui.grid.prepend($ui.spacer[0]);
 }
 
 ////////

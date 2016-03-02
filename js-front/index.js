@@ -16,7 +16,6 @@ import carrousel from './carrousel';
 import contact from './contact';
 import map, {mapInit} from './map';
 import lightbox from './lightbox';
-import * as utils from './_utils';
 import {default as $, hasSupport} from './_dom';
 
 const log     = logger('app', false);
@@ -78,7 +77,7 @@ function init() {
         </ul>
       </div>
     `;
-    utils.$('body').appendChild(utils.parseHTML(gridTmpl)[0]);
+    $('body').append(gridTmpl);
     let grid    = document.querySelector('.demo-grid');
     let isOpen  = false;
     document.addEventListener('keyup', toggleGrid);

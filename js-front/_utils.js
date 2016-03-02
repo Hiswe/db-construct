@@ -1,26 +1,4 @@
 
-function $(selector, context = document) {
-  return context.querySelector(selector);
-}
-
-function $$(selector, context = document) {
-  return [...context.querySelectorAll(selector)];
-}
-
-function parseHTML(str) {
-  var tmp = document.implementation.createHTMLDocument();
-  tmp.body.innerHTML = str;
-  return tmp.body.children;
-};
-
-function addClass(el, className) {
-  el.classList.add(className);
-}
-
-function removeClass(el, className) {
-  el.classList.remove(className);
-}
-
 // Has to create SVG in SVG namespace ¬_¬'
 function svgIcon(name) {
   var svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
@@ -45,4 +23,4 @@ function ready(fn) {
   }
 }
 
-export {$, $$, parseHTML, ready, svgIcon, addClass, removeClass, wait};
+export {ready, svgIcon, wait};

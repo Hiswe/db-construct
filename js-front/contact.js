@@ -1,13 +1,14 @@
-import serialize from 'form-serialize';
+import serialize        from 'form-serialize';
 
-import logger from './_logger';
-import * as utils from './_utils';
+import logger           from './_logger';
+import {svgIcon, wait}  from './_utils';
+import $                from './_dom';
 
 var log       = logger('form', false);
 const $ui     = {};
 
 function init() {
-  $ui.form = utils.$('form');
+  $ui.form = $('form');
   if (!$ui.form) return log('abort');
   log('init');
   bindUi();
@@ -15,45 +16,47 @@ function init() {
 }
 
 function bindUi() {
-  $ui.process = utils.$('.js-process', $ui.form);
-  $ui.success = utils.$('.js-success', $ui.form);
-  $ui.error   = utils.$('.js-error', $ui.form);
+  $ui.process = $ui.form.find('.js-process');
+  $ui.success = $ui.form.find('.js-success');
+  $ui.error   = $ui.form.find('.js-error');
 }
 
 function bindEvents() {
-  $ui.form.addEventListener('submit', onSubmit);
-  $ui.success.addEventListener('click', reinitForm);
-  $ui.error.addEventListener('click', reinitForm);
-  $ui.success.appendChild(utils.svgIcon('close'));
-  $ui.error.appendChild(utils.svgIcon('close'));
+  $ui.form.on('submit', onSubmit);
+  $ui.success.on('click', reinitForm);
+  $ui.error.on('click', reinitForm);
+  $ui.success.append(svgIcon('close'));
+  $ui.error.append(svgIcon('close'));
 }
 
 function onSubmit(e) {
-  log('submit', serialize($ui.form, {hash: true}));
   e.preventDefault();
-  utils.addClass($ui.form, 'is-disabled');
-  utils.addClass($ui.process, 'is-visible');
+  let isValid = $ui.form[0].checkValidity();
+  if (!isValid) return log.warn('abort submit: form is not valid');
+  log('submit', serialize($ui.form, {hash: true}));
+  $ui.form.addClass('is-disabled');
+  $ui.process.addClass('is-visible');
   send()
     .then(checkStatus)
     .then(onSuccess, onError);
 }
 
 function reinitForm() {
-  utils.removeClass($ui.form, 'is-disabled');
-  utils.removeClass($ui.success, 'is-visible');
-  utils.removeClass($ui.error, 'is-visible');
+  $ui.form.removeClass('is-disabled');
+  $ui.success.removeClass('is-visible');
+  $ui.error.removeClass('is-visible');
 }
 
 function onSuccess(res) {
   log('success');
-  utils.removeClass($ui.process, 'is-visible');
-  utils.addClass($ui.success, 'is-visible');
+  $ui.process.removeClass('is-visible');
+  $ui.success.addClass('is-visible');
 }
 
 function onError(res) {
   log('error');
-  utils.removeClass($ui.process, 'is-visible');
-  utils.addClass($ui.error, 'is-visible');
+  $ui.process.removeClass('is-visible');
+  $ui.error.addClass('is-visible');
 }
 
 function send() {
@@ -68,10 +71,10 @@ function send() {
     // send session (fetch API by default omit it)
     // https://medium.com/@un.deter.red/fetch-doesn-t-send-cookies-by-default-f99ca4111774#.gsh5pk9a4
     credentials: 'include',
-    body: JSON.stringify(serialize($ui.form, {hash: true})),
+    body: JSON.stringify(serialize($ui.form[0], {hash: true})),
   })
 
-  return Promise.all([utils.wait(2000), contact]);
+  return Promise.all([wait(1000), contact]);
 }
 
 // https://github.com/github/fetch#handling-http-error-statuses

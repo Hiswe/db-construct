@@ -58,8 +58,8 @@ method.removeClass = function removeClass(classNames) {
 
 //----- CSS
 
-function setCss(el, property, value) {
-  el.style[property] = value;
+function setCss(el, i, property, value) {
+  el.style[property] = typeof value === 'function' ? value(el, i) : value;
 }
 
 function getCss(el, property) {
@@ -68,7 +68,7 @@ function getCss(el, property) {
 
 method.css = function css(property, value) {
   if (!value) return getCss();
-  this.forEach(el => setCss(el, property, value));
+  this.forEach((el, i) => setCss(el, i, property, value));
   return this;
 }
 
@@ -97,6 +97,16 @@ method.html = function html(content) {
   return this;
 }
 
+function prependChild(el, childrens) {
+  childrens = $(childrens);
+  childrens.forEach(child => el.insertBefore(child, el.firstChild));
+}
+
+method.prepend = function prepend(childrens) {
+  this.forEach( el => prependChild(el, childrens));
+  return this;
+}
+
 //----- DOM Removal
 
 function removeSelf(el) {
@@ -117,6 +127,14 @@ method.remove = function remove() {
 method.eq = function eq(index) {
   if (this[index]) return new Minidom(this[index]);
   return new Minidom();
+}
+
+//----- Miscellaneous Traversing
+
+method.add = function add(selector, context = document) {
+  let newSet = $(selector, context = document);
+  this.push(...newSet);
+  return this;
 }
 
 //----- Tree traversal

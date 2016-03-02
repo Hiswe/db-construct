@@ -315,7 +315,7 @@ gulp.task('browser-sync', ['nodemon'], function () {
     port: 7000,
     ghostMode: {
       clicks: true,
-      forms: true,
+      forms:  false,
       scroll: false
     },
   });
