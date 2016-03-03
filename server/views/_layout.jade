@@ -66,9 +66,11 @@ html(lang=getLocale(), manifest= isDev ? false : "/cache.manifest")
 
     footer: .in
       .footer
-        div.footer-name(data-copyright="D.B. Construct ©2016")
+        div.footer-name
           +svg-image('logo-db-construct-nb')
           p D.B. Edil Construct Co. Ltd <br> Design &amp; build
+          include _copyright
+
 
         dl.footer-contact
           dt
@@ -94,8 +96,7 @@ html(lang=getLocale(), manifest= isDev ? false : "/cache.manifest")
               br
               | #{__('address.line-2')}
 
-
-      p.copyright D.B. Construct ©2016
+      include _copyright
 
     //- Gracefull degradation for old browsers
     +notie()

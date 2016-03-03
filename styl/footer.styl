@@ -97,20 +97,25 @@ footer {
     }
   }
 }
-.footer-name {
-  +mq('>=M') {
-    &::after {
-      content: attr(data-copyright);
-    }
-  }
-}
 
 .copyright {
   display: block;
   text-align: center;
 
+  .footer-name & {
+    display: none;
+  }
+
+  a {
+    color: white;
+  }
+
   +mq('>=M') {
     display: none;
     text-align: left;
+
+    .footer-name & {
+      display: block;
+    }
   }
 }
