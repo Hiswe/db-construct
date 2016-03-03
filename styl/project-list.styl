@@ -3,25 +3,31 @@
 }
 
 .projects {
+  clear-fix();
   margin-top: $gutter;
   // fix IE10 horizontal scrollbar
   overflow: hidden;
 
-  +mq('>=S') {
+  +mq('>=M') {
     row();
   }
   a {
     color: white;
     text-decoration: none;
-    // text-shadow: 0 0 5px rgba(black, .5);
     text-shadow: 0 0 5px rgba(black, 1), 0 0 5px rgba(black, .5);
   }
   dl {
     position: relative;
-    margin: 0 0 $gutter;
+    margin: 0;
     background: rgba(black, .4);
 
     +mq('>=S') {
+      float: left;
+      width: 50%;
+    }
+
+    +mq('>=M') {
+      margin-bottom: $gutter;
       cell(1, 2);
     }
   }

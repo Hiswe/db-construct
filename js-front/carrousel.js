@@ -10,7 +10,7 @@ import controlTmpl    from '../server/views/front-end/carrousel-control.jade';
 import {svgIcon}      from './_utils';
 import $              from './_dom';
 
-const isLogging = true;
+const isLogging = false;
 const log       = logger('carrousel', isLogging);
 const configs   = {
   delay: 5 * 1000,

@@ -78,6 +78,13 @@ function slowAssets(req, res, next) {
 //   app.use(slowAssets)
 // }
 
+app.get('/cache.manifest', function (req, res, next) {
+  res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+  res.header("Pragma", "no-cache");
+  res.header("Expires", 0);
+  next();
+});
+
 app.use(express.static(path.join(__dirname, './public')));
 
 // placeholder mocking

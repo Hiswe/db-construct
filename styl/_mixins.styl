@@ -15,6 +15,14 @@ flex-center-align() {
   justify-content: center;
 }
 
+clear-fix() {
+  &::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
+
 image-container() {
   if (!$is-ie) {
     position: relative;
@@ -118,7 +126,10 @@ container() {
     width: 960px;
     margin: 0 auto;
   } else {
+    width: 100%;
+
     +mq('>=M') {
+      width: auto;
       max-width: $max-width;
       width: 'calc(%s - %s)' % (100% ($gutter * 2));
     }

@@ -18,11 +18,15 @@
 }
 
 .project-content {
-  +mq('>=S') {
+  clear-fix();
+  padding-bottom: $gutter;
+
+  +mq('>=M') {
     row();
   }
 
   +mq('>=L') {
+
     // wait masonry initialization
     &.is-loaded {
       display: block;
@@ -36,10 +40,6 @@
       cell(2);
     }
   }
-
-  +mq('<L') {
-    height: auto !important;
-  }
 }
 
 .grid-sizer,
@@ -51,18 +51,20 @@
     height: auto;
   }
 
-
   +mq('>=S') {
-    cell(1, 2);
+    float: left;
+    width: 50%;
+    margin-top: 0;
   }
-  +mq('<L') {
-    position: static !important;
+
+  +mq('>=M') {
+    cell(1, 2);
+    max-width: none;
+    width: 'calc(%s - %s)' % (col(1) $gutter * 0.666 );
   }
   +mq('>=L') {
     margin-left: 0;
     margin-right: 0;
-    max-width: none;
-    width: 'calc(%s - %s)' % (col(1) $gutter * 0.666 );
   }
 }
 
@@ -77,9 +79,12 @@
 }
 
 .project-description {
-  +mq('<L') {
-    cell(1, 1);
+  padding-bottom: $gutter;
+
+  +mq('>=M') {
+    padding-bottom: 0;
   }
+
   ul {
     padding-left: 1em;
   }
@@ -88,14 +93,29 @@
   }
 }
 
-.grid-sizer {
-  // border-top: 1px solid red;
-  +mq('<M') {
-    display: none;
+.project-description,
+.project-image {
+  +mq('>=M') {
+    margin-top: $gutter;
   }
 }
 
-.project-description,
-.project-image {
-  margin-top: $gutter;
+//////
+// RESET MASONRY ON SMALLER SCREENS
+//////
+
++mq('<L') {
+  .project-content {
+    height: auto !important;
+  }
+  .grid-sizer,
+  .grid-item {
+    position: static !important;
+  }
+  .grid-sizer {
+    display: none;
+  }
+  .project-description {
+    cell(1, 1);
+  }
 }
