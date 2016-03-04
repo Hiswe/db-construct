@@ -87,11 +87,10 @@ app.get('/cache.manifest', function (req, res, next) {
 
 app.use(express.static(path.join(__dirname, './public')));
 
-// placeholder mocking
-var mock      = require('./server/mock');
-
+// // placeholder mocking
+// var mock      = require('./server/mock');
 // if (config.isDev) app.get('/image/:dimensions', mock.image);
-app.get('/image/:dimensions', mock.image);
+// app.get('/image/:dimensions', mock.image);
 
 //////
 // LOGGING
