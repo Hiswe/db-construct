@@ -85,7 +85,7 @@ gulp.task('libraries-ie', function () {
   .pipe(gulp.dest('public'));
 });
 
-//----- APPLICATION
+//----- FRONT APPLICATION
 
 gulp.task('app', function () {
   var b = browserify({

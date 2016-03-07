@@ -110,7 +110,7 @@
 		"alert": {
 			"success": "Your message has been sent!",
 			"error": "An error has occurred. Please try with the email address",
-			"process": "Wait a moment, your message is being send!"
+			"process": "Wait a moment, your message is being sent!"
 		},
 		"mail": "Mail us",
 		"phone": {
