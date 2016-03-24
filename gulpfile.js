@@ -210,7 +210,7 @@ gulp.task('prepare-svg-fallback', function () {
 
 gulp.task('svg-fallback', ['prepare-svg-fallback'], function () {
   return gulp
-    .src(['tmp/*.svg'])
+    .src(['public/logo-db-construct-color.svg', 'tmp/*.svg'])
     // https://www.npmjs.com/package/gulp-svg2png#svg2pngscaling-verbose-concurrency
     .pipe($.svg2png(1, false, cpus))
     .pipe(gulp.dest('public/fallback'));
@@ -321,7 +321,7 @@ gulp.task('mail', function() {
 
 gulp.task('svg',    ['icons', 'svg-images']);
 // gulp.task('assets', ['icons', 'svg-images', 'fonts', 'mail']);
-gulp.task('assets', ['icons', 'svg-images', 'manifest', 'mail']);
+gulp.task('assets', ['svg', 'manifest', 'mail']);
 
 ////////
 // DEV
