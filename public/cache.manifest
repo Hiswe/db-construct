@@ -1,0 +1,17 @@
+CACHE MANIFEST
+# Time: Thu Mar 24 2016 14:17:27 GMT+0700 (ICT)
+
+CACHE:
+db-construct.css
+db-construct.js
+svg-images.svg
+svg-symbols.svg
+favicon.png
+
+NETWORK:
+http://*
+https://*
+*
+
+SETTINGS:
+prefer-online
