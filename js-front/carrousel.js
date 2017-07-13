@@ -6,7 +6,7 @@ import raf            from 'raf';
 import transitionend  from 'transitionend-property';
 
 import logger         from './_logger';
-import controlTmpl    from '../server/views/front-end/carrousel-control.jade';
+import controlTmpl    from '../server/views/front-end/carrousel-control.pug';
 import {svgIcon}      from './_utils';
 import $              from './_dom';
 

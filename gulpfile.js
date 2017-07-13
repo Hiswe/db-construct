@@ -67,7 +67,7 @@ gulp.task('css', function () {
 
 var browserify    = require('browserify');
 var babelify      = require('babelify');
-var jadeify       = require('jadeify');
+const pugify = require('pugify');
 var envify        = require('envify/custom');
 var vinylBuffer   = require('vinyl-buffer');
 var source        = require('vinyl-source-stream');
@@ -98,7 +98,7 @@ gulp.task('app', function () {
   b.transform(babelify, {presets: ['es2015']})
   // can't compile mixins
   // https://github.com/jadejs/jade/issues/1950
-  b.transform(jadeify, { compileDebug: isDev, pretty: isDev });
+  b.transform(pugify, { compileDebug: isDev, pretty: isDev });
 
   b.transform(envify({
     _: 'purge',
@@ -258,7 +258,7 @@ gulp.task('manifest', function(){
 //----- RENDER MAIL
 
 gulp.task('mail', function() {
-  var mailSrc = 'server/views/mail*.jade';
+  var mailSrc = 'server/views/mail*.pug';
   var dico = {
     en: JSON.parse(fs.readFileSync(__dirname + '/server/locales/en.js')),
     th: JSON.parse(fs.readFileSync(__dirname + '/server/locales/th.js')),
@@ -291,12 +291,12 @@ gulp.task('mail', function() {
 
   var en =  gulp
     .src(mailSrc)
-    .pipe($.jade(getParams('en')))
+    .pipe($.pug(getParams('en')))
     .pipe($.rename({suffix: '-en'}))
 
   var th =  gulp
     .src(mailSrc)
-    .pipe($.jade(getParams('th')))
+    .pipe($.pug(getParams('th')))
     .pipe($.rename({suffix: '-th'}))
 
   return merge(en, th)
@@ -360,15 +360,15 @@ gulp.task('browser-sync', ['nodemon'], function () {
   });
 });
 
-gulp.task('watch', ['browser-sync', 'js'], function () {
-  gulp.watch(['server/views/**/mail-*.jade',
-              'server/views/**/_mail-*.jade'], ['mail']);
+gulp.task('watch', ['browser-sync', 'build'], function () {
+  gulp.watch(['server/views/**/mail-*.pug',
+              'server/views/**/_mail-*.pug'], ['mail']);
   // !! don't put ./ before path
   // http://stackoverflow.com/questions/22391527/gulps-gulp-watch-not-triggered-for-new-or-deleted-files
   gulp.watch(['styl/**/*.styl',
               'styl/**/*.css'],  ['css']);
   gulp.watch(['public/*.js']).on('change', reload);
-  gulp.watch('server/views/**/*.jade').on('change', reload);
+  gulp.watch('server/views/**/*.pug').on('change', reload);
 
 });
 

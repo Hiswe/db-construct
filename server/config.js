@@ -4,7 +4,15 @@ var _       = require('lodash');
 var path    = require('path');
 var rc      = require('rc');
 
-var config  = rc('dbconstruct', {});
+var config  = rc('dbconstruct', {
+  "emailTransport": {
+    "host": "localhost",
+    "port": 1025
+  },
+  "emailOptions": {
+    "to": "hiswehalya@gmail.com",
+  }
+});
 
 config.NODE_ENV   = config.NODE_ENV || process.env.NODE_ENV || 'development';
 config.PORT       = process.env.PORT || 3000;

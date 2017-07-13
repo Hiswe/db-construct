@@ -1,0 +1,9 @@
+{
+  "emailTransport": {
+    "host": "localhost",
+    "port": 1025
+  },
+  "emailOptions": {
+    "to": "Domenico <info@db-construct.com>",
+  }
+}
