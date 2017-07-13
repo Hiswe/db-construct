@@ -10,7 +10,7 @@ var config  = rc('dbconstruct', {
     "port": 1025
   },
   "emailOptions": {
-    "to": "hiswehalya@gmail.com",
+    "to": "Domenico <info@db-construct.com>",
   }
 });
 

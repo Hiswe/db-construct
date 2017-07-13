@@ -4,9 +4,7 @@ import logger     from './_logger';
 import $          from './_dom';
 
 const log = logger('map', false);
-const url =
-`http://maps.googleapis.com/maps/api/js
-?callback=window.dbConstruct.mapInit`;
+const url = `http://maps.googleapis.com/maps/api/js?callback=window.dbConstruct.mapInit`;
 var address;
 var map;
 var location;

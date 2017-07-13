@@ -45,20 +45,31 @@ function postMessage(req, res, next) {
 // nodemailer:
 // If callback argument is not set then the method returns a Promise object.
 function sendMails(req) {
-  let domenicoMsg       = req.body.message.replace(/\n/g, '<br>');
-  if (req.body.phone) domenicoMsg = `${domenicoMsg}
-<p>Phone: <a href="tel:${req.body.phone}">${req.body.phone}</a></p>
+  const data                  = req.body
+  let domenicoMsg             = data.message.replace(/\n/g, '<br>');
+  if (data.phone) domenicoMsg = `${domenicoMsg}
+<p>Phone: <a href="tel:${data.phone}">${data.phone}</a></p>
 `;
+  domenicoMsg = `from: ${data.name}
+<br>
+<br>
+${domenicoMsg}
+`
+  // to prevent yahoo DMARC block messages
+  // change sender email domain to a banjai domain name
+  // https://sendgrid.com/blog/yahoo-dmarc-update/
+  var fromAddress = `${data.email.split('@')[0]}@db-construct.com`
   var contactMail       = transporter.sendMail({
-    from:     req.body.email,
+    from:     `${data.name} - ${data.email} <${fromAddress}>`, // modified customer email
     to:       config.emailOptions.to,
+    replyTo:  data.email, // customer email
     // subject:  `[DBCONSTRUCT] information demand ${req.body.name}`,
     subject:  `[DB-CONSTRUCT] information demand`,
     html:     domenicoMsg,
   });
   var confirmationMail  = transporter.sendMail({
     from:     config.emailOptions.to,
-    to:       req.body.email,
+    to:       data.email,
     subject:  `[DB-CONSTRUCT] Thank your for your message!`,
     html:     mailing[req.getLocale()],
   });
